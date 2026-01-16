@@ -359,7 +359,7 @@ function TurtleGuide:CreateRouteSelectorFrame()
 	local f = CreateFrame("Frame", "TurtleGuideRouteSelectorFrame", UIParent)
 	f:SetWidth(300)
 	f:SetHeight(400)
-	f:SetPoint("CENTER")
+	f:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	f:SetBackdrop({
 		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
 		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
@@ -374,7 +374,7 @@ function TurtleGuide:CreateRouteSelectorFrame()
 	f:SetFrameStrata("DIALOG")
 
 	local title = f:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
-	title:SetPoint("TOP", 0, -20)
+	title:SetPoint("TOP", f, "TOP", 0, -20)
 	title:SetText(L["Select Your Race"])
 
 	local desc = f:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
@@ -410,7 +410,7 @@ function TurtleGuide:CreateRouteSelectorFrame()
 
 	-- Close button
 	local closeBtn = CreateFrame("Button", nil, f, "UIPanelCloseButton")
-	closeBtn:SetPoint("TOPRIGHT", -5, -5)
+	closeBtn:SetPoint("TOPRIGHT", f, "TOPRIGHT", -5, -5)
 
 	self.routeSelectorFrame = f
 	f:Hide()
