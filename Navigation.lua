@@ -3,6 +3,29 @@
 
 local L = TurtleGuide.Locale
 
+local function HasMetaMap()
+	return IsAddOnLoaded("MetaMap") and MetaMap_NameToZoneID and MetaMap_GetCurrentMapInfo
+end
+
+local function HasMetaMapNotes()
+	return HasMetaMap() and MetaMapNotes_AddNewNote
+end
+
+local function HasMetaMapBWP()
+	return HasMetaMap() and BWP_ClearDest and BWP_DisplayFrame and BWPDistanceText and BWPDestText
+end
+
+local function EnsureMetaMapBWP()
+	if not HasMetaMap() then return false end
+	if not IsAddOnLoaded("MetaMapBWP") then
+		LoadAddOn("MetaMapBWP")
+	end
+	if IsAddOnLoaded("MetaMapBWP") and MetaMap_LoadBWP then
+		MetaMap_LoadBWP(0, 3)
+	end
+	return HasMetaMapBWP()
+end
+
 local zonei, zonec, zonenames = {}, {}, {}
 for ci, c in pairs{GetMapContinents()} do
 	zonenames[ci] = {GetMapZones(ci)}
@@ -12,26 +35,91 @@ for ci, c in pairs{GetMapContinents()} do
 end
 
 local cache = {}
+local metamapnotes = {}
+
+-- Helper to get valid zone data (ensures map is set to player location)
+local function GetPlayerZoneData()
+	-- Save current map state
+	local wasShown = WorldMapFrame:IsShown()
+
+	-- Briefly set map to player's zone to get valid data
+	SetMapToCurrentZone()
+	local c = GetCurrentMapContinent()
+	local z = GetCurrentMapZone()
+
+	-- Restore map state
+	if not wasShown and WorldMapFrame:IsShown() then
+		HideUIPanel(WorldMapFrame)
+	end
+
+	return c, z
+end
 
 -- Set a waypoint using TomTom
-local function MapPoint(zone, x, y, desc)
-	TurtleGuide:Debug(string.format("Mapping %q - %s (%.2f, %.2f)", desc, zone, x, y))
+local function MapPoint(zone, x, y, desc, onArrival)
+	desc = desc or "Waypoint"
+	TurtleGuide:Debug(string.format("Mapping %q - %s (%.2f, %.2f)", desc, zone or "nil", x or 0, y or 0))
 	local zi, zc = zone and zonei[zone], zone and zonec[zone]
-	if not zi then
+	if not zi or zi == 0 then
 		if zone then TurtleGuide:Print(string.format(L["Cannot find zone %q, using current zone."], zone))
 		else TurtleGuide:Print(L["No zone provided, using current zone."]) end
 
-		zi, zc = GetCurrentMapZone(), GetCurrentMapContinent()
-		zone = zonenames[zc][zi]
+		zc, zi = GetPlayerZoneData()
+		zone = zonenames[zc] and zonenames[zc][zi]
 	end
 
-	local opts = {title = "[TG] " .. desc}
-	if TomTom then
-		TomTom:AddMFWaypoint(zc, zi, x / 100, y / 100, opts)
+	-- Skip if still no valid zone
+	if not zc or zc == 0 or not zi or zi == 0 then
+		TurtleGuide:Debug("Could not determine zone for waypoint")
+		return
+	end
+
+	-- Use TomTom for waypoints
+	if TomTom and TomTom.AddMFWaypoint then
+		local title = "[TG] " .. (desc or "Waypoint")
+		TurtleGuide:Debug(string.format("TomTom waypoint: c=%d z=%d x=%.2f y=%.2f title=%s", zc, zi, x/100, y/100, title))
+
+		-- Build waypoint options
+		local opts = {title = title, crazy = true, silent = true}
+
+		-- Add arrival callback if provided (for travel objectives)
+		if onArrival then
+			opts.callbacks = {
+				distance = {
+					[15] = function(event, uid, dist, lastdist)
+						-- Only trigger on approach (lastdist > dist), not when leaving
+						if lastdist and lastdist > 15 then
+							TurtleGuide:Debug("TomTom arrival callback triggered")
+							onArrival()
+						end
+					end
+				}
+			}
+		end
+
+		local uid = TomTom:AddMFWaypoint(zc, zi, x / 100, y / 100, opts)
+		if uid then
+			TurtleGuide.tomtomwaypoints = TurtleGuide.tomtomwaypoints or {}
+			table.insert(TurtleGuide.tomtomwaypoints, uid)
+			TurtleGuide.lastwaypoint = true
+		end
 	elseif Cartographer_Waypoints then
 		local pt = NotePoint:new(zone, x / 100, y / 100, "[TG] " .. desc)
 		Cartographer_Waypoints:AddWaypoint(pt)
 		table.insert(cache, pt.WaypointID)
+	elseif TurtleGuide.db.char.mapmetamap and HasMetaMap() then
+		if TurtleGuide.db.char.mapbwp and EnsureMetaMapBWP() then
+			local zid = MetaMap_NameToZoneID(zone) or MetaMap_GetCurrentMapInfo()
+			BWP_ClearDest()
+			BWP_AddDestination("[TG] " .. desc, zid, x / 100, y / 100, true, true)
+			TurtleGuide.lastwaypoint = true
+		elseif HasMetaMapNotes() then
+			local zid = MetaMap_NameToZoneID(zone) or MetaMap_GetCurrentMapInfo()
+			local note = {zoneid = zid, xPos = x / 100, yPos = y / 100, name = "[TG] " .. desc, color = 0}
+			MetaMapNotes_AddNewNote(note)
+			table.insert(metamapnotes, note)
+			TurtleGuide.lastwaypoint = true
+		end
 	end
 end
 
@@ -44,20 +132,52 @@ end
 -- Clear all TurtleGuide waypoints
 function TurtleGuide:ClearWaypoint()
 	if TomTom then
-		if TomTom.waypoints then
-			for k, wp in ipairs(TomTom.waypoints) do
-				if wp.title and string.sub(wp.title, 1, 5) == "[TG] " then
-					self:Debug(string.format("Removing %q from TomTom", wp.title))
-					TomTom:RemoveWaypoint(wp, true)
+		if TurtleGuide.tomtomwaypoints then
+			for _, uid in ipairs(TurtleGuide.tomtomwaypoints) do
+				if TomTom.RemoveWaypoint then
+					TomTom:RemoveWaypoint(uid)
 				end
 			end
+			TurtleGuide.tomtomwaypoints = {}
 		end
+		self.lastwaypoint = nil
 	elseif Cartographer_Waypoints then
 		while cache[1] do
 			local pt = table.remove(cache)
 			Cartographer_Waypoints:CancelWaypoint(pt)
 		end
+	elseif HasMetaMapNotes() then
+		for i = table.getn(metamapnotes), 1, -1 do
+			local note = table.remove(metamapnotes, i)
+			MetaMapNotes_DeleteNote(note.zoneid, note.xPos, note.yPos)
+		end
+		if HasMetaMapBWP() then
+			BWP_ClearDest()
+		end
+	elseif HasMetaMapBWP() then
+		BWP_ClearDest()
 	end
+end
+
+-- Force waypoint update - directly creates waypoint for current objective
+function TurtleGuide:ForceWaypointUpdate()
+	if not self.current then return end
+
+	local action, quest = self:GetObjectiveInfo(self.current)
+	if not action then return end
+
+	local note = self:GetObjectiveTag("N", self.current)
+	local qid = self:GetObjectiveTag("QID", self.current)
+	local zonename = self:GetObjectiveTag("Z", self.current) or self.zonename
+
+	self:Debug(string.format("ForceWaypointUpdate: step=%d action=%s quest=%s note=%s zone=%s",
+		self.current, action or "nil", quest or "nil", note or "nil", zonename or "nil"))
+
+	-- Clear and recreate waypoint
+	self:ParseAndMapCoords(qid, action, note, quest, zonename)
+
+	-- Signal to StatusFrame that waypoint was updated
+	self.waypointForced = true
 end
 
 -- Map NPC location using pfQuest database
@@ -106,7 +226,9 @@ function TurtleGuide:MapPfQuestNPC(qid, action)
 		if unitLookup[unitId] and unitLookup[unitId]["coords"] then
 			for _, data in pairs(unitLookup[unitId]["coords"]) do
 				local x, y, zone, _ = unpack(data)
-				MapPoint(pfDB.zones.loc[zone], x, y, title .. " (" .. pfDB.units.loc[unitId] .. ")")
+				local zoneName = pfDB.zones.loc and pfDB.zones.loc[zone] or nil
+				local unitName = pfDB.units.loc and pfDB.units.loc[unitId] or "NPC"
+				MapPoint(zoneName, x, y, title .. " (" .. unitName .. ")")
 				return true
 			end
 		end
@@ -115,7 +237,9 @@ function TurtleGuide:MapPfQuestNPC(qid, action)
 		if objectLookup[objectId] and objectLookup[objectId]["coords"] then
 			for _, data in pairs(objectLookup[objectId]["coords"]) do
 				local x, y, zone, _ = unpack(data)
-				MapPoint(pfDB.zones.loc[zone], x, y, title .. " (" .. pfDB.objects.loc[objectId] .. ")")
+				local zoneName = pfDB.zones.loc and pfDB.zones.loc[zone] or nil
+				local objName = pfDB.objects.loc and pfDB.objects.loc[objectId] or "Object"
+				MapPoint(zoneName, x, y, title .. " (" .. objName .. ")")
 				return true
 			end
 		end
@@ -129,20 +253,41 @@ function TurtleGuide:ParseAndMapCoords(qid, action, note, desc, zone)
 	-- Clear existing waypoints first
 	self:ClearWaypoint()
 
+	self:Debug(string.format("ParseAndMapCoords: action=%s note=%s desc=%s zone=%s",
+		action or "nil", note or "nil", desc or "nil", zone or "nil"))
+
+	-- Check if this is an objective that should auto-complete on arrival
+	local isTravelObjective = (action == "RUN" or action == "FLY" or action == "HEARTH" or action == "BOAT" or action == "GETFLIGHTPOINT")
+	local onArrival = nil
+	if isTravelObjective then
+		onArrival = function()
+			TurtleGuide:Debug("Travel objective arrival - marking complete")
+			TurtleGuide:SetTurnedIn()
+		end
+	end
+
 	if note and string.find(note, L.COORD_MATCH) then
+		self:Debug("Found coordinates in note")
 		for x, y in string.gfind(note, L.COORD_MATCH) do
-			MapPoint(zone, tonumber(x), tonumber(y), desc)
+			MapPoint(zone, tonumber(x), tonumber(y), desc, onArrival)
 		end
 	elseif (action == "ACCEPT" or action == "TURNIN") then
+		self:Debug("Trying pfQuest lookup for ACCEPT/TURNIN")
 		if pfQuest or pfDB then
-			self:MapPfQuestNPC(qid, action)
+			if not self:MapPfQuestNPC(qid, action) and not self.lastwaypoint and (TomTom or Cartographer_Waypoints or HasMetaMap()) then
+				self:Print("No waypoint data found. Try enabling note coords or install pfQuest.")
+			end
+		elseif not self.lastwaypoint and (TomTom or Cartographer_Waypoints or HasMetaMap()) then
+			self:Print("No waypoint data found. Try enabling note coords or install pfQuest.")
 		end
+	else
+		self:Debug("No coords in note and action=" .. (action or "nil") .. " - no waypoint created")
 	end
 end
 
 -- Auto-update waypoint when step changes
 function TurtleGuide:UpdateWaypoint()
-	if not TomTom and not Cartographer_Waypoints then return end
+	if not TomTom and not Cartographer_Waypoints and not HasMetaMap() then return end
 
 	local action, quest, fullquest = self:GetObjectiveInfo()
 	if not action then return end

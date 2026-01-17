@@ -213,6 +213,62 @@ TurtleGuide:RegisterRoute("Undead", {
 	{zone = "Stranglethorn Vale", levels = "30-60", guide = "Stranglethorn Vale (30-31)"},
 })
 
+-- Turtle WoW Custom Race Routes
+
+-- High Elf (Alliance) - Starts in Thalassian Highlands
+TurtleGuide:RegisterRoute("HighElf", {
+	{zone = "Thalassian Highlands", levels = "1-10", guide = "Thalassian Highlands (1-10)"},
+	{zone = "Teldrassil", levels = "1-12", guide = "Teldrassil (1-12)"},  -- Fallback if Thalassian Highlands doesn't exist
+	{zone = "Darkshore", levels = "12-17", guide = "Darkshore (12-17)"},
+	{zone = "Thalassian Highlands", levels = "15-20", guide = "Thalassian Highlands (15-20)"},
+	-- After starting zone, merge into Alliance route
+	{zone = "Darkshore", levels = "20-21", guide = "Darkshore (20-21)"},
+	{zone = "Ashenvale", levels = "21-22", guide = "Ashenvale (21-22)"},
+	{zone = "Stonetalon Mountains", levels = "22-23", guide = "Stonetalon Mountains (22-23)"},
+	{zone = "Darkshore", levels = "23-24", guide = "Darkshore (23-24)"},
+	{zone = "Ashenvale", levels = "24-24", guide = "Ashenvale (24-24)"},
+	{zone = "Wetlands", levels = "24-27", guide = "Wetlands (24-27)"},
+	{zone = "Northwind", levels = "28-34", guide = "Northwind (28-34)"},  -- Turtle WoW zone
+	{zone = "Desolace", levels = "34-35", guide = "Desolace (34-35)"},
+	{zone = "Stranglethorn Vale", levels = "36-37", guide = "Stranglethorn Vale (36-37)"},
+	{zone = "Alterac Mountains", levels = "37-37", guide = "Alterac Mountains (37-37)"},
+	{zone = "Arathi Highlands", levels = "37-38", guide = "Arathi Highlands (37-38)"},
+	{zone = "Dustwallow Marsh", levels = "38-39", guide = "Dustwallow Marsh (38-39)"},
+	{zone = "Gilneas", levels = "39-46", guide = "Gilneas (39-46)"},  -- Turtle WoW zone
+	{zone = "Stranglethorn Vale", levels = "46-47", guide = "Stranglethorn Vale (46-47)"},
+	{zone = "Searing Gorge", levels = "47-48", guide = "Searing Gorge (47-48)"},
+	{zone = "Gillijim's Isle", levels = "48-53", guide = "Gillijim's Isle (48-53)"},  -- Turtle WoW zone
+	{zone = "Felwood", levels = "53-54", guide = "Felwood (53-54)"},
+	{zone = "Tel'abim", levels = "54-60", guide = "Tel'abim (54-60)"},  -- Turtle WoW zone
+	{zone = "Hyjal", levels = "56-60", guide = "Hyjal (56-60)"},  -- Turtle WoW zone
+})
+
+-- Goblin (Horde) - Starts in Blackstone Island (Turtle WoW)
+TurtleGuide:RegisterRoute("Goblin", {
+	{zone = "Blackstone Island", levels = "1-16", guide = "Blackstone Island (1-16)"},
+	{zone = "Durotar", levels = "1-12", guide = "Durotar (1-12)"},  -- Fallback if Blackstone Island doesn't exist
+	{zone = "The Barrens", levels = "12-20", guide = "Barrens (12-20)"},  -- Fallback continuation
+	-- After starting zone, merge into Horde route
+	{zone = "Stonetalon Mountains", levels = "20-22", guide = "Stonetalon Mountains (20-22)"},
+	{zone = "Ashenvale", levels = "21-22", guide = "Ashenvale (21-22)"},
+	{zone = "Stonetalon Mountains", levels = "22-23", guide = "Stonetalon Mountains (22-23)"},
+	{zone = "Thousand Needles", levels = "25-26", guide = "Thousand Needles (25-26)"},
+	{zone = "Thousand Needles", levels = "27-29", guide = "Thousand Needles (27-29)"},
+	{zone = "Northwind", levels = "28-34", guide = "Northwind (28-34)"},  -- Turtle WoW zone
+	{zone = "Desolace", levels = "32-34", guide = "Desolace (32-34)"},
+	{zone = "Stranglethorn Vale", levels = "34-36", guide = "Stranglethorn Vale (34-36)"},
+	{zone = "Grim Reaches", levels = "33-38", guide = "Grim Reaches (33-38)"},  -- Turtle WoW zone
+	{zone = "Gilneas", levels = "39-46", guide = "Gilneas (39-46)"},  -- Turtle WoW zone
+	{zone = "Tanaris", levels = "44-45", guide = "Tanaris (44-45)"},
+	{zone = "Feralas", levels = "45-46", guide = "Feralas (45-46)"},
+	{zone = "Azshara", levels = "46-47", guide = "Azshara (46-47)"},
+	{zone = "Searing Gorge", levels = "47-48", guide = "Searing Gorge (47-48)"},
+	{zone = "Gillijim's Isle", levels = "48-53", guide = "Gillijim's Isle (48-53)"},  -- Turtle WoW zone
+	{zone = "Island of Lapidis", levels = "48-53", guide = "Island of Lapidis (48-53)"},  -- Turtle WoW zone
+	{zone = "Tel'abim", levels = "54-60", guide = "Tel'abim (54-60)"},  -- Turtle WoW zone
+	{zone = "Hyjal", levels = "56-60", guide = "Hyjal (56-60)"},  -- Turtle WoW zone
+})
+
 -- Print route info for debugging
 function TurtleGuide:PrintCurrentRoute()
 	local route = self.routes[self.db.char.currentroute]

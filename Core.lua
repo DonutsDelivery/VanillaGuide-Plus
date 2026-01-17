@@ -16,6 +16,60 @@ TurtleGuide.myfaction = UnitFactionGroup("player")
 -- Race-based route definitions
 TurtleGuide.routes = {}
 
+-- Turtle WoW custom race support
+-- Maps race strings from UnitRace() to route names and faction info
+TurtleGuide.turtleRaces = {
+	-- Standard races
+	["Human"] = {route = "Human", faction = "Alliance"},
+	["Dwarf"] = {route = "Dwarf", faction = "Alliance"},
+	["Night Elf"] = {route = "NightElf", faction = "Alliance"},
+	["NightElf"] = {route = "NightElf", faction = "Alliance"},
+	["Gnome"] = {route = "Gnome", faction = "Alliance"},
+	["Orc"] = {route = "Orc", faction = "Horde"},
+	["Troll"] = {route = "Troll", faction = "Horde"},
+	["Tauren"] = {route = "Tauren", faction = "Horde"},
+	["Undead"] = {route = "Undead", faction = "Horde"},
+	["Scourge"] = {route = "Undead", faction = "Horde"},  -- Internal name for Undead
+	-- Turtle WoW custom races
+	["High Elf"] = {route = "HighElf", faction = "Alliance"},
+	["HighElf"] = {route = "HighElf", faction = "Alliance"},
+	["BloodElf"] = {route = "HighElf", faction = "Alliance"},  -- Turtle WoW uses BloodElf internally for High Elf
+	["Goblin"] = {route = "Goblin", faction = "Horde"},  -- Horde race in Turtle WoW
+}
+
+-- Get the normalized route name for a race
+function TurtleGuide:GetRouteForRace(race)
+	local raceInfo = self.turtleRaces[race]
+	if raceInfo then
+		return raceInfo.route
+	end
+	-- Fallback: use the race name as-is
+	return race
+end
+
+-- Get all races available for the player's faction
+function TurtleGuide:GetRacesForFaction(faction)
+	local races = {}
+	for raceName, info in pairs(self.turtleRaces) do
+		-- Include if faction matches or race is neutral (Both)
+		if info.faction == faction or info.faction == "Both" then
+			-- Avoid duplicates (e.g., "Night Elf" and "NightElf")
+			local routeName = info.route
+			local found = false
+			for _, r in ipairs(races) do
+				if r.route == routeName then
+					found = true
+					break
+				end
+			end
+			if not found then
+				table.insert(races, {name = raceName, route = routeName})
+			end
+		end
+	end
+	return races
+end
+
 TurtleGuide.icons = setmetatable({
 	ACCEPT = "Interface\\GossipFrame\\AvailableQuestIcon",
 	COMPLETE = "Interface\\Icons\\Ability_DualWield",
@@ -49,18 +103,72 @@ local defaults = {
 	routeselected = false,
 	mapquestgivers = true,
 	mapnotecoords = true,
+	mapmetamap = true,
+	mapbwp = true,
 	showstatusframe = true,
 	showuseitem = true,
 	showuseitemcomplete = true,
 	skipfollowups = true,
 	petskills = {},
 	completedquests = {},
+	completedquestsbyid = {},  -- {[questId] = true} from server
+	lastserverquery = 0,       -- timestamp for throttling
+	-- Branching state
+	isbranching = false,
+	branchsavedguide = nil,
+	branchsavedstep = nil,
+	autobranch = false,  -- auto-branch to Turtle WoW zones
 }
 
 local options = {
 	type = "group",
 	handler = TurtleGuide,
 	args = {
+		DiagNav = {
+			name = "Navigation Diag",
+			desc = "Check navigation addon status",
+			type = "execute",
+			func = function()
+				TurtleGuide:Print("--- Navigation Status ---")
+				if TomTom then
+					TurtleGuide:Print("TomTom: YES")
+					TurtleGuide:Print("  AddMFWaypoint: " .. (TomTom.AddMFWaypoint and "YES" or "NO"))
+					TurtleGuide:Print("  RemoveWaypoint: " .. (TomTom.RemoveWaypoint and "YES" or "NO"))
+				else
+					TurtleGuide:Print("TomTom: NO - Install TomTom-TWOW for arrow navigation")
+				end
+				if Cartographer_Waypoints then
+					TurtleGuide:Print("Cartographer_Waypoints: YES")
+				end
+				TurtleGuide:Print("MetaMap: " .. (IsAddOnLoaded("MetaMap") and "YES" or "NO"))
+			end,
+		},
+		TestWaypoint = {
+			name = "Test Waypoint",
+			desc = "Create a test TomTom waypoint",
+			type = "execute",
+			func = function()
+				if not TomTom then
+					TurtleGuide:Print("TomTom not found")
+					return
+				end
+
+				-- Use SetMapToCurrentZone to get valid data (same as the fix)
+				SetMapToCurrentZone()
+				local c = GetCurrentMapContinent()
+				local z = GetCurrentMapZone()
+				TurtleGuide:Print(string.format("Zone data: c=%s z=%s", tostring(c), tostring(z)))
+
+				if not c or c == 0 or not z or z == 0 then
+					TurtleGuide:Print("Could not get zone data")
+					return
+				end
+
+				-- Create waypoint at 50, 50
+				local uid = TomTom:AddMFWaypoint(c, z, 0.5, 0.5, {title = "TG Test", crazy = true})
+				TurtleGuide:Print("Waypoint created: " .. tostring(uid))
+			end,
+		},
 		TrackQuests = {
 			name = "Auto Track",
 			desc = L["Automatically track quests"],
@@ -102,6 +210,114 @@ local options = {
 			func = function() TurtleGuide:ShowRouteSelector() end,
 			order = 4,
 		},
+		ShowErrorLog = {
+			name = "Error Log",
+			desc = "Show captured Lua errors",
+			type = "execute",
+			func = function() TurtleGuide:ShowErrorLog() end,
+			order = 5,
+		},
+		NextStep = {
+			name = "Next",
+			desc = "Skip to next objective",
+			type = "execute",
+			func = function() TurtleGuide:SkipToNextObjective() end,
+			order = 10,
+		},
+		PrevStep = {
+			name = "Previous",
+			desc = "Go back to previous objective",
+			type = "execute",
+			func = function() TurtleGuide:GoToPreviousObjective() end,
+			order = 11,
+		},
+		GoToStep = {
+			name = "Go To",
+			desc = "Jump to step number",
+			type = "text",
+			usage = "<number>",
+			get = false,
+			set = function(v) TurtleGuide:GoToObjective(v) end,
+			order = 12,
+		},
+		Refresh = {
+			name = "Refresh",
+			desc = "Rescan quest log and update guide progress",
+			type = "execute",
+			func = function() TurtleGuide:QueryServerCompletedQuests() end,
+			order = 13,
+		},
+		Branch = {
+			name = "Branch",
+			desc = "Branch to a different zone guide (saves current progress)",
+			type = "execute",
+			func = function() TurtleGuide:ShowBranchSelector() end,
+			order = 14,
+		},
+		ReturnMain = {
+			name = "Return to Main",
+			desc = "Return to main route from branch",
+			type = "execute",
+			func = function() TurtleGuide:ReturnFromBranch() end,
+			order = 15,
+		},
+		AutoBranch = {
+			name = "Auto Branch",
+			desc = "Automatically branch to Turtle WoW zones when available",
+			type = "toggle",
+			get = function() return TurtleGuide.db.char.autobranch end,
+			set = function(v) TurtleGuide.db.char.autobranch = v end,
+			order = 16,
+		},
+		DebugRoute = {
+			name = "Debug Route",
+			desc = "Show debug info about route and guide selection",
+			type = "execute",
+			func = function()
+				local _, race = UnitRace("player")
+				local routeName = TurtleGuide:GetRouteForRace(race)
+				local route = TurtleGuide.routes[routeName]
+				local level = UnitLevel("player")
+
+				TurtleGuide:Print("--- Route Debug ---")
+				TurtleGuide:Print("Race from UnitRace: " .. tostring(race))
+				TurtleGuide:Print("Route name: " .. tostring(routeName))
+				TurtleGuide:Print("Route exists: " .. tostring(route ~= nil))
+				TurtleGuide:Print("Player level: " .. tostring(level))
+				TurtleGuide:Print("Current guide: " .. tostring(TurtleGuide.db.char.currentguide))
+
+				-- Check if specific guides exist
+				TurtleGuide:Print("--- Guide Existence ---")
+				TurtleGuide:Print("'Thalassian Highlands (1-10)': " .. tostring(TurtleGuide.guides["Thalassian Highlands (1-10)"] ~= nil))
+				TurtleGuide:Print("'Teldrassil (1-12)': " .. tostring(TurtleGuide.guides["Teldrassil (1-12)"] ~= nil))
+
+				-- Show first few guides in guidelist
+				TurtleGuide:Print("--- First 5 guides in guidelist ---")
+				for i = 1, math.min(5, table.getn(TurtleGuide.guidelist)) do
+					TurtleGuide:Print(i .. ": " .. tostring(TurtleGuide.guidelist[i]))
+				end
+
+				-- Show what GetNextRouteGuideForLevel would return
+				if route then
+					local nextGuide = TurtleGuide:GetNextRouteGuideForLevel(route, level)
+					TurtleGuide:Print("GetNextRouteGuideForLevel returns: " .. tostring(nextGuide))
+				end
+			end,
+			order = 17,
+		},
+		ListGuides = {
+			name = "List Guides",
+			desc = "List all loaded guides",
+			type = "execute",
+			func = function()
+				TurtleGuide:Print("--- All Loaded Guides ---")
+				for i, name in ipairs(TurtleGuide.guidelist) do
+					TurtleGuide:Print(i .. ": " .. name)
+				end
+				TurtleGuide:Print("Total: " .. table.getn(TurtleGuide.guidelist) .. " guides")
+			end,
+			order = 18,
+		},
 	},
 }
 
@@ -122,6 +338,7 @@ function TurtleGuide:OnInitialize()
 	self:RegisterDefaults("char", defaults)
 	self:RegisterChatCommand({"/tg", "/turtleguide"}, options)
 	self.OnMenuRequest = options
+	self:SetupErrorCapture()
 	if not FuBar then
 		self.OnMenuRequest.args.hide.guiName = L["Hide minimap icon"]
 		self.OnMenuRequest.args.hide.desc = L["Hide minimap icon"]
@@ -153,24 +370,27 @@ function TurtleGuide:InitializeRoute()
 	if not self.db.char.routeselected then
 		-- Auto-detect race and suggest route
 		local _, race = UnitRace("player")
-		if race and self.routes[race] then
-			self.db.char.currentroute = race
-			self.db.char.routeselected = true
-			-- Load the first guide in the route
-			local route = self.routes[race]
-			if route and route[1] and route[1].guide then
-				self.db.char.currentguide = route[1].guide
+		local routeName = self:GetRouteForRace(race)
+		if routeName and self.routes[routeName] then
+			self:ApplyRouteSelection(routeName)
+			local message = L["You have been assigned the %s leveling route."]
+			if not message then
+				message = "You have been assigned the %s leveling route."
 			end
-			self:Print(string.format(L["You have been assigned the %s leveling route."], race))
+			self:Print(string.format(message, tostring(race)))
 		else
-			-- Fallback to default start guides
+			-- Fallback to default start guides (including Turtle WoW races)
 			local startguides = {
 				Orc = "Durotar (1-12)", Troll = "Durotar (1-12)",
 				Tauren = "Mulgore (1-12)", Undead = "Tirisfal Glades (1-12)",
 				Dwarf = "Dun Morogh (1-11)", Gnome = "Dun Morogh (1-11)",
-				Human = "Elwynn Forest (1-12)", NightElf = "Teldrassil (1-12)"
+				Human = "Elwynn Forest (1-12)", NightElf = "Teldrassil (1-12)",
+				-- Turtle WoW custom races
+				HighElf = "Thalassian Highlands (1-10)",  -- High Elf starting zone
+				Goblin = "Blackstone Island (1-16)",      -- Goblin starting zone
 			}
-			self.db.char.currentguide = startguides[race] or self.guidelist[1]
+			-- Use normalized route name for lookup
+			self.db.char.currentguide = startguides[routeName] or startguides[race] or self.guidelist[1]
 			self.db.char.routeselected = true
 		end
 	end
@@ -181,8 +401,12 @@ function TurtleGuide:InitializeRoute()
 	for _, event in pairs(self.TrackEvents) do self:RegisterEvent(event) end
 	self:RegisterEvent("QUEST_COMPLETE", "UpdateStatusFrame")
 	self:RegisterEvent("QUEST_DETAIL", "UpdateStatusFrame")
+	self:RegisterEvent("QUEST_QUERY_COMPLETE")
 	self.TrackEvents = nil
+	self:QueryServerCompletedQuests()
 	self:UpdateStatusFrame()
+	-- Force waypoint creation on initial load
+	self:ForceWaypointUpdate()
 	self.enableDone = true
 end
 
@@ -275,7 +499,7 @@ function TurtleGuide:GetQuestDetails(name)
 	if not name then return end
 	local i = self:GetQuestLogIndexByName(name)
 	if not i or i < 1 then return end
-	local _, _, _, _, _, isComplete = GetQuestLogTitle(i)
+	local _, _, _, _, _, _, isComplete = GetQuestLogTitle(i)
 	local complete = i and isComplete == 1
 
 	return i, complete
@@ -305,7 +529,20 @@ function TurtleGuide:GetObjectiveStatus(i)
 	local i = i or self.current
 	if not self.actions[i] then return end
 
-	return self.turnedin[self.quests[i]], self:GetQuestDetails(self.quests[i]) -- turnedin, logi, complete
+	local turnedin = self.turnedin[self.quests[i]]
+	local logi, complete = self:GetQuestDetails(self.quests[i])
+
+	-- Server-side completion check - ONLY for TURNIN actions
+	-- Don't auto-mark ACCEPT/COMPLETE as done based on server data
+	if not turnedin and self.actions[i] == "TURNIN" then
+		local qid = self:GetObjectiveTag("QID", i)
+		if qid and self:IsQuestCompletedOnServer(qid) then
+			turnedin = true
+			-- Don't persist - let the user manually confirm or let normal flow handle it
+		end
+	end
+
+	return turnedin, logi, complete
 end
 
 
@@ -344,6 +581,457 @@ end
 
 
 ---------------------------------
+--  Server Quest Query API     --
+---------------------------------
+
+function TurtleGuide:QueryServerCompletedQuests(force)
+	-- Count locally tracked completed quests
+	local localCountByName = 0
+	local localCountByQid = 0
+	if self.db.char.completedquests then
+		for _ in pairs(self.db.char.completedquests) do
+			localCountByName = localCountByName + 1
+		end
+	end
+	if self.db.char.completedquestsbyid then
+		for _ in pairs(self.db.char.completedquestsbyid) do
+			localCountByQid = localCountByQid + 1
+		end
+	end
+
+	-- Check pfQuest availability
+	local hasPfQuest = pfDB and pfDB["quests"] and pfDB["quests"]["data"]
+	if hasPfQuest then
+		self:Print("|cff00ff00pfQuest database detected - using prerequisite chain inference|r")
+	else
+		self:Print("|cffff9900pfQuest not found - prerequisite inference unavailable|r")
+	end
+
+	self:Print(string.format("|cff88aaff%d quests tracked by name, %d by QID|r", localCountByName, localCountByQid))
+
+	-- Re-run SmartSkipToStep to re-evaluate guide progress
+	if self.actions and self.quests then
+		local oldCurrent = self.current or 1
+		self:SmartSkipToStep()
+		local newCurrent = self.current or 1
+
+		if newCurrent > oldCurrent then
+			self:Print(string.format("|cff00ff00Skipped to step %d (was %d)|r", newCurrent, oldCurrent))
+		else
+			self:Print("|cff88ff88Guide progress is up to date|r")
+		end
+	else
+		self:Print("|cffff9900No guide loaded|r")
+	end
+
+	self:UpdateStatusFrame()
+	return true
+end
+
+function TurtleGuide:QUEST_QUERY_COMPLETE()
+	-- Placeholder for future server API support
+	-- Currently Turtle WoW 1.12 doesn't have QueryQuestsCompleted/GetQuestsCompleted
+	self:Debug("QUEST_QUERY_COMPLETE fired (unexpected)")
+end
+
+function TurtleGuide:IsQuestCompletedOnServer(qid)
+	if not qid then return false end
+	return self.db.char.completedquestsbyid[tonumber(qid)] == true
+end
+
+
+---------------------------------
+--   Quest Tracking            --
+---------------------------------
+
+-- Track the quest for the current objective
+function TurtleGuide:TrackCurrentQuest()
+	if not self.db.char.trackquests then return end
+	if not self.current or not self.actions then return end
+
+	local action, quest = self:GetObjectiveInfo(self.current)
+	if not action or not quest then return end
+
+	-- Untrack previously tracked quest from TurtleGuide
+	if self.trackedQuestName and self.trackedQuestName ~= quest then
+		local oldIndex = self:GetQuestLogIndexByName(self.trackedQuestName)
+		if oldIndex and oldIndex > 0 and IsQuestWatched(oldIndex) then
+			RemoveQuestWatch(oldIndex)
+		end
+		self.trackedQuestName = nil
+	end
+
+	-- Only auto-track for COMPLETE actions (quest objectives)
+	if action == "COMPLETE" then
+		local questLogIndex = self:GetQuestLogIndexByName(quest)
+		if questLogIndex and questLogIndex > 0 then
+			if not IsQuestWatched(questLogIndex) then
+				AddQuestWatch(questLogIndex)
+				self:Debug("Tracking quest: " .. quest .. " (index " .. questLogIndex .. ")")
+			end
+			self.trackedQuestName = quest
+		end
+	end
+end
+
+
+---------------------------------
+--   Manual Navigation         --
+---------------------------------
+
+function TurtleGuide:SkipToNextObjective()
+	if not self.current then return end
+	if self.current >= table.getn(self.actions) then
+		if not self:LoadNextGuide() then
+			self:Print("Already at the last objective.")
+		end
+		return
+	end
+
+	-- Find next incomplete objective (after current)
+	local nextStep = nil
+	for i = self.current + 1, table.getn(self.actions) do
+		if not self.turnedin[self.quests[i]] then
+			nextStep = i
+			break
+		end
+	end
+
+	-- Mark current and all skipped objectives as done
+	local endMark = nextStep and (nextStep - 1) or table.getn(self.actions)
+	for i = self.current, endMark do
+		self.turnedin[self.quests[i]] = true
+	end
+
+	if not nextStep then
+		-- All remaining objectives are done, try next guide
+		if not self:LoadNextGuide() then
+			self:Print("All objectives complete.")
+		end
+		return
+	end
+
+	self.current = nextStep
+	self:ForceWaypointUpdate()
+	self:SetStatusText(self.current)
+	self:UpdateOHPanel()
+end
+
+function TurtleGuide:GoToPreviousObjective()
+	if not self.current or self.current <= 1 then
+		self:Print("Already at the first objective.")
+		return
+	end
+
+	-- Unmark current objective so we can come back to it
+	self:SetTurnedIn(self.current, false, true)
+
+	-- Find previous objective (go back one step, unmark it)
+	local prevStep = self.current - 1
+	self:SetTurnedIn(prevStep, false, true)
+
+	self.current = prevStep
+	self:ForceWaypointUpdate()
+	self:SetStatusText(self.current)
+	self:UpdateOHPanel()
+
+	-- Flag to re-check completion conditions after rewind
+	self.recheckCompletion = true
+end
+
+function TurtleGuide:GoToObjective(stepNum)
+	stepNum = tonumber(stepNum)
+	if not stepNum or stepNum < 1 or stepNum > table.getn(self.actions) then
+		self:Print("Invalid step number.")
+		return
+	end
+
+	-- Mark all objectives before stepNum as done (so progress persists)
+	for i = 1, stepNum - 1 do
+		if not self.turnedin[self.quests[i]] then
+			self.turnedin[self.quests[i]] = true
+		end
+	end
+
+	-- Unmark the target step and all after it
+	for i = stepNum, table.getn(self.actions) do
+		if self.turnedin[self.quests[i]] then
+			self.turnedin[self.quests[i]] = nil
+		end
+	end
+
+	self.current = stepNum
+	self:ForceWaypointUpdate()
+	self:SetStatusText(self.current)
+	self:UpdateOHPanel()
+
+	-- Flag to re-check completion conditions after jump
+	self.recheckCompletion = true
+end
+
+
+---------------------------------
+--      Branching Functions    --
+---------------------------------
+
+-- Branch to a different guide while saving current position
+function TurtleGuide:BranchToGuide(guideName)
+	if not guideName or not self.guides[guideName] then
+		self:Print("Invalid guide: " .. tostring(guideName))
+		return
+	end
+
+	-- Don't branch if already on this guide
+	if self.db.char.currentguide == guideName then
+		self:Print("Already on this guide.")
+		return
+	end
+
+	-- Save current state if not already branching
+	if not self.db.char.isbranching then
+		self.db.char.branchsavedguide = self.db.char.currentguide
+		self.db.char.branchsavedstep = self.current
+		self.db.char.isbranching = true
+		self:Print(string.format("Branching to %s (main route saved: %s)", guideName, self.db.char.branchsavedguide))
+	else
+		self:Print(string.format("Switching branch to %s", guideName))
+	end
+
+	-- Load the branch guide
+	self:LoadGuide(guideName)
+	self:UpdateStatusFrame()
+	self:UpdateGuideListPanel()
+end
+
+-- Return from branch to saved main route
+function TurtleGuide:ReturnFromBranch()
+	if not self.db.char.isbranching then
+		self:Print("Not currently on a branch.")
+		return
+	end
+
+	local savedGuide = self.db.char.branchsavedguide
+	local savedStep = self.db.char.branchsavedstep
+
+	if not savedGuide or not self.guides[savedGuide] then
+		self:Print("Saved guide not found. Clearing branch state.")
+		self.db.char.isbranching = false
+		self.db.char.branchsavedguide = nil
+		self.db.char.branchsavedstep = nil
+		return
+	end
+
+	self:Print(string.format("Returning to main route: %s", savedGuide))
+
+	-- Clear branch state
+	self.db.char.isbranching = false
+	self.db.char.branchsavedguide = nil
+	self.db.char.branchsavedstep = nil
+
+	-- Load the saved guide
+	self:LoadGuide(savedGuide)
+
+	-- Find appropriate step based on player level
+	-- SmartSkipToStep already handles this in LoadGuide
+
+	self:UpdateStatusFrame()
+	self:UpdateGuideListPanel()
+end
+
+-- Check if current guide is complete and handle branch return
+function TurtleGuide:CheckBranchCompletion()
+	if not self.db.char.isbranching then return false end
+
+	-- Check if current branch guide is 100% complete
+	local totalSteps = self.actions and table.getn(self.actions) or 0
+	if totalSteps == 0 then return false end
+
+	local completedSteps = 0
+	for i, quest in ipairs(self.quests) do
+		if self.turnedin[quest] then
+			completedSteps = completedSteps + 1
+		end
+	end
+
+	local completion = completedSteps / totalSteps
+	if completion >= 1 then
+		self:Print("Branch guide complete! Returning to main route.")
+		self:ReturnFromBranch()
+		return true
+	end
+
+	return false
+end
+
+-- Show branch selector UI
+function TurtleGuide:ShowBranchSelector()
+	if not self.branchSelectorFrame then
+		self:CreateBranchSelectorFrame()
+	end
+	self:UpdateBranchSelectorPanel()
+	self.branchSelectorFrame:Show()
+end
+
+function TurtleGuide:CreateBranchSelectorFrame()
+	local f = CreateFrame("Frame", "TurtleGuideBranchSelectorFrame", UIParent)
+	f:SetWidth(350)
+	f:SetHeight(400)
+	f:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+	f:SetBackdrop({
+		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+		tile = true, tileSize = 32, edgeSize = 32,
+		insets = {left = 11, right = 12, top = 12, bottom = 11}
+	})
+	f:SetMovable(true)
+	f:EnableMouse(true)
+	f:RegisterForDrag("LeftButton")
+	f:SetScript("OnDragStart", function() this:StartMoving() end)
+	f:SetScript("OnDragStop", function() this:StopMovingOrSizing() end)
+	f:SetFrameStrata("DIALOG")
+	f:EnableMouseWheel(true)
+
+	local title = f:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+	title:SetPoint("TOP", f, "TOP", 0, -20)
+	title:SetText("Branch to Zone")
+
+	-- Branch status indicator
+	local statusText = f:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+	statusText:SetPoint("TOP", title, "BOTTOM", 0, -5)
+	statusText:SetWidth(320)
+	f.statusText = statusText
+
+	-- Scroll frame for guide list
+	local scrollFrame = CreateFrame("ScrollFrame", "TurtleGuideBranchScrollFrame", f)
+	scrollFrame:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -60)
+	scrollFrame:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -32, 50)
+
+	local content = CreateFrame("Frame", nil, scrollFrame)
+	content:SetWidth(300)
+	content:SetHeight(1) -- Will be updated dynamically
+	scrollFrame:SetScrollChild(content)
+	f.content = content
+
+	-- Create guide buttons
+	f.guideButtons = {}
+	for i = 1, 20 do
+		local btn = CreateFrame("Button", nil, content)
+		btn:SetWidth(300)
+		btn:SetHeight(22)
+		btn:SetPoint("TOPLEFT", content, "TOPLEFT", 0, -(i-1) * 24)
+
+		local highlight = btn:CreateTexture(nil, "HIGHLIGHT")
+		highlight:SetTexture("Interface\\HelpFrame\\HelpFrameButton-Highlight")
+		highlight:SetTexCoord(0, 1, 0, 0.578125)
+		highlight:SetAllPoints()
+
+		local text = btn:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+		text:SetPoint("LEFT", 4, 0)
+		text:SetWidth(290)
+		text:SetJustifyH("LEFT")
+		btn.text = text
+
+		btn:SetScript("OnClick", function()
+			if this.guideName then
+				TurtleGuide:BranchToGuide(this.guideName)
+				f:Hide()
+			end
+		end)
+
+		f.guideButtons[i] = btn
+	end
+
+	-- Scroll handling
+	f.offset = 0
+	f:SetScript("OnMouseWheel", function()
+		local delta = arg1
+		f.offset = f.offset - delta * 3
+		if f.offset < 0 then f.offset = 0 end
+		TurtleGuide:UpdateBranchSelectorPanel()
+	end)
+
+	-- Return to main button
+	local returnBtn = CreateFrame("Button", nil, f, "UIPanelButtonTemplate")
+	returnBtn:SetWidth(140)
+	returnBtn:SetHeight(24)
+	returnBtn:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 20, 16)
+	returnBtn:SetText("Return to Main")
+	returnBtn:SetScript("OnClick", function()
+		TurtleGuide:ReturnFromBranch()
+		f:Hide()
+	end)
+	f.returnBtn = returnBtn
+
+	-- Close button
+	local closeBtn = CreateFrame("Button", nil, f, "UIPanelCloseButton")
+	closeBtn:SetPoint("TOPRIGHT", f, "TOPRIGHT", -5, -5)
+
+	self.branchSelectorFrame = f
+	table.insert(UISpecialFrames, "TurtleGuideBranchSelectorFrame")
+	f:Hide()
+end
+
+function TurtleGuide:UpdateBranchSelectorPanel()
+	local f = self.branchSelectorFrame
+	if not f or not f:IsVisible() then return end
+
+	-- Update status text
+	if self.db.char.isbranching then
+		f.statusText:SetText("|cff00ff00Currently branching from:|r " .. (self.db.char.branchsavedguide or "Unknown"))
+		f.returnBtn:Enable()
+	else
+		f.statusText:SetText("|cffffffffSelect a zone to branch to:|r")
+		f.returnBtn:Disable()
+	end
+
+	-- Get player level for filtering
+	local playerLevel = UnitLevel("player")
+
+	-- Build filtered guide list (exclude current guide)
+	local filteredGuides = {}
+	for _, name in ipairs(self.guidelist) do
+		if name ~= self.db.char.currentguide then
+			-- Parse level range from guide name
+			local _, _, minText, maxText = string.find(name, "%((%d+)%-(%d+)%)")
+			local minLevel = tonumber(minText) or 1
+			local maxLevel = tonumber(maxText) or 60
+
+			-- Show guides within reasonable level range
+			if playerLevel >= minLevel - 2 and playerLevel <= maxLevel + 5 then
+				table.insert(filteredGuides, {
+					name = name,
+					minLevel = minLevel,
+					maxLevel = maxLevel
+				})
+			end
+		end
+	end
+
+	-- Clamp offset
+	local maxOffset = math.max(0, table.getn(filteredGuides) - 20)
+	if f.offset > maxOffset then f.offset = maxOffset end
+
+	-- Update buttons
+	for i, btn in ipairs(f.guideButtons) do
+		local guideInfo = filteredGuides[i + f.offset]
+		if guideInfo then
+			local complete = self.db.char.completion[guideInfo.name] or 0
+			local r, g, b = self.ColorGradient(complete)
+			local coloredName = string.format("|cff%02x%02x%02x%s|r", math.floor(r * 255), math.floor(g * 255), math.floor(b * 255), guideInfo.name)
+			btn.text:SetText(coloredName)
+			btn.guideName = guideInfo.name
+			btn:Show()
+		else
+			btn:Hide()
+			btn.guideName = nil
+		end
+	end
+
+	f.content:SetHeight(table.getn(filteredGuides) * 24)
+end
+
+
+---------------------------------
 --      Route Functions        --
 ---------------------------------
 
@@ -358,7 +1046,7 @@ end
 function TurtleGuide:CreateRouteSelectorFrame()
 	local f = CreateFrame("Frame", "TurtleGuideRouteSelectorFrame", UIParent)
 	f:SetWidth(300)
-	f:SetHeight(400)
+	f:SetHeight(450)
 	f:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	f:SetBackdrop({
 		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
@@ -382,16 +1070,43 @@ function TurtleGuide:CreateRouteSelectorFrame()
 	desc:SetWidth(260)
 	desc:SetText(L["Choose a leveling route based on your race:"])
 
-	-- Create race buttons
+	-- Create race buttons (including Turtle WoW custom races)
+	-- Add "My Race" at top to use actual detected race
+	local _, detectedRace = UnitRace("player")
+	local detectedRoute = self:GetRouteForRace(detectedRace)
+
 	local races = {}
+	-- Add detected race first with special label
+	table.insert(races, {name = "My Race: " .. tostring(detectedRace), route = detectedRoute, highlight = true})
+
 	if self.myfaction == "Alliance" then
-		races = {"Human", "Dwarf", "NightElf", "Gnome"}
+		local allianceRaces = {
+			{name = "Human", route = "Human"},
+			{name = "Dwarf", route = "Dwarf"},
+			{name = "Night Elf", route = "NightElf"},
+			{name = "Gnome", route = "Gnome"},
+			{name = "High Elf", route = "HighElf"},  -- Turtle WoW
+		}
+		for _, r in ipairs(allianceRaces) do
+			table.insert(races, r)
+		end
 	else
-		races = {"Orc", "Troll", "Tauren", "Undead"}
+		local hordeRaces = {
+			{name = "Orc", route = "Orc"},
+			{name = "Troll", route = "Troll"},
+			{name = "Tauren", route = "Tauren"},
+			{name = "Undead", route = "Undead"},
+			{name = "Goblin", route = "Goblin"},  -- Turtle WoW
+		}
+		for _, r in ipairs(hordeRaces) do
+			table.insert(races, r)
+		end
 	end
 
 	local lastButton
-	for i, race in ipairs(races) do
+	for i, raceInfo in ipairs(races) do
+		local displayName = raceInfo.name
+		local routeName = raceInfo.route
 		local btn = CreateFrame("Button", nil, f, "UIPanelButtonTemplate")
 		btn:SetWidth(200)
 		btn:SetHeight(30)
@@ -400,9 +1115,9 @@ function TurtleGuide:CreateRouteSelectorFrame()
 		else
 			btn:SetPoint("TOP", desc, "BOTTOM", 0, -20)
 		end
-		btn:SetText(race)
+		btn:SetText(displayName)
 		btn:SetScript("OnClick", function()
-			TurtleGuide:SelectRoute(race)
+			TurtleGuide:SelectRoute(routeName)
 			f:Hide()
 		end)
 		lastButton = btn
@@ -417,34 +1132,163 @@ function TurtleGuide:CreateRouteSelectorFrame()
 end
 
 function TurtleGuide:SelectRoute(race)
-	self.db.char.currentroute = race
-	self.db.char.routeselected = true
-
-	-- Load the first guide in the route
-	local route = self.routes[race]
-	if route and route[1] and route[1].guide then
-		self.db.char.currentguide = route[1].guide
-		self:LoadGuide(self.db.char.currentguide)
-		self:Print(string.format(L["You have been assigned the %s leveling route."], race))
+	self:ApplyRouteSelection(race)
+	local message = L["You have been assigned the %s leveling route."]
+	if not message then
+		message = "You have been assigned the %s leveling route."
 	end
-
+	self:Print(string.format(message, tostring(race)))
 	self:UpdateStatusFrame()
 end
 
 -- Get the next guide in the current route based on player level
-function TurtleGuide:GetNextRouteGuide()
-	local route = self.routes[self.db.char.currentroute]
+-- Only returns guides that actually exist in self.guides
+-- Returns the FIRST matching guide (stops at first valid match to allow fallback ordering)
+function TurtleGuide:GetNextRouteGuideForLevel(route, playerLevel)
 	if not route then return nil end
 
-	local playerLevel = UnitLevel("player")
+	local level = playerLevel or UnitLevel("player")
+	local bestGuide
+	local skippedGuides = {}
 	for i, zone in ipairs(route) do
-		local minLevel = tonumber(string.match(zone.levels, "(%d+)%-")) or 1
-		local maxLevel = tonumber(string.match(zone.levels, "%-(%d+)")) or 60
-		if playerLevel >= minLevel and playerLevel <= maxLevel + 2 then
-			return zone.guide
+		local _, _, minText, maxText = string.find(zone.levels or "", "(%d+)%-(%d+)")
+		local minLevel = tonumber(minText) or 1
+		local maxLevel = tonumber(maxText) or 60
+		if level >= minLevel and level <= maxLevel + 2 then
+			-- Only use this guide if it actually exists
+			if self.guides[zone.guide] then
+				-- Found a valid guide - use it and stop looking
+				bestGuide = zone.guide
+				break
+			else
+				-- Guide doesn't exist, record it as skipped and continue looking
+				table.insert(skippedGuides, zone.guide)
+			end
+		elseif level < minLevel then
+			-- Past our level range - if we have a guide, we're done
+			if bestGuide then
+				break
+			end
+			-- If we haven't found a valid guide yet, take the first available future guide
+			if self.guides[zone.guide] then
+				bestGuide = zone.guide
+				break
+			else
+				table.insert(skippedGuides, zone.guide)
+			end
 		end
 	end
-	return nil
+	-- Warn about skipped guides
+	if table.getn(skippedGuides) > 0 then
+		self:Print("|cffff9900Warning: Skipped missing guides: " .. table.concat(skippedGuides, ", ") .. "|r")
+	end
+	return bestGuide
+end
+
+function TurtleGuide:ApplyRouteSelection(race)
+	self.db.char.currentroute = race
+	self.db.char.routeselected = true
+
+	local route = self.routes[race]
+	local nextguide = self:GetNextRouteGuideForLevel(route, UnitLevel("player"))
+	if not nextguide and route and route[1] and route[1].guide then
+		nextguide = route[1].guide
+	end
+	if nextguide then
+		self.db.char.currentguide = nextguide
+		self:LoadGuide(self.db.char.currentguide)
+	end
+end
+
+function TurtleGuide:SetupErrorCapture()
+	if self.errorCaptured then return end
+	self.errorCaptured = true
+	self.errorLog = self.errorLog or {}
+
+	local originalHandler = geterrorhandler()
+	seterrorhandler(function(errorMessage)
+		local timestamp = date("%H:%M:%S")
+		local stack = debugstack and debugstack(2, 12, 12) or "(no stack)"
+		local entry = string.format("[%s] %s\n%s", timestamp, tostring(errorMessage), tostring(stack))
+		table.insert(self.errorLog, 1, entry)
+		if table.getn(self.errorLog) > 50 then
+			table.remove(self.errorLog)
+		end
+		if originalHandler then
+			originalHandler(errorMessage)
+		end
+	end)
+end
+
+function TurtleGuide:ShowErrorLog()
+	if not self.errorLogFrame then
+		self:CreateErrorLogFrame()
+	end
+	self.errorLogFrame:Show()
+end
+
+function TurtleGuide:CreateErrorLogFrame()
+	local f = CreateFrame("Frame", "TurtleGuideErrorLogFrame", UIParent)
+	f:SetWidth(520)
+	f:SetHeight(360)
+	f:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+	f:SetBackdrop({
+		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+		tile = true, tileSize = 32, edgeSize = 32,
+		insets = {left = 11, right = 12, top = 12, bottom = 11}
+	})
+	f:SetMovable(true)
+	f:EnableMouse(true)
+	f:RegisterForDrag("LeftButton")
+	f:SetScript("OnDragStart", function() this:StartMoving() end)
+	f:SetScript("OnDragStop", function() this:StopMovingOrSizing() end)
+	f:SetFrameStrata("DIALOG")
+	f:Hide()
+
+	local title = f:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+	title:SetPoint("TOP", f, "TOP", 0, -16)
+	title:SetText("TurtleGuide Error Log")
+
+	local desc = f:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+	desc:SetPoint("TOP", title, "BOTTOM", 0, -8)
+	desc:SetWidth(480)
+	desc:SetText("Most recent errors are at the top. Use Ctrl+C to copy.")
+
+	local scrollFrame = CreateFrame("ScrollFrame", "TurtleGuideErrorLogScrollFrame", f, "UIPanelScrollFrameTemplate")
+	scrollFrame:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -60)
+	scrollFrame:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -32, 16)
+
+	local editBox = CreateFrame("EditBox", "TurtleGuideErrorLogEditBox", scrollFrame)
+	editBox:SetMultiLine(true)
+	editBox:SetFontObject("ChatFontNormal")
+	editBox:SetWidth(470)
+	editBox:SetAutoFocus(false)
+	editBox:SetScript("OnEscapePressed", function() f:Hide() end)
+	editBox:SetScript("OnEditFocusGained", function()
+		editBox:HighlightText(0)
+	end)
+
+	scrollFrame:SetScrollChild(editBox)
+	f.editBox = editBox
+
+	local closeBtn = CreateFrame("Button", nil, f, "UIPanelCloseButton")
+	closeBtn:SetPoint("TOPRIGHT", f, "TOPRIGHT", -5, -5)
+
+	f:SetScript("OnShow", function()
+		local entries = TurtleGuide.errorLog or {}
+		if table.getn(entries) == 0 then
+			f.editBox:SetText("No errors captured yet.")
+		else
+			f.editBox:SetText(table.concat(entries, "\n\n"))
+		end
+		if f.editBox.SetCursorPosition then
+			f.editBox:SetCursorPosition(0)
+		end
+		f.editBox:HighlightText(0)
+	end)
+
+	self.errorLogFrame = f
 end
 
 

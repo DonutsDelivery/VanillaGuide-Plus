@@ -6,7 +6,8 @@ local ww = WidgetWarlock
 
 local ROWHEIGHT = 30
 local ROWOFFSET = 6
-local NUMROWS = math.floor(305 / ROWHEIGHT)
+local HEADER_HEIGHT = 55
+local NUMROWS = math.floor((305 - HEADER_HEIGHT) / ROWHEIGHT)
 
 
 local offset = 0
@@ -103,8 +104,35 @@ function TurtleGuide:UpdateObjectivePanel()
 	routebutton:SetText("Route")
 	routebutton:SetScript("OnClick", function() frame:Hide(); TurtleGuide:ShowRouteSelector() end)
 
+	-- Branch button
+	local branchbutton = CreateButton(frame, "RIGHT", routebutton, "LEFT")
+	branchbutton:SetText("Branch")
+	branchbutton:SetScript("OnClick", function() frame:Hide(); TurtleGuide:ShowBranchSelector() end)
+	branchbutton:SetScript("OnEnter", function()
+		GameTooltip:SetOwner(this, "ANCHOR_TOP")
+		GameTooltip:SetText("Branch to a different zone guide")
+	end)
+	branchbutton:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	frame.branchbutton = branchbutton
+
+	-- Return to Main button (only visible when branching)
+	local returnbutton = CreateButton(frame, "RIGHT", branchbutton, "LEFT")
+	returnbutton:SetWidth(100)
+	returnbutton:SetText("Return Main")
+	returnbutton:SetScript("OnClick", function() TurtleGuide:ReturnFromBranch() end)
+	returnbutton:SetScript("OnEnter", function()
+		GameTooltip:SetOwner(this, "ANCHOR_TOP")
+		if TurtleGuide.db.char.branchsavedguide then
+			GameTooltip:SetText("Return to: " .. TurtleGuide.db.char.branchsavedguide)
+		else
+			GameTooltip:SetText("Return to main route")
+		end
+	end)
+	returnbutton:SetScript("OnLeave", function() GameTooltip:Hide() end)
+	frame.returnbutton = returnbutton
+
 	if TurtleGuide.db.char.debug then
-		local b = CreateButton(frame, "RIGHT", routebutton, "LEFT")
+		local b = CreateButton(frame, "RIGHT", returnbutton, "LEFT")
 		b:SetText("Debug All")
 		b:SetScript("OnClick", function() frame:Hide(); self:DebugGuideSequence(true) end)
 	end
@@ -112,6 +140,52 @@ function TurtleGuide:UpdateObjectivePanel()
 	title = ww.SummonFontString(frame, nil, "SubZoneTextFont", nil, "BOTTOM", frame, "TOP")
 	local fontname, fontheight, fontflags = title:GetFont()
 	title:SetFont(fontname, 18, fontflags)
+
+	-- Current objective header (prominent display)
+	local currentHeader = CreateFrame("Frame", nil, frame)
+	currentHeader:SetHeight(50)
+	currentHeader:SetPoint("TOPLEFT", frame, "TOPLEFT", 6, -6)
+	currentHeader:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -26, -6)
+	currentHeader:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background"})
+	currentHeader:SetBackdropColor(0.2, 0.4, 0.6, 0.8)
+
+	local currentIcon = ww.SummonTexture(currentHeader, nil, 36, 36, nil, "LEFT", currentHeader, "LEFT", 8, 0)
+	local currentText = ww.SummonFontString(currentHeader, nil, "GameFontNormalLarge", nil, "LEFT", currentIcon, "RIGHT", 8, 6)
+	local currentNote = ww.SummonFontString(currentHeader, nil, "GameFontNormalSmall", nil, "TOPLEFT", currentText, "BOTTOMLEFT", 0, -2)
+	currentNote:SetTextColor(0.9, 0.7, 0.2)
+
+	-- Navigation buttons in header
+	local prevHeaderBtn = CreateButton(currentHeader, "RIGHT", currentHeader, "RIGHT", -90, 0)
+	prevHeaderBtn:SetWidth(32) prevHeaderBtn:SetText("<")
+	prevHeaderBtn:SetScript("OnClick", function() TurtleGuide:GoToPreviousObjective() end)
+	prevHeaderBtn:SetScript("OnEnter", function()
+		GameTooltip:SetOwner(this, "ANCHOR_TOP")
+		GameTooltip:SetText("Previous objective")
+	end)
+	prevHeaderBtn:SetScript("OnLeave", function() GameTooltip:Hide() end)
+
+	local nextHeaderBtn = CreateButton(currentHeader, "LEFT", prevHeaderBtn, "RIGHT", 2, 0)
+	nextHeaderBtn:SetWidth(32) nextHeaderBtn:SetText(">")
+	nextHeaderBtn:SetScript("OnClick", function() TurtleGuide:SkipToNextObjective() end)
+	nextHeaderBtn:SetScript("OnEnter", function()
+		GameTooltip:SetOwner(this, "ANCHOR_TOP")
+		GameTooltip:SetText("Skip to next objective")
+	end)
+	nextHeaderBtn:SetScript("OnLeave", function() GameTooltip:Hide() end)
+
+	local skipHeaderBtn = CreateButton(currentHeader, "LEFT", nextHeaderBtn, "RIGHT", 2, 0)
+	skipHeaderBtn:SetWidth(32) skipHeaderBtn:SetText(">>")
+	skipHeaderBtn:SetScript("OnClick", function() TurtleGuide:SetTurnedIn(); TurtleGuide:UpdateStatusFrame() end)
+	skipHeaderBtn:SetScript("OnEnter", function()
+		GameTooltip:SetOwner(this, "ANCHOR_TOP")
+		GameTooltip:SetText("Mark complete and advance")
+	end)
+	skipHeaderBtn:SetScript("OnLeave", function() GameTooltip:Hide() end)
+
+	frame.currentHeader = currentHeader
+	frame.currentIcon = currentIcon
+	frame.currentText = currentText
+	frame.currentNote = currentNote
 
 	completed = ww.SummonFontString(frame, nil, "NumberFontNormalLarge", nil, "BOTTOMLEFT", 10, 10)
 
@@ -135,7 +209,7 @@ function TurtleGuide:UpdateObjectivePanel()
 	local bg = {bgFile = "Interface/Tooltips/UI-Tooltip-Background"}
 	for i = 1, NUMROWS do
 		local row = CreateFrame("Button", nil, frame)
-		row:SetPoint("TOPLEFT", i == 1 and frame or rows[i - 1], i == 1 and "TOPLEFT" or "BOTTOMLEFT", 0, i == 1 and -3 or 0)
+		row:SetPoint("TOPLEFT", i == 1 and frame or rows[i - 1], i == 1 and "TOPLEFT" or "BOTTOMLEFT", 0, i == 1 and -58 or 0)
 		row:SetWidth(630 - 24)
 		row:SetHeight(ROWHEIGHT)
 		row:SetBackdrop(bg)
@@ -185,7 +259,25 @@ end
 local accepted = {}
 function TurtleGuide:UpdateOHPanel(value)
 	if not frame or not frame:IsVisible() then return end
-	title:SetText(self.db.char.currentguide or L["No Guide Loaded"])
+
+	-- Update title with branch indicator
+	local guideName = self.db.char.currentguide or L["No Guide Loaded"]
+	if self.db.char.isbranching then
+		title:SetText("|cff00ff00[Branch]|r " .. guideName)
+	else
+		title:SetText(guideName)
+	end
+
+	-- Show/hide return button based on branch status
+	if frame.returnbutton then
+		if self.db.char.isbranching then
+			frame.returnbutton:Show()
+			frame.returnbutton:Enable()
+		else
+			frame.returnbutton:Hide()
+		end
+	end
+
 	local r, g, b = self.ColorGradient((self.current - 1) / table.getn(self.actions))
 	completed:SetText(string.format(L["|cff%02x%02x%02x%d%% complete"], r * 255, g * 255, b * 255, (self.current - 1) / table.getn(self.actions) * 100))
 
@@ -212,35 +304,79 @@ function TurtleGuide:UpdateOHPanel(value)
 
 	for i, row in ipairs(rows) do
 		row.i = i + offset
-		local action, name = self:GetObjectiveInfo(i + offset)
+		local idx = i + offset
+		local action, name = self:GetObjectiveInfo(idx)
 		if not name then row:Hide()
 		else
-			local turnedin, logi, complete = self:GetObjectiveStatus(i + offset)
-			local optional, intown = self:GetObjectiveTag("O", i + offset), self:GetObjectiveTag("T", i + offset)
+			local turnedin, logi, complete = self:GetObjectiveStatus(idx)
+			local optional, intown = self:GetObjectiveTag("O", idx), self:GetObjectiveTag("T", idx)
+			local isActive = (idx == self.current)
 			row:Show()
 
-			if intown then row:SetBackdropColor(0, 0.5, 0, 0.5) else row:SetBackdropColor(0, 0, 0, 0) end
-
+			-- Visual hierarchy based on status
 			local shortname = string.gsub(name, L.PART_GSUB, "")
 			logi = not turnedin and (not accepted[shortname] or (accepted[shortname] == name)) and logi
 			complete = not turnedin and (not accepted[shortname] or (accepted[shortname] == name)) and complete
 			local checked = turnedin or action == "ACCEPT" and logi or action == "COMPLETE" and complete
 
+			if isActive then
+				-- ACTIVE: Bright highlight
+				row:SetBackdropColor(0.2, 0.4, 0.6, 0.7)
+				row.text:SetTextColor(1, 1, 1)
+			elseif checked then
+				-- COMPLETED: Dimmed
+				row:SetBackdropColor(0.1, 0.1, 0.1, 0.3)
+				row.text:SetTextColor(0.5, 0.5, 0.5)
+			elseif intown then
+				-- IN-TOWN: Green tint
+				row:SetBackdropColor(0, 0.3, 0, 0.4)
+				row.text:SetTextColor(0.8, 1, 0.8)
+			else
+				-- UPCOMING: Normal
+				row:SetBackdropColor(0, 0, 0, 0)
+				row.text:SetTextColor(1, 0.82, 0)
+			end
+
+			-- Show quest progress for COMPLETE objectives
+			local progressText = ""
+			if action == "COMPLETE" and logi and not complete then
+				local numObj = GetNumQuestLeaderBoards(logi)
+				for j = 1, numObj do
+					local text = GetQuestLogLeaderBoard(j, logi)
+					if text then progressText = text break end
+				end
+			end
+
 			row.icon:SetTexture(self.icons[action])
 			if action ~= "ACCEPT" and action ~= "TURNIN" then row.icon:SetTexCoord(4 / 48, 44 / 48, 4 / 48, 44 / 48) end
 			row.text:SetText(name .. (optional and L[" |cff808080(Optional)"] or ""))
-			row.detail:SetText(self:GetObjectiveTag("N", i + offset))
+			row.detail:SetText(progressText ~= "" and progressText or self:GetObjectiveTag("N", idx))
 			row.check:SetChecked(checked)
 
-			if (TurtleGuide.current > (i + offset)) and optional and not checked then
+			if (TurtleGuide.current > idx) and optional and not checked then
 				row.text:SetTextColor(0.5, 0.5, 0.5)
 				row.check:Disable()
+			elseif not isActive and not checked then
+				row.check:Enable()
 			else
-				row.text:SetTextColor(1, 0.82, 0)
 				row.check:Enable()
 			end
 
 			if self.db.char.currentguide == "No Guide" then row.check:Disable() end
 		end
+	end
+
+	-- Update current objective header
+	if frame.currentIcon and self.current then
+		local action, name = self:GetObjectiveInfo(self.current)
+		local note = self:GetObjectiveTag("N", self.current)
+		frame.currentIcon:SetTexture(self.icons[action])
+		if action ~= "ACCEPT" and action ~= "TURNIN" then
+			frame.currentIcon:SetTexCoord(4 / 48, 44 / 48, 4 / 48, 44 / 48)
+		else
+			frame.currentIcon:SetTexCoord(0, 1, 0, 1)
+		end
+		frame.currentText:SetText(action .. ": " .. (name or "???"))
+		frame.currentNote:SetText(note or "")
 	end
 end

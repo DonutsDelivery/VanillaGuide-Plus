@@ -1,5 +1,6 @@
 local ICONSIZE, CHECKSIZE, GAP = 16, 16, 8
-local FIXEDWIDTH = ICONSIZE + CHECKSIZE + GAP * 4 - 4
+local NAVBTNSIZE = 14
+local FIXEDWIDTH = ICONSIZE + CHECKSIZE + GAP * 4 - 4 + NAVBTNSIZE * 2 + 6  -- +prev/next buttons
 
 local TurtleGuide = TurtleGuide
 local ww = WidgetWarlock
@@ -16,9 +17,64 @@ f:SetBackdropColor(0.09, 0.09, 0.19, 0.5)
 f:SetBackdropBorderColor(0.5, 0.5, 0.5, 0.5)
 
 local check = ww.SummonCheckBox(CHECKSIZE, f, "LEFT", GAP, 0)
-local icon = ww.SummonTexture(f, "ARTWORK", ICONSIZE, ICONSIZE, nil, "LEFT", check, "RIGHT", GAP - 4, 0)
-local text = ww.SummonFontString(f, "OVERLAY", "GameFontNormalSmall", nil, "RIGHT", -GAP - 4, 0)
+
+-- Previous objective button
+local prevBtn = CreateFrame("Button", nil, f)
+prevBtn:SetWidth(14) prevBtn:SetHeight(14)
+prevBtn:SetPoint("LEFT", check, "RIGHT", 2, 0)
+prevBtn:SetNormalTexture("Interface\\Buttons\\UI-SpellbookIcon-PrevPage-Up")
+prevBtn:SetPushedTexture("Interface\\Buttons\\UI-SpellbookIcon-PrevPage-Down")
+prevBtn:SetHighlightTexture("Interface\\Buttons\\UI-Panel-MinimizeButton-Highlight")
+prevBtn:SetScript("OnClick", function() TurtleGuide:GoToPreviousObjective() end)
+prevBtn:SetScript("OnEnter", function()
+	GameTooltip:SetOwner(this, "ANCHOR_TOP")
+	GameTooltip:SetText("Previous objective")
+end)
+prevBtn:SetScript("OnLeave", function() GameTooltip:Hide() end)
+
+local icon = ww.SummonTexture(f, "ARTWORK", ICONSIZE, ICONSIZE, nil, "LEFT", prevBtn, "RIGHT", GAP - 4, 0)
+local text = ww.SummonFontString(f, "OVERLAY", "GameFontNormalSmall", nil, "RIGHT", -GAP - 4 - 18, 0)
 text:SetPoint("LEFT", icon, "RIGHT", GAP - 4, 0)
+
+-- Next objective button
+local nextBtn = CreateFrame("Button", nil, f)
+nextBtn:SetWidth(14) nextBtn:SetHeight(14)
+nextBtn:SetPoint("RIGHT", f, "RIGHT", -GAP, 0)
+nextBtn:SetNormalTexture("Interface\\Buttons\\UI-SpellbookIcon-NextPage-Up")
+nextBtn:SetPushedTexture("Interface\\Buttons\\UI-SpellbookIcon-NextPage-Down")
+nextBtn:SetHighlightTexture("Interface\\Buttons\\UI-Panel-MinimizeButton-Highlight")
+nextBtn:SetScript("OnClick", function() TurtleGuide:SkipToNextObjective() end)
+nextBtn:SetScript("OnEnter", function()
+	GameTooltip:SetOwner(this, "ANCHOR_TOP")
+	GameTooltip:SetText("Skip to next objective")
+end)
+nextBtn:SetScript("OnLeave", function() GameTooltip:Hide() end)
+
+-- Return from branch button (only visible when branching)
+local returnBtn = CreateFrame("Button", nil, f)
+returnBtn:SetWidth(50) returnBtn:SetHeight(14)
+returnBtn:SetPoint("LEFT", f, "RIGHT", 4, 0)
+returnBtn:SetBackdrop({
+	bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
+	edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+	tile = true, tileSize = 8, edgeSize = 8,
+	insets = {left = 2, right = 2, top = 2, bottom = 2}
+})
+returnBtn:SetBackdropColor(0, 0.4, 0, 0.8)
+returnBtn:SetBackdropBorderColor(0, 0.8, 0, 0.8)
+local returnText = returnBtn:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+returnText:SetPoint("CENTER", 0, 0)
+returnText:SetText("|cff00ff00<< Main|r")
+returnText:SetTextColor(0, 1, 0)
+returnBtn:SetScript("OnClick", function() TurtleGuide:ReturnFromBranch() end)
+returnBtn:SetScript("OnEnter", function()
+	GameTooltip:SetOwner(this, "ANCHOR_TOP")
+	local savedGuide = TurtleGuide.db.char.branchsavedguide or "Unknown"
+	GameTooltip:SetText("Return to main route:\n" .. savedGuide, nil, nil, nil, nil, true)
+end)
+returnBtn:SetScript("OnLeave", function() GameTooltip:Hide() end)
+returnBtn:Hide()
+TurtleGuide.branchReturnBtn = returnBtn
 
 local item = CreateFrame("Button", nil, UIParent)
 item:SetFrameStrata("LOW")
@@ -82,7 +138,35 @@ function TurtleGuide:SetStatusText(i)
 	self.current = i
 	local action, quest = self:GetObjectiveInfo(i)
 	local note = self:GetObjectiveTag("N")
-	local newtext = (quest or "???") .. (note and " [?]" or "")
+	local totalSteps = self.actions and table.getn(self.actions) or 0
+	local stepNum = string.format("[%d/%d] ", i, totalSteps)
+	local branchIndicator = self.db.char.isbranching and "|cff00ff00*|r " or ""
+	local newtext = branchIndicator .. stepNum .. (quest or "???") .. (note and " [?]" or "")
+
+	-- Check for unmet prerequisites from other zones (only for ACCEPT actions)
+	-- Only warn once per objective to avoid spam
+	if action == "ACCEPT" and self.lastPrereqWarning ~= i then
+		local unmetPrereqs = self:GetUnmetPrerequisites(i)
+		for _, prereq in ipairs(unmetPrereqs) do
+			-- Only warn if prerequisite is NOT in current guide (i.e., from another zone)
+			if not prereq.guideStep then
+				self:Print(string.format("|cffff6600Warning:|r Quest requires prerequisite from another zone: |cffffd700%s|r", prereq.name))
+				self.lastPrereqWarning = i
+			end
+		end
+	end
+
+	-- Show/hide branch return button
+	if self.branchReturnBtn then
+		if self.db.char.isbranching then
+			self.branchReturnBtn:Show()
+		else
+			self.branchReturnBtn:Hide()
+		end
+	end
+
+	-- Auto-track quest for COMPLETE objectives
+	self:TrackCurrentQuest()
 
 	if text:GetText() ~= newtext or icon:GetTexture() ~= self.icons[action] then
 		oldsize = f:GetWidth()
@@ -114,7 +198,7 @@ function TurtleGuide:SetStatusText(i)
 end
 
 
-local lastmapped, lastmappedaction, tex, uitem
+local lastmapped, lastmappedaction, lastmappedquest, tex, uitem
 function TurtleGuide:UpdateStatusFrame()
 	self:Debug("UpdateStatusFrame", self.current)
 
@@ -163,7 +247,13 @@ function TurtleGuide:UpdateStatusFrame()
 
 			local incomplete
 			if action == "ACCEPT" then incomplete = (not optional or hasuseitem or haslootitem or prereqturnedin) and not logi
-			elseif action == "TURNIN" then incomplete = not optional or logi
+			elseif action == "TURNIN" then
+				-- Check server-side completion for TURNIN
+				local qid = self:GetObjectiveTag("QID", i)
+				if qid and self:IsQuestCompletedOnServer(qid) then
+					return self:SetTurnedIn(i, true)
+				end
+				incomplete = not optional or logi
 			elseif action == "COMPLETE" then incomplete = not complete and (not optional or logi)
 			elseif action == "NOTE" or action == "KILL" then incomplete = not optional or haslootitem
 			elseif action == "GRIND" then incomplete = needlevel
@@ -189,6 +279,13 @@ function TurtleGuide:UpdateStatusFrame()
 	QuestLog_Update()
 	QuestWatch_Update()
 
+	-- Check if we're on a branch and it's complete
+	if not nextstep and self.db.char.isbranching then
+		self:Print("Branch guide complete! Returning to main route.")
+		self:ReturnFromBranch()
+		return
+	end
+
 	if not nextstep and self:LoadNextGuide() then return self:UpdateStatusFrame() end
 
 	if not nextstep then return end
@@ -202,8 +299,11 @@ function TurtleGuide:UpdateStatusFrame()
 	self:Debug(string.format("Progressing to objective \"%s %s\"", action, quest))
 
 	-- Mapping / Navigation
-	if (TomTom or Cartographer_Waypoints) and (lastmapped ~= quest or lastmappedaction ~= action) then
-		lastmappedaction, lastmapped = action, quest
+	local shouldUpdateWaypoint = (lastmappedquest ~= fullquest or lastmappedaction ~= action) or self.waypointForced
+	if (TomTom or Cartographer_Waypoints or (self.db.char.mapmetamap and IsAddOnLoaded("MetaMap"))) and shouldUpdateWaypoint then
+		lastmappedaction, lastmappedquest = action, fullquest
+		lastmapped = quest
+		self.waypointForced = nil
 		self:ParseAndMapCoords(qid, action, note, quest, zonename)
 	end
 
@@ -258,7 +358,8 @@ f:SetScript("OnClick", function()
 	if TurtleGuide.db.char.currentguide == "No Guide" then
 		TurtleGuide.guidelistframe:Show()
 	else
-		if btn == "RightButton" then
+		if btn == "LeftButton" then
+			-- Left-click: Show/hide objectives panel
 			if TurtleGuide.objectiveframe:IsVisible() then
 				HideUIPanel(TurtleGuide.objectiveframe)
 			else
@@ -269,6 +370,7 @@ f:SetScript("OnClick", function()
 				ShowUIPanel(TurtleGuide.objectiveframe)
 			end
 		else
+			-- Right-click: Show/hide quest log
 			if QuestLogFrame:IsVisible() or (EQL3_QuestLogFrame and EQL3_QuestLogFrame:IsVisible()) then
 				HideUIPanel(QuestLogFrame)
 				HideUIPanel(EQL3_QuestLogFrame)
@@ -297,13 +399,22 @@ end)
 local function ShowTooltip()
 	local self = this
 	local tip = TurtleGuide:GetObjectiveTag("N")
-	if not tip or tip == "" then return end
-	tip = tostring(tip)
 	local quad, vhalf, hhalf = TurtleGuide.GetQuadrant(self)
 	local anchpoint = "ANCHOR_TOP" .. hhalf
 	TurtleGuide:Debug("Setting tooltip anchor", anchpoint)
 	GameTooltip:SetOwner(self, anchpoint)
-	GameTooltip:SetText(tip, nil, nil, nil, nil, 1)
+
+	-- Show branch status if branching
+	if TurtleGuide.db.char.isbranching then
+		GameTooltip:AddLine("|cff00ff00Currently branching|r", 1, 1, 1)
+		GameTooltip:AddLine("Main route: " .. (TurtleGuide.db.char.branchsavedguide or "Unknown"), 0.7, 0.7, 0.7)
+		GameTooltip:AddLine(" ", 1, 1, 1)
+	end
+
+	if tip and tip ~= "" then
+		GameTooltip:AddLine(tostring(tip), 1, 1, 1, true)
+	end
+
 	GameTooltip:Show()
 end
 

@@ -1,5 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
+	<Script file="01_10_Thalassian_Highlands.lua"/>
 	<Script file="01_12_Dun_Morogh.lua"/>
 	<Script file="01_12_Elwynn_Forest.lua"/>
 	<Script file="01_12_Teldrassil.lua"/>
@@ -14,19 +15,24 @@
 	<Script file="24_24_Ashenvale.lua"/>
 	<Script file="24_27_Wetlands.lua"/>
 	<Script file="27_28_Redridge_Mountains.lua"/>
+	<Script file="28_34_Northwind.lua"/>
 	<Script file="28_29_Duskwood.lua"/>
 	<Script file="29_30_Ashenvale.lua"/>
+	<Script file="29_34_Balor.lua"/>
 	<Script file="30_31_Wetlands.lua"/>
 	<Script file="31_32_Hillsbrad_Foothills.lua"/>
 	<Script file="32_33_Stranglethorn.lua"/>
 	<Script file="33_34_Thousand_Needles.lua"/>
+	<Script file="33_38_Grim_Reaches.lua"/>
 	<Script file="34_35_Desolace.lua"/>
 	<Script file="36_37_Stranglethorn.lua"/>
 	<Script file="37_37_Alterac_Mountains.lua"/>
 	<Script file="37_38_Arathi_Highlands.lua"/>
 	<Script file="38_39_Dustwallow_Marsh.lua"/>
 	<Script file="39_40_Stranglethorn.lua"/>
+	<Script file="39_46_Gilneas.lua"/>
 	<Script file="40_41_Badlands.lua"/>
+	<Script file="40_50_Icepoint_Rock.lua"/>
 	<Script file="41_42_Swamp_of_Sorrows.lua"/>
 	<Script file="42_43_Stranglethorn.lua"/>
 	<Script file="43_43_Desolace.lua"/>
@@ -37,6 +43,7 @@
 	<Script file="46_47_Stranglethorn.lua"/>
 	<Script file="47_48_Searing_Gorge.lua"/>
 	<Script file="48_49_Feralas.lua"/>
+	<Script file="48_53_Lapidis_Isle.lua"/>
 	<Script file="49_50_Tanaris.lua"/>
 	<Script file="50_50_Hinterlands.lua"/>
 	<Script file="50_51_Blasted_Lands.lua"/>
@@ -44,6 +51,7 @@
 	<Script file="52_53_Azshara.lua"/>
 	<Script file="53_54_Felwood.lua"/>
 	<Script file="54_55_Winterspring.lua"/>
+	<Script file="54_60_TelAbim.lua"/>
 	<Script file="55_56_Burning_Steppes.lua"/>
 	<Script file="55_56_Felwood.lua"/>
 	<Script file="56_57_Western_Plaguelands.lua"/>

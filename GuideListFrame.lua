@@ -18,20 +18,40 @@ end
 
 local function ShowTooltip()
 	local f = this
-	if TurtleGuide.db.char.completion[f.guide] ~= 1 then return end
-
 	GameTooltip:SetOwner(f, "ANCHOR_RIGHT")
-	GameTooltip:SetText("This guide has been completed. Shift-click to reset it.", nil, nil, nil, nil, true)
+
+	local lines = {}
+	table.insert(lines, "Left-click: Load this guide")
+	table.insert(lines, "Right-click: Branch to this guide")
+
+	if TurtleGuide.db.char.completion[f.guide] == 1 then
+		table.insert(lines, "Shift-click: Reset progress")
+	end
+
+	if TurtleGuide.db.char.isbranching and TurtleGuide.db.char.branchsavedguide == f.guide then
+		table.insert(lines, "|cff00ff00(Your saved main route)|r")
+	end
+
+	GameTooltip:SetText(table.concat(lines, "\n"), nil, nil, nil, nil, true)
 end
 
 local function OnClick()
 	local f = this
+	local btn = arg1
 	if IsShiftKeyDown() then
 		TurtleGuide.db.char.completion[f.guide] = nil
 		TurtleGuide.db.char.turnins[f.guide] = {}
 		TurtleGuide:UpdateGuideListPanel()
 		GameTooltip:Hide()
+	elseif btn == "RightButton" then
+		-- Right-click: Branch to this guide (saves current progress)
+		local text = f.guide
+		if text then
+			TurtleGuide:BranchToGuide(text)
+			TurtleGuide:UpdateGuideListPanel()
+		end
 	else
+		-- Left-click: Load guide normally
 		local text = f.guide
 		if not text then f:SetChecked(false)
 		else
@@ -87,6 +107,7 @@ for i = 1, NUMROWS * 3 do
 	text:SetFont(fontname, 11, fontflags)
 	text:SetTextColor(.79, .79, .79, 1)
 
+	row:RegisterForClicks("LeftButtonUp", "RightButtonUp")
 	row:SetScript("OnClick", OnClick)
 	row:SetScript("OnEnter", ShowTooltip)
 	row:SetScript("OnLeave", HideTooltip)
@@ -120,6 +141,14 @@ table.insert(UISpecialFrames, "TurtleGuideGuideList")
 
 function TurtleGuide:UpdateGuideListPanel()
 	if not frame or not frame:IsVisible() then return end
+
+	-- Update title to show branch status
+	if self.db.char.isbranching then
+		frame.title:SetText("Guide List |cff00ff00(Branching)|r")
+	else
+		frame.title:SetText("Guide List")
+	end
+
 	for i, row in ipairs(rows) do
 		row.i = i + offset + 1
 
@@ -129,6 +158,12 @@ function TurtleGuide:UpdateGuideListPanel()
 
 		local r, g, b = self.ColorGradient(complete or 0)
 		local text = complete and complete ~= 0 and string.format("|cff%02x%02x%02x%s", r * 255, g * 255, b * 255, name) or name
+
+		-- Mark saved main route when branching
+		if self.db.char.isbranching and self.db.char.branchsavedguide == name then
+			text = "|cff00ff00[Main]|r " .. text
+		end
+
 		row.text:SetText(text)
 		row:SetChecked(self.db.char.currentguide == name)
 	end

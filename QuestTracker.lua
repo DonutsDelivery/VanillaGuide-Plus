@@ -86,7 +86,7 @@ function TurtleGuide:QUEST_LOG_UPDATE(event)
 
 	self:Debug("QUEST_LOG_UPDATE", action, logi, complete)
 
-	if (self.updatedelay and not logi) or action == "ACCEPT" or action == "COMPLETE" and complete then self:UpdateStatusFrame() end
+	if (self.updatedelay and not logi) or action == "ACCEPT" or action == "COMPLETE" then self:UpdateStatusFrame() end
 
 	if action == "KILL" or action == "NOTE" then
 		local quest, questtext = self:GetObjectiveTag("Q"), self:GetObjectiveTag("QO")
@@ -135,6 +135,27 @@ function TurtleGuide:UI_INFO_MESSAGE(event, msg)
 end
 
 
+-- Detect NPC interaction for GETFLIGHTPOINT objectives
+local flightEventFrame = CreateFrame("Frame")
+flightEventFrame:RegisterEvent("TAXIMAP_OPENED")
+flightEventFrame:RegisterEvent("GOSSIP_SHOW")
+flightEventFrame:RegisterEvent("PLAYER_TARGET_CHANGED")
+flightEventFrame:SetScript("OnEvent", function()
+	if TurtleGuide:GetObjectiveInfo() ~= "GETFLIGHTPOINT" then return end
+
+	if event == "TAXIMAP_OPENED" or event == "GOSSIP_SHOW" then
+		TurtleGuide:Debug(event .. " - completing GETFLIGHTPOINT")
+		TurtleGuide:SetTurnedIn()
+	elseif event == "PLAYER_TARGET_CHANGED" then
+		-- Check if targeting a friendly NPC (likely the flight master)
+		if UnitExists("target") and not UnitIsPlayer("target") and not UnitCanAttack("player", "target") then
+			TurtleGuide:Debug("Targeted friendly NPC - completing GETFLIGHTPOINT")
+			TurtleGuide:SetTurnedIn()
+		end
+	end
+end)
+
+
 function TurtleGuide:CRAFT_SHOW()
 	if not GetCraftName() == "Beast Training" then return end
 	for i = 1, GetNumCrafts() do
@@ -153,11 +174,72 @@ GetQuestReward = function(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13
 	TurtleGuide:Debug("GetQuestReward", quest)
 	TurtleGuide:CompleteQuest(quest, true)
 
-	-- Track completed quest for smart skip
+	-- Track completed quest for smart skip (by name)
 	TurtleGuide.db.char.completedquests[quest] = true
+
+	-- Also track by QID if we can find it in the current guide
+	if TurtleGuide.quests and TurtleGuide.actions then
+		for i, guideQuest in ipairs(TurtleGuide.quests) do
+			local cleanGuideQuest = string.gsub(guideQuest, "@.*@", "")
+			cleanGuideQuest = string.gsub(cleanGuideQuest, TurtleGuide.Locale.PART_GSUB, "")
+			if cleanGuideQuest == quest and TurtleGuide.actions[i] == "TURNIN" then
+				local qid = TurtleGuide:GetObjectiveTag("QID", i)
+				if qid then
+					TurtleGuide.db.char.completedquestsbyid[tonumber(qid)] = true
+					TurtleGuide:Debug("Tracked completed QID: " .. qid)
+				end
+				break
+			end
+		end
+	end
 
 	return orig(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20)
 end
+
+
+-- Hook UseContainerItem to detect USE objective completion
+local origUseContainerItem = UseContainerItem
+UseContainerItem = function(bag, slot, ...)
+	local action = TurtleGuide:GetObjectiveInfo()
+	local useitem = TurtleGuide:GetObjectiveTag("U")
+
+	if action == "USE" and useitem then
+		local link = GetContainerItemLink(bag, slot)
+		if link and string.find(link, "item:" .. useitem) then
+			TurtleGuide:Debug("Detected USE item from bag: " .. useitem)
+			-- Delay slightly to allow the item use to complete
+			TurtleGuide.pendingUseComplete = true
+		end
+	end
+
+	return origUseContainerItem(bag, slot, unpack(arg))
+end
+
+-- Check for pending USE completion after item use
+local useCheckFrame = CreateFrame("Frame")
+local useCheckElapsed = 0
+local useCheckPending = false
+useCheckFrame:SetScript("OnUpdate", function()
+	if TurtleGuide.pendingUseComplete then
+		-- Start tracking
+		useCheckPending = true
+		useCheckElapsed = 0
+		TurtleGuide.pendingUseComplete = nil
+	end
+
+	if useCheckPending then
+		useCheckElapsed = useCheckElapsed + arg1
+		if useCheckElapsed > 0.3 then
+			useCheckPending = false
+			useCheckElapsed = 0
+			local action = TurtleGuide:GetObjectiveInfo()
+			if action == "USE" then
+				TurtleGuide:Debug("Completing USE objective after item use")
+				TurtleGuide:SetTurnedIn()
+			end
+		end
+	end
+end)
 
 
 -- Scan quest log and return list of quests with their status
@@ -220,3 +302,103 @@ function TurtleGuide:IsQuestComplete(questName)
 	end
 	return false
 end
+
+
+-- Distance-based arrival detection for travel objectives (fallback when TomTom not available)
+local arrivalCheckFrame = CreateFrame("Frame")
+local arrivalCheckElapsed = 0
+local ARRIVAL_CHECK_INTERVAL = 0.5  -- Check every 0.5 seconds
+local ARRIVAL_DISTANCE = 0.015  -- Map coordinate distance threshold (~30-50 yards)
+
+-- Zone name to continent/zone index lookup (built from Navigation.lua pattern)
+local zonei, zonec = {}, {}
+for ci, c in pairs({GetMapContinents()}) do
+	for zi, z in pairs({GetMapZones(ci)}) do
+		zonei[z], zonec[z] = zi, ci
+	end
+end
+
+-- Check if current objective completion conditions are already met
+local function RecheckCurrentObjective()
+	if not TurtleGuide.current or not TurtleGuide.actions then return end
+
+	local action = TurtleGuide:GetObjectiveInfo()
+	if not action then return end
+
+	TurtleGuide:Debug("Rechecking completion for: " .. action)
+
+	-- GETFLIGHTPOINT: Check if targeting friendly NPC
+	if action == "GETFLIGHTPOINT" then
+		if UnitExists("target") and not UnitIsPlayer("target") and not UnitCanAttack("player", "target") then
+			TurtleGuide:Debug("Recheck: Already targeting friendly NPC - completing GETFLIGHTPOINT")
+			TurtleGuide:SetTurnedIn()
+			return
+		end
+	end
+
+	-- Travel objectives: Will be caught by the distance check below
+end
+
+arrivalCheckFrame:SetScript("OnUpdate", function()
+	arrivalCheckElapsed = arrivalCheckElapsed + arg1
+	if arrivalCheckElapsed < ARRIVAL_CHECK_INTERVAL then return end
+	arrivalCheckElapsed = 0
+
+	-- Check if we need to re-evaluate after rewind
+	if TurtleGuide.recheckCompletion then
+		TurtleGuide.recheckCompletion = nil
+		RecheckCurrentObjective()
+	end
+
+	-- Skip if TomTom is handling arrival detection (it has callbacks)
+	if TomTom and TomTom.AddMFWaypoint then return end
+
+	-- Only check if guide is loaded
+	if not TurtleGuide.current or not TurtleGuide.actions then return end
+
+	local action, quest = TurtleGuide:GetObjectiveInfo()
+	if not action then return end
+
+	-- Only check for travel/arrival objectives
+	if action ~= "RUN" and action ~= "FLY" and action ~= "HEARTH" and action ~= "BOAT" and action ~= "GETFLIGHTPOINT" then return end
+
+	-- Get target coordinates from note
+	local note = TurtleGuide:GetObjectiveTag("N")
+	if not note then return end
+
+	local targetX, targetY
+	for x, y in string.gfind(note, L.COORD_MATCH) do
+		targetX, targetY = tonumber(x) / 100, tonumber(y) / 100
+		break  -- Use first coordinate found
+	end
+
+	if not targetX or not targetY then return end
+
+	-- Get target zone
+	local targetZone = TurtleGuide:GetObjectiveTag("Z") or TurtleGuide.zonename
+
+	-- Get player position
+	SetMapToCurrentZone()
+	local playerC, playerZ = GetCurrentMapContinent(), GetCurrentMapZone()
+	local playerX, playerY = GetPlayerMapPosition("player")
+
+	-- If target zone is specified, check we're in the right zone
+	if targetZone then
+		local targetZI, targetZC = zonei[targetZone], zonec[targetZone]
+		if targetZC and targetZI and (playerC ~= targetZC or playerZ ~= targetZI) then
+			return  -- Not in target zone yet
+		end
+	end
+
+	-- Skip if we couldn't get player position
+	if playerX == 0 and playerY == 0 then return end
+
+	-- Calculate distance (simple Euclidean in map coordinates)
+	local dx, dy = playerX - targetX, playerY - targetY
+	local distance = math.sqrt(dx * dx + dy * dy)
+
+	if distance <= ARRIVAL_DISTANCE then
+		TurtleGuide:Debug(string.format("Arrived at destination: %.3f from target (threshold %.3f)", distance, ARRIVAL_DISTANCE))
+		TurtleGuide:SetTurnedIn()
+	end
+end)

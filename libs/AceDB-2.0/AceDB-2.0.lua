@@ -275,7 +275,14 @@ end
 
 local _,race = UnitRace("player")
 local faction
-if race == "Orc" or race == "Scourge" or race == "Troll" or race == "Tauren" then
+-- Use UnitFactionGroup for accurate faction detection (supports Turtle WoW custom races)
+local unitFaction = UnitFactionGroup("player")
+if unitFaction == "Horde" then
+	faction = FACTION_HORDE
+elseif unitFaction == "Alliance" then
+	faction = FACTION_ALLIANCE
+elseif race == "Orc" or race == "Scourge" or race == "Troll" or race == "Tauren" or race == "Goblin" then
+	-- Fallback for race-based detection (includes Turtle WoW's Goblin race)
 	faction = FACTION_HORDE
 else
 	faction = FACTION_ALLIANCE

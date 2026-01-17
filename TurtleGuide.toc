@@ -8,7 +8,7 @@
 
 ## SavedVariables: TurtleGuideDB
 
-## OptionalDeps: TomTom, pfQuest
+## OptionalDeps: TomTom, pfQuest, MetaMap, MetaMapBWP
 
 # libs Core
 libs\AceLibrary\AceLibrary.lua
@@ -46,3 +46,6 @@ Guides\Alliance\Guides.xml
 
 # Horde Guides
 Guides\Horde\Guides.xml
+
+# Both Factions Guides
+Guides\Both\Guides.xml
