@@ -980,9 +980,9 @@ function TurtleGuide:ShowBranchSelector()
 end
 
 function TurtleGuide:CreateBranchSelectorFrame()
-	local NUMROWS = 16
+	local NUMROWS = 14
 	local COLWIDTH = 210
-	local ROWHEIGHT = 19
+	local ROWHEIGHT = 22
 
 	local f = CreateFrame("Frame", "TurtleGuideBranchSelectorFrame", UIParent)
 	f:SetWidth(660)
@@ -1154,12 +1154,12 @@ function TurtleGuide:UpdateBranchSelectorPanel()
 		end
 	end
 
-	-- Clamp offset (48 buttons = 3 columns × 16 rows)
-	local maxOffset = math.max(0, table.getn(displayList) - 48)
+	-- Clamp offset (42 buttons = 3 columns × 14 rows)
+	local maxOffset = math.max(0, table.getn(displayList) - 42)
 	if f.offset > maxOffset then f.offset = maxOffset end
 
 	-- Update buttons from displayList (matching GuideListFrame pattern)
-	for i = 1, 48 do
+	for i = 1, 42 do
 		local btn = f.guideButtons[i]
 		local entry = displayList[i + f.offset]
 		if entry then
