@@ -544,7 +544,22 @@ function TurtleGuide:GetQuestDetails(name)
 	local i = self:GetQuestLogIndexByName(name)
 	if not i or i < 1 then return end
 	local _, _, _, _, _, _, isComplete = GetQuestLogTitle(i)
-	local complete = i and isComplete == 1
+	local complete = i and isComplete and isComplete == 1
+
+	-- Fallback: check if all quest objectives are done via leaderboard
+	if not complete and i then
+		local numObjectives = GetNumQuestLeaderBoards(i)
+		if numObjectives and numObjectives > 0 then
+			complete = true
+			for j = 1, numObjectives do
+				local text, objType, finished = GetQuestLogLeaderBoard(j, i)
+				if not finished then
+					complete = false
+					break
+				end
+			end
+		end
+	end
 
 	return i, complete
 end
