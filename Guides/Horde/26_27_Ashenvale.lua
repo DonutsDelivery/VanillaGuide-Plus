@@ -72,6 +72,8 @@ C Satyr Horns |QID|6441| |N|Kill Bleakheart Satyr, Felmusk Felsworn, Felmusk Sat
 R Splintertree Post |TID|6441| |N|Travel to Splintertree Post (68.24, 54.82) (71.67, 63.66) (73.09, 61.49)|
 T Satyr Horns |QID|6441| |N|Pixel in Splintertree Post (73.10, 61.48)|
 
+R Sun Rock Retreat |N|Travel south from Splintertree Post through Ashenvale, then west into Stonetalon Mountains to Sun Rock Retreat| |Z|Stonetalon Mountains|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

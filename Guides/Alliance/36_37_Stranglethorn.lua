@@ -147,6 +147,8 @@ A Ironband Wants You! |QID|707| |N|Prospector Stormpike in The Library (74.53, 1
 T Letter to Stormpike |QID|514| |N|Prospector Stormpike in The Library (74.59, 11.68)| |Z|Ironforge| |O|
 A Further Mysteries |QID|525| |N|Prospector Stormpike in The Library (74.59, 11.68)| |Z|Ironforge| |PRE|514| |O|
 
+R Alterac Mountains |N|Fly from Ironforge to Southshore, then travel north into Alterac Mountains (48.82, 54.87)| |Z|Alterac Mountains|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

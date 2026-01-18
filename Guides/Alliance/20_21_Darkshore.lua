@@ -95,6 +95,8 @@ C One Shot. One Kill. |QID|5713| |N|Protect Sentinel Aynasha until the quest is 
 C The Sleeper Has Awakened |QID|5321| |N|Escort Kerlonian Evershade to Maestra's Post<br/><b>Avoid the main road so you don't get ambushed by 4 mobs (29.01, 25.66) (27.25, 35.62)| |U|13536| |Z|Ashenvale|
 T The Sleeper Has Awakened |QID|5321| |N|Liladris Moonriver in Maestra's Post (27.25, 35.62)| |Z|Ashenvale|
 
+R Ashenvale |N|Travel south from Darkshore into Ashenvale. Follow the road south past the Grove of the Ancients to Maestra's Post (27.25, 35.62)| |Z|Ashenvale|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

@@ -38,6 +38,8 @@ T A New Ore Sample |QID|1153| |N|Tatternack Steelforge in Camp Taurajo (45.11, 5
 C Cry of the Thunderhawk |QID|913| |N|Kill Thunderhawk Cloudscraper to collect Thunderhawk Wings (44.0, 55.0) (48.3, 56.9) (48.1, 60.0) (48.7, 62.1) (44.9, 63.0) (44.5, 61.6)| |Z|The Barrens| |PRE|907|
 T Cry of the Thunderhawk |QID|913| |N|Jorn Skyseer in Camp Taurajo (44.89, 59.15)| |Z|The Barrens| |PRE|907|
 
+R Splintertree Post |N|Fly from Camp Taurajo to The Crossroads, then travel north through The Mor'shan Rampart into Ashenvale to Splintertree Post| |Z|Ashenvale|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

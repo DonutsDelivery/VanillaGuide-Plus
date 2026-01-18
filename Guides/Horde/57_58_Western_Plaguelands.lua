@@ -102,7 +102,9 @@ A Rabine Saturna |QID|1123| |N|Arch Druid Hamuul Runetotem in Elder Rise (78.55,
 T A Donation of Mageweave |QID|7822| |N|Rumstag Proudstrider in Thunder Bluff (43.0, 42.7)| |Z|Thunder Bluff| |L|4338 60| |O| 
 T A Donation of Runecloth |QID|7823| |N|Rumstag Proudstrider in Thunder Bluff (43.0, 42.7)| |Z|Thunder Bluff| |L|14047 60| |O| 
 
-N Guide Complete |N|Tick to continue to the next guide| 
+R Silithus |N|Fly to Cenarion Hold in Silithus| |Z|Silithus|
+
+N Guide Complete |N|Tick to continue to the next guide|
 
 ]]
 end)

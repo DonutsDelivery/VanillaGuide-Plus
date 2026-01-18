@@ -266,6 +266,11 @@ T Visit the Herbalist |QID|130| |N|Martie Jainrose in Lakeshire (21.89, 46.37)| 
 A Delivering Daffodils |QID|131| |N|Martie Jainrose in Lakeshire (21.89, 46.37)| |Z|Redridge Mountains|
 T Delivering Daffodils |QID|131| |N|Darcy in Lakeshire (26.77, 44.31)| |Z|Redridge Mountains|
 
+R Stormwind City |N|Travel to Stormwind City and take the Deeprun Tram from Dwarven District to Ironforge (70.3, 29.5)| |Z|Stormwind City|
+R Ironforge |N|Exit the Deeprun Tram and enter Ironforge| |Z|Ironforge|
+R Menethil Harbor |N|Fly from Ironforge to Menethil Harbor. Speak to Gryth Thurden (55.5, 47.8)| |Z|Ironforge|
+R Auberdine |N|Take the boat from Menethil Harbor to Auberdine in Darkshore (4.5, 57.3)| |Z|Wetlands|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

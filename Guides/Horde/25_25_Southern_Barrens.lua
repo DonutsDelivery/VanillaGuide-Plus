@@ -94,6 +94,8 @@ R The Great Lift |QID|4542| |N|Run to The Great Lift (44.0, 92.0)|
 T Calling in the Reserves |QID|5881| |N|Grish Longrunner in The Great Lift (31.93, 21.56)| |Z|Thousand Needles|
 A Message to Freewind Post |QID|4542| |N|Brave Moonhorn in The Great Lift (32.25, 22.10)| |Z|Thousand Needles|
 
+R Freewind Post |N|Continue south from The Great Lift down into Thousand Needles, then travel to Freewind Post| |Z|Thousand Needles|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

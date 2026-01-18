@@ -156,6 +156,8 @@ N Kravel's Crate |QID|5762| |N|Withdraw Kravel's Crate from the bank. Tick this 
 T Wharfmaster Dizzywig |QID|1111| |N|Wharfmaster Dizzywig in Ratchet (63.33, 38.41)| |Z|The Barrens| |O|
 A Parts for Kravel |QID|1112| |N|Wharfmaster Dizzywig in Ratchet (63.33, 38.41)| |Z|The Barrens| |PRE|1112|
 
+R Grom'gol Base Camp |N|Take the boat from Ratchet to Booty Bay, then travel north to Grom'gol Base Camp, or fly to Grom'gol if you have the flight path| |Z|Stranglethorn Vale|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

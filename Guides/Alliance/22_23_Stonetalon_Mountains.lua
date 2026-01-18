@@ -34,6 +34,8 @@ R Stonetalon Peak |TID|1056| |N|Travel to Stonetalon Peak (37.10, 8.10)| |Z|Ston
 T Journey to Stonetalon Peak |QID|1056| |N|Keeper Albagorm in Stonetalon Peak (37.10, 8.10)| |Z|Stonetalon Mountains|
 f Stonetalon Peak |TID|1134| |N|Speak to Teloren and grab flight path for Stonetalon Peak (36.46, 7.20)| |Z|Stonetalon Mountains|
 
+R Darkshore |N|Fly from Stonetalon Peak to Auberdine, or travel back through Ashenvale and take the boat from Rut'theran Village (37.21, 44.27)| |Z|Darkshore|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

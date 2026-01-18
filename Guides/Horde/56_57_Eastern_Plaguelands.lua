@@ -125,6 +125,8 @@ A Good Luck Charm |QID|5050| |N|Jeremiah Payson in Trade Quarter (67.58, 44.04)|
 T A Donation of Runecloth |QID|7818| |N|Ralston Farnsley in Magic Quarter (71.83, 29.15)| |Z|Undercity| |L|14047 60| |O|
 T A Donation of Mageweave |QID|7817| |N|Ralston Farnsley in Magic Quarter (71.83, 29.15)| |Z|Undercity| |L|4338 60| |O|
 
+R The Bulwark |N|Travel west to The Bulwark in Western Plaguelands| |Z|Western Plaguelands|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

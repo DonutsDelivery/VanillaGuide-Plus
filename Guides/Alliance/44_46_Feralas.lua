@@ -103,6 +103,8 @@ A Feralas: A History |QID|2940| |N|Click on book Feralas: A History in Rut'thera
 T Feralas: A History |QID|2940| |N|Daryn Lightwind in Rut'theran Village (55.42, 92.19)| |Z|Teldrassil|
 A The Borrower |QID|2941| |N|Daryn Lightwind in Rut'theran Village (55.42, 92.19)| |Z|Teldrassil|
 
+R Azshara |N|Travel to Azshara: Fly from Rut'theran Village to Talrendis Point in Azshara, or travel through Ashenvale.| |Z|Teldrassil|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

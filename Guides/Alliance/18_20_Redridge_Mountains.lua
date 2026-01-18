@@ -127,6 +127,12 @@ B Bronze Tube |QID|2609.3| |N|Buy Bronze Tube from Neal Allen in Menethil Keep. 
 T The Touch of Zanzil |QID|2609| |N|Doc Mixilpixil in SI:7 (78.02, 58.87)| |Z|Stormwind City| |C|Rogue|
 U Eau de Mixilpixil |N|Use Eau de Mixilpixil to cure the (spell:9991) debuff| |U|8432| |C|Rogue|
 
+R Stormwind City |N|Travel to Stormwind City from Redridge Mountains through Elwynn Forest| |Z|Stormwind City|
+R Deeprun Tram |N|Take the Deeprun Tram from Stormwind City to Ironforge (70.3, 29.5)| |Z|Stormwind City|
+R Ironforge |N|Exit the Deeprun Tram into Ironforge| |Z|Ironforge|
+R Menethil Harbor |N|Fly from Ironforge to Menethil Harbor. Speak to Gryth Thurden (55.5, 47.8)| |Z|Ironforge|
+R Auberdine |N|Take the boat from Menethil Harbor to Auberdine in Darkshore (4.5, 57.3)| |Z|Wetlands|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

@@ -122,6 +122,8 @@ N Abandon Quest |QID|7701| |N|Abandon 'WANTED: Overseer Maltorius' quest| |O|
 N Abandon Quest |QID|7722| |N|Abandon 'What the Flux?' quest| |O|
 N Abandon Quest |QID|3372| |N|Abandon 'Release Them' quest| |O|
 
+R Feralas |N|Travel to Feralas: Hearthstone to Ironforge, fly to Menethil Harbor, take the boat to Theramore, then fly to Feathermoon Stronghold.| |Z|Searing Gorge|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

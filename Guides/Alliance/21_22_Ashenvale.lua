@@ -72,6 +72,8 @@ R Ruins of Stardust |QID|1034| |N|Travel to Ruins of Stardust (33.61, 67.49)|
 C The Ruins of Stardust |QID|1034| |N|Collect 5 Handful of Stardust which are found in Stardust covered bushes which are in the Ruins of Stardust (33.61, 67.49)|
 N Teronis' Journal |TID|1034| |N|Destroy Teronis' Journal as it is no longer needed| |L|5505| |O|
 
+R Stonetalon Mountains |N|Travel west from Astranaar, then south through The Talondeep Path to reach Stonetalon Mountains (59.00, 62.50)| |Z|Stonetalon Mountains|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

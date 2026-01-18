@@ -78,7 +78,9 @@ T The Green Hills of Stranglethorn |Z|Stranglethorn Vale| |QID|338| |N|Barnil St
 A Nothing But The Truth (Part 1) |Z|Duskwood| |QID|1372| |N|Apothecary Faustin (87.0, 36.4)| 
 T Nothing But The Truth (Part 1) |Z|Duskwood| |QID|1372| |N|Deathstalker Zraedus (87.7, 35.7)| 
 
-N Guide Complete |N|Tick to continue to the next guide| 
+R Swamp of Sorrows |N|Travel to Swamp of Sorrows via Stranglethorn Vale and Duskwood, or fly from Booty Bay to Stonard if available| |Z|Swamp of Sorrows|
+
+N Guide Complete |N|Tick to continue to the next guide|
 ]]
 end)
 

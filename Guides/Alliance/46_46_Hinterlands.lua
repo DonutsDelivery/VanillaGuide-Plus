@@ -91,6 +91,8 @@ A Signal for Pickup |QID|3451| |N|Xiggs Fuselighter in Hall of Arms (70.83, 94.8
 T Signal for Pickup |QID|3451| |N|Xiggs Fuselighter in Hall of Arms (70.83, 94.82)| |Z|Ironforge|
 N Standard Issue Flare Gun |QID|3483| |N|Get Standard Issue Flare Gun from Xiggs Fuselighter in Hall of Arms (70.83, 94.82)| |Z|Ironforge| |L|10444|
 
+R Stranglethorn Vale |N|Travel to Stranglethorn Vale: Fly to Booty Bay from Ironforge.| |Z|Ironforge|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

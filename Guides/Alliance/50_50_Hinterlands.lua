@@ -60,6 +60,8 @@ T Whiskey Slim's Lost Grog |QID|580| |N|Whiskey Slim in The Salty Sailor Tavern 
 N Stone Circle |QID|3444| |N|Store Stone Circle to the bank (26.57, 76.56)| |Z|Stranglethorn Vale| |L|10556| |O|
 N Violet Tragan |QID|2641| |N|Store Violet Tragan to the bank (26.57, 76.56)| |Z|Stranglethorn Vale| |L|8526| |O|
 
+R Blasted Lands |N|Travel to Blasted Lands: Fly to Nethergarde Keep from Stormwind, or travel through Swamp of Sorrows.| |Z|Stranglethorn Vale|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

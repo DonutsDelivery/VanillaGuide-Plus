@@ -40,6 +40,8 @@ T Wanted: Lieutenant Fangore |QID|180| |N|Magistrate Solomon in Lakeshire (30, 4
 R Tower of Azora |TID|178| |N|Travel to Tower of Azora (65.20, 69.72)| |Z|Elwynn Forest| |O|
 T Theocritus' Retrieval |QID|178| |N|Theocritus in Tower of Azora, inside on the top floor (65.20, 69.72)| |Z|Elwynn Forest| |O|
 
+R Duskwood |N|Travel south from Redridge Mountains through Three Corners into Duskwood. Head to Darkshire (77.50, 44.40)| |Z|Duskwood|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

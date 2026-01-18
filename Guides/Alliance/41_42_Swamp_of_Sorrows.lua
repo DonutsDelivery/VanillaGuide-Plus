@@ -78,6 +78,8 @@ A Rumors for Kravel |QID|1117| |N|Krazek in The Salty Sailor Tavern (26.95, 77.2
 R Theramore Isle |TID|1258| |N|Travel to Theramore Isle (66.35, 45.48)| |Z|Dustwallow Marsh|
 T ... and Bugs |QID|1258| |N|Morgan Stern in Theramore Isle (66.35, 45.48)| |Z|Dustwallow Marsh|
 
+R Stranglethorn Vale |N|Travel to Stranglethorn Vale: Fly to Booty Bay or travel south from Duskwood.| |Z|Dustwallow Marsh|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

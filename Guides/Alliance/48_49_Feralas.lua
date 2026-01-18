@@ -85,6 +85,8 @@ T The Morrow Stone |QID|2942| |N|Troyas Moonbreeze in Feathermoon Stronghold (31
 T Improved Quality |QID|7733| |N|Pratt McGrubben in Feathermoon Stronghold (30.61, 42.73)| |Z|Feralas|
 T Pristine Yeti Hide |QID|7735| |N|Pratt McGrubben in Feathermoon Stronghold (30.61, 42.73)| |Z|Feralas|
 
+R Tanaris |N|Travel to Tanaris: Fly to Gadgetzan from Feathermoon Stronghold.| |Z|Feralas|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

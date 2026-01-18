@@ -157,6 +157,8 @@ A Making Sense of It |QID|4321| |N|J.D. Collie in Marshal's Refuge (41.91, 2.69)
 
 N Evergreen Herb Casing |QID|3761| |N|Collect more Evergreen Herb Casing from creatures or from Dirt piles in Un'Goro, you will need about 45 Evergreen Herb Casing for later quest| |L|11024 45|
 
+R Flame Crest |N|Fly to Flame Crest in Burning Steppes via Gadgetzan or Orgrimmar| |Z|Burning Steppes|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

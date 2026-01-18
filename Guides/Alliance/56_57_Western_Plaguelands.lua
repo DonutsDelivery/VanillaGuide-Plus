@@ -119,6 +119,8 @@ R Chillwind Camp |QID|5533| |N|Travel to Chillwind Camp (42.96, 84.47)| |Z|Weste
 T Return to Chillwind Camp (Part 4) |QID|5226| |N|High Priestess MacDonnell in Chillwind Camp (42.96, 84.47)| |Z|Western Plaguelands|
 T Mission Accomplished! |QID|5238| |N| Commander Ashlam Valorfist in Chillwind Camp (42.70, 84.06)| |Z|Western Plaguelands|
 
+R Eastern Plaguelands |N|Travel to Eastern Plaguelands: Travel east from Chillwind Camp through the Thondroril River crossing.| |Z|Western Plaguelands|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

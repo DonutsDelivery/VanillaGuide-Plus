@@ -76,6 +76,8 @@ C Northfold Manor |QID|681| |N|Kill 10 Syndicate Highwayman and 6 Syndicate Merc
 R Refuge Pointe |TID|681| |N|Travel to Refuge Pointe (45.83, 47.57)| |Z|Arathi Highlands|
 T Northfold Manor |QID|681| |N|Captain Nials in Refuge Pointe (45.84, 47.50)| |Z|Arathi Highlands|
 
+R Stranglethorn Vale |N|Fly from Refuge Pointe or Southshore to Ironforge, take the Deeprun Tram to Stormwind, then travel south through Duskwood to Stranglethorn Vale (38.03, 3.35)| |Z|Stranglethorn Vale|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

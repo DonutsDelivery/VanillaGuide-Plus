@@ -400,6 +400,8 @@ T Hezrul Bloodmark |QID|852| |N|Regthar Deathgate in the bunkers west of The Cro
 
 N Level 20 Required |N|You should be close to level 20, grind nearby mobs to reach level 20|
 
+R Sun Rock Retreat |N|Travel west from The Crossroads through Honor's Stand into Stonetalon Mountains, then south to Sun Rock Retreat| |Z|Stonetalon Mountains|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

@@ -91,6 +91,8 @@ f Booty Bay |QID|616| |N|Speak to Gyll in Booty Bay (27.55, 77.77)| |Z|Stranglet
 A The Haunted Isle |QID|616| |N|Krazek in The Salty Sailor Tavern (26.97, 77.23)| |Z|Stranglethorn Vale|
 T The Haunted Isle |QID|616| |N|Baron Revilgaz in Booty Bay (27.22, 76.87)| |Z|Stranglethorn Vale|
 
+R Thousand Needles |N|Take the boat from Booty Bay to Ratchet, then travel south through the Barrens to the Great Lift and descend into Thousand Needles (30.71, 24.39)| |Z|Thousand Needles|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

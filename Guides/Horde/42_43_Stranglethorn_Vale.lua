@@ -137,6 +137,8 @@ R Grom'gol Base Camp|TID|598| |N|Travel to Grom'gol Base Camp (32.21, 27.75)| |P
 T Split Bone Necklace |QID|598| |N|Kin'weelay in Grom'gol Base Camp (32.21, 27.75)| |Z|Stranglethorn Vale| |PRE|596|
 A Grim Message |QID|2932| |N|Nimboya in Grom'gol Base Camp (32.16, 27.77)| |Z|Stranglethorn Vale| |PRE|596|
 
+R Brackenwall Village |N|Take the zeppelin from Grom'gol to Orgrimmar, then fly to Brackenwall Village in Dustwallow Marsh| |Z|Dustwallow Marsh|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

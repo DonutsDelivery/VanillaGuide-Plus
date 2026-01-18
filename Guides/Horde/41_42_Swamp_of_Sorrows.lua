@@ -60,6 +60,8 @@ R Stonard |OID|1429| |N|Travel or Hearthstone to Stonard (47.9, 54.9)| |U|6948|
 T Pool of Tears |QID|1424| |N|Fel'zerul in Stonard (47.9, 54.9)|
 A The Atal'ai Exile |QID|1429| |N|Fel'zerul in Stonard (47.9, 54.9)|
 
+R Grom'gol Base Camp |N|Travel west through Deadwind Pass and Duskwood to Stranglethorn Vale, or Hearthstone to Booty Bay and travel north| |Z|Stranglethorn Vale|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

@@ -23,6 +23,8 @@ N Bag of Water Elemental Bracers |QID|602| |N|Withdraw Bag of Water Elemental Br
 N Seahorn's Sealed Letter |QID|670| |N|Withdraw Seahorn's Sealed Letter from the bank. Tick this step (52.30, 28.89)| |Z|Tanaris| |L|4494| |OO|
 N Letter of Commendation |QID|1052| |N|Withdraw Letter of Commendation from the bank. Tick this step (52.30, 28.89)| |Z|Tanaris| |L|5539| |OO|
 
+R The Hinterlands |N|Travel to The Hinterlands: Fly to Aerie Peak from Gadgetzan or Ironforge.| |Z|Tanaris|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

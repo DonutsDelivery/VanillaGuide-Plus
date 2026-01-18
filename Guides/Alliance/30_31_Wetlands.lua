@@ -61,6 +61,8 @@ A Cleansing the Eye |QID|293| |N|Glorin Steelbrow in Deepwater Tavern (10.60, 60
 R Menethil Keep |TID|474| |N|Travel to Menethil Keep (9.90, 57.45)| |Z|Wetlands|
 T Defeat Nek'rosh |QID|474| |N|Captain Stoutfist in Menethil Keep (9.90, 57.45)| |Z|Wetlands| |PRE|465|
 
+R Hillsbrad Foothills |N|Travel north through Dun Modr, cross the Thandol Span into Arathi Highlands, then head west into Hillsbrad Foothills. Go to Southshore (51.10, 58.90)| |Z|Hillsbrad Foothills|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

@@ -51,6 +51,8 @@ N Book: The Powers Below |QID|968| |N|Store Book: The Powers Below to the bank (
 T The Absent Minded Prospector (Part 3) |QID|741| |N|Chief Archaeologist Greywhisker in Darnassus (31.37, 84.14)| |Z|Darnassus| |PRE|731|
 A The Absent Minded Prospector (Part 4) |QID|942| |N|Chief Archaeologist Greywhisker in Darnassus (31.28, 83.65)| |Z|Darnassus| |PRE|731|
 
+R Ashenvale |N|Travel south from Auberdine into Ashenvale. Head to Astranaar (34.50, 48.00)| |Z|Ashenvale|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

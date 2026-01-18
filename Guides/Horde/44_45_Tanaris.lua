@@ -91,6 +91,8 @@ R Gadgetzan |TID|1691| |N|Travel to Gadgetzan (52.47, 28.43)| |Z|Tanaris|
 T More Wastewander Justice |QID|1691| |N|Chief Engineer Bilgewhizzle in Gadgetzan (52.45, 28.50)| |Z|Tanaris|
 T WANTED: Caliph Scorpidsting |QID|2781| |N|Chief Engineer Bilgewhizzle in Gadgetzan (52.44, 28.50)| |Z|Tanaris| |O|
 
+R Camp Mojache |N|Fly to Camp Mojache in Feralas| |Z|Feralas|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

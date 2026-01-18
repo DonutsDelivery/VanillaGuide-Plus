@@ -54,6 +54,8 @@ T Raising Spirits (Part 2) |QID|674| |N|Gor'mul in Hammerfall (72.68, 34.04)|
 A Raising Spirits (Part 3) |QID|675| |N|Gor'mul in Hammerfall (72.68, 34.04)|
 T Raising Spirits (Part 3) |QID|675| |N|Tor'gan in Hammerfall, skip follow (74.65, 36.34)|
 
+R Grom'gol Base Camp |N|Fly from Hammerfall to Undercity, then take the zeppelin to Grom'gol Base Camp in Stranglethorn Vale| |Z|Stranglethorn Vale|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

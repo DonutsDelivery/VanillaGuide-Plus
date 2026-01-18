@@ -97,6 +97,8 @@ R Everlook |QID|6606| |N|Travel to Everlook (61.13, 38.44)| |Z|Winterspring|
 A A Little Luck |QID|6606| |N|Harlo Wigglesworth in Everlook (61.13, 38.44)| |Z|Winterspring|
 T A Little Luck |QID|6606| |N|Witch Doctor Mau'ari in Everlook (61.92, 38.30)| |Z|Winterspring|
 
+R Undercity |N|Fly or take the zeppelin from Orgrimmar to Undercity| |Z|Undercity|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

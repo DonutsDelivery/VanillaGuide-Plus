@@ -45,6 +45,8 @@ T New Life |QID|6381| |N|Tammra Windfield in Sun Rock Retreat (47.45, 58.46)|
 T Elemental War |QID|6393| |N|Tsunaman in Sun Rock Retreat (47.27, 64.27)|
 A Calling in the Reserves |QID|5881| |N|Maggran Earthbinder in Sun Rock Retreat (47.26, 61.11)|
 
+R Camp Taurajo |N|Travel east from Sun Rock Retreat through Honor's Stand into The Barrens, then south to Camp Taurajo| |Z|The Barrens|
+
 N Guide Complete |N|Tick to continue to the next guide|
 ]]
 end)

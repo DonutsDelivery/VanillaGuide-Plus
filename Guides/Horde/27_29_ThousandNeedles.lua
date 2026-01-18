@@ -116,6 +116,8 @@ T Grimtotem Spying |QID|5064| |N|Cliffwatcher Longhorn in Freewind Post (45.69, 
 
 N Kodo Skin Scroll |N|Store Kodo Skin Scroll in the bank . Tick this step (49.6, 69.4)| |Z|Orgrimmar| |L|5838| |O|
 
+R Tarren Mill |N|Fly from Freewind Post to Orgrimmar, take the zeppelin to Undercity, then travel south through Silverpine Forest to Hillsbrad Foothills and Tarren Mill| |Z|Hillsbrad Foothills|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

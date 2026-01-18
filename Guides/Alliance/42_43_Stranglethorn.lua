@@ -79,6 +79,8 @@ N Bag of Water Elemental Bracers |QID|602| |N|Store Bag of Water Elemental Brace
 N Encrusted Tail Fin |QID|1107| |N|Store Encrusted Tail Fin to the bank (26.57, 76.56)| |Z|Stranglethorn Vale| |L|5796| |O|
 N Carefully Folded Note |QID|610| |N|Store Carefully Folded Note| |L|4098| |O|
 
+R Desolace |N|Travel to Desolace: Take the boat from Booty Bay to Ratchet, fly to Theramore, then travel through Dustwallow Marsh and The Barrens to Desolace.| |Z|Stranglethorn Vale|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

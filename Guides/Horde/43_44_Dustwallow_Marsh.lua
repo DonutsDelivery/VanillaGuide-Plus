@@ -68,6 +68,8 @@ N Draenethyst Shard |QID|1373| |N|Withdraw Draenethyst Shard at the bank. Tick t
 N Jeweled Pendant |QID|1262| |N|Store Jeweled Pendant at the bank. Tick this step (47.4, 58.8)| |Z|Thunder Bluff| |L|5942| |O|
 N Seaforium Booster |QID|1188| |N|Store Seaforium Booster at the bank. Tick this step (47.4, 58.8)| |Z|Thunder Bluff| |L|5862| |O|
 
+R Shadowprey Village |N|Fly to Shadowprey Village in Desolace| |Z|Desolace|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

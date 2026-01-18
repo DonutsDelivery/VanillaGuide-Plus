@@ -90,6 +90,8 @@ f Flame Crest |N|Speak to Vahgruk and grab flight path for Flame Crest (65.61, 2
 N Abandon Quest |QID|7701| |N|Abandon 'WANTED: Overseer Maltorius' quest| |O|
 N Abandon Quest |QID|7722| |N|Abandon 'What the Flux?' quest| |O|
 
+R Stonard |N|Fly to Stonard in Swamp of Sorrows, or travel via Burning Steppes and Redridge Mountains| |Z|Swamp of Sorrows|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

@@ -85,6 +85,8 @@ N Level 30 Required |OID|1361| |N|You should be close to level 30, grind nearby 
 A Regthar Deathgate |QID|1361| |N|Krusk in Tarren Mill (63.17, 20.70)|
 A The Hammer May Fall |QID|676| |N|Tallow in Tarren Mill (61.9, 19.7)|
 
+R Hammerfall |N|Travel east from Tarren Mill through Hillsbrad Foothills into Arathi Highlands to Hammerfall| |Z|Arathi Highlands|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

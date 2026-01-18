@@ -104,6 +104,8 @@ R Booty Bay |TID|348| |N|Travel to Booty Bay (27.64, 76.75)| |Z|Stranglethorn Va
 T The Curse of the Tides |QID|611| |N|Baron Revilgaz in Booty Bay (27.20, 76.90)| |Z|Stranglethorn Vale|  |PRE|603|
 T Stranglethorn Fever |QID|348| |N|Fin Fizracket in Booty Bay (27.64, 76.75)| |Z|Stranglethorn Vale|
 
+R Searing Gorge |N|Travel to Searing Gorge: Fly to Ironforge, then travel south through Loch Modan to Badlands and Searing Gorge.| |Z|Stranglethorn Vale|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

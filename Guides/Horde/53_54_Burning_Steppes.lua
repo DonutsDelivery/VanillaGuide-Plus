@@ -101,6 +101,8 @@ T Betrayed (Part 4) |QID|3507| |N|Belgrom Rockmaul in Valley of Honor (75.20, 34
 N White Ravasaur Claw |QID|4300| |N|Withdraw White Ravasaur Claw from the bank. Tick this step (49.6, 69.4)| |Z|Orgrimmar| |L|11477| |OO|
 N Linken's Training Sword |QID|3908| |N|Withdraw Linken's Training Sword from the bank. Tick this step (49.6, 69.4)| |Z|Orgrimmar| |L|11477| |OO|
 
+R Felwood |N|Fly to Orgrimmar, then travel north through Ashenvale to Felwood| |Z|Felwood|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

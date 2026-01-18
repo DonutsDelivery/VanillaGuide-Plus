@@ -108,6 +108,8 @@ A Of Love and Family (Part 1)|QID|5846| |N|Tirion Fordring in Thondroril River (
 R Caer Darrow |TID|5846| |N|Travel to Caer Darrow (65.76, 75.36)| |Z|Western Plaguelands|
 T Of Love and Family (Part 1) |QID|5846| |N|Artist Renfray in Caer Darrow (65.76, 75.36)| |Z|Western Plaguelands| 
 
+R Western Plaguelands |N|Travel to Western Plaguelands: Travel west through Thondroril River to Western Plaguelands.| |Z|Western Plaguelands|
+
 N Guide Complete |N|Tick to continue to the next guide| 
 
 ]]

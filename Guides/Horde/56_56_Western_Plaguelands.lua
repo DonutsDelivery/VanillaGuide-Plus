@@ -84,7 +84,7 @@ C Target: Gahrron's Withering |QID|5235| |N|Kill Cauldron Lord Soulwrath and col
 T Target: Gahrron's Withering |QID|5235| |N|Scourge Cauldron in Gahrron's Withering (62.57, 58.65)| |Z|Western Plaguelands| |OBJ|4271|
 A Return to the Bulwark |QID|5236| |N|Scourge Cauldron in Gahrron's Withering (62.57, 58.65)| |Z|Western Plaguelands| |OBJ|4271|
 
-R Eastern Plaguelands |N|Travel east to Eastern Plaguelands (66.58, 39.76) (67.12, 37.67)| |Z|Western Plaguelands|
+R Eastern Plaguelands |N|Travel east to Eastern Plaguelands| |Z|Eastern Plaguelands|
 
 N Guide Complete |N|Tick to continue to the next guide|
 

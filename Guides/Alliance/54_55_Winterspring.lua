@@ -113,6 +113,8 @@ T Winterfall Activity |QID|8464| |N|Salfa in Frostfire Hot Springs (27.75, 34.58
 T Mystery Goo |QID|5085| |N|Donova Snowden in Frostfire Hot Springs (31.27, 45.15)| |Z|Winterspring|
 A Toxic Horrors |QID|5086| |N|Donova Snowden in Frostfire Hot Springs (31.27, 45.15)| |Z|Winterspring|
 
+R Felwood |N|Travel to Felwood: Travel through Timbermaw Hold tunnel from Winterspring to Felwood.| |Z|Winterspring|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

@@ -41,6 +41,8 @@ N Rod of Helcular |N|Store Rod of Helcular in the bank . Tick this step (54.2, 2
 N Kravel's Parts Order |N|Store Kravel's Parts Order in the bank . Tick this step (54.2, 28.8)| |Z|Tanaris| |L|5799| |O|
 N Kravel's Crate |N|Store Kravel's Crate in the bank . Tick this step (54.2, 28.8)| |Z|Tanaris| |L|14542| |O|
 
+R Desolace |N|Fly to Shadowprey Village in Desolace, or travel via Stonetalon Mountains if you don't have the flight path| |Z|Desolace|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

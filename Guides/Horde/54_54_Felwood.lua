@@ -44,6 +44,8 @@ A Speak to Salfa |QID|8465| |N|Nafien in Timbermaw Hold (64.76, 8.19)| |Z|Felwoo
 R Moonglade |TID|5249| |N|Travel north via the tunnel to Moonglade (35.76, 72.41)| |Z|Moonglade|
 f Moonglade |TID|5249| |N|Speak to Faustron and grab flight path for Moonglade (32.14, 66.54)| |Z|Moonglade|
 
+R Winterspring |N|Travel north through Timbermaw Hold tunnel to Winterspring| |Z|Winterspring|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

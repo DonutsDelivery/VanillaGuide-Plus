@@ -50,6 +50,8 @@ R Thunder Bluff |OID|1196| |N|Travel to Thunder Bluff (54.67, 51.28)| |Z|Thunder
 T The Sacred Flame (Part 1) |QID|1195| |N|Zangen Stonehoof in Thunder Bluff (54.67, 51.28)| |Z|Thunder Bluff| |O|
 A The Sacred Flame (Part 2) |QID|1196| |N|Zangen Stonehoof in Thunder Bluff (54.67, 51.28)| |Z|Thunder Bluff| |PRE|1195|
 
+R Freewind Post |N|Travel east from Sun Rock Retreat to The Barrens, then south to The Great Lift and down into Thousand Needles to Freewind Post| |Z|Thousand Needles|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

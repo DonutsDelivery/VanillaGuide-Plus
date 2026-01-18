@@ -103,7 +103,9 @@ N Abandon Quest |QID|340| |N|Abandon The Green Hills of Stranglethorn and Chapte
 N Abandon Quest |QID|341| |N|Abandon The Green Hills of Stranglethorn and Chapter quest if you're unable to complete it now. You can complete this later| |O|
 N Abandon Quest |QID|342| |N|Abandon The Green Hills of Stranglethorn and Chapter quest if you're unable to complete it now. You can complete this later| |O|
 
-N Guide Complete |N|Tick to continue to the next guide| 
+R Searing Gorge |N|Take the zeppelin from Grom'gol to Orgrimmar, then fly to Kargath in the Badlands and travel north to Searing Gorge| |Z|Searing Gorge|
+
+N Guide Complete |N|Tick to continue to the next guide|
 
 ]]
 end)

@@ -35,6 +35,8 @@ T Everything Counts In Large Amounts |QID|3501| |N|Kum'isha the Collector in Ris
 A To Serve Kum'isha |QID|2521| |N|Kum'isha the Collector in Rise of the Defiler (51.99, 35.65)| |L|8244| |O|
 T To Serve Kum'isha |QID|2521| |N|Kum'isha the Collector in Rise of the Defiler (51.99, 35.65)| |L|8244| |O|
 
+R Un'Goro Crater |N|Travel to Un'Goro Crater: Fly to Gadgetzan, then travel southwest through Tanaris to Un'Goro Crater.| |Z|Blasted Lands|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

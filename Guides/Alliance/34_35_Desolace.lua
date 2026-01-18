@@ -112,6 +112,8 @@ R Feathermoon Stronghold |N|Travel to Feathermoon Stronghold (40.86, 90.19) (41.
 R Feathermoon Stronghold |N|Travel to Feathermoon Stronghold (46.40, 14.95) (48.20, 23.25) (46.96, 28.30) (47.88, 37.00) (44.83, 42.35) (30.24, 43.25) Take the boat if it's available but it is faster to swim if the boat just left. You can also die and ressurect to Feathermoon Stronghold| |Z|Feralas|
 f Feathermoon Stronghold |N|Speak to Fyldren Moonfeather and grab flight path for Feathermoon Stronghold (30.24, 43.25)| |Z|Feralas|
 
+R Stranglethorn Vale |N|Fly from Feathermoon Stronghold or Nijel's Point to Ratchet, take the boat to Booty Bay (27.20, 76.89)| |Z|Stranglethorn Vale|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

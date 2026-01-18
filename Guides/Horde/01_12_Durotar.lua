@@ -258,6 +258,8 @@ N Lieutenant's Insignia |N|Destroy Lieutenant's Insignia, it is not used for any
 R Razor Hill |QID|840| |N|Travel to Razor Hill (50.89, 43.58)|
 A Conscript of the Horde |QID|840| |N|Takrin Pathseeker in Razor Hill (50.89, 43.58)|
 
+R The Crossroads |N|Travel west along the road from Razor Hill to The Crossroads in The Barrens| |Z|The Barrens|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

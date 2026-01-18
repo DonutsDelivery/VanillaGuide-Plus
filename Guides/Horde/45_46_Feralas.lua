@@ -119,6 +119,8 @@ A Perfect Yeti Hide |QID|7738| |N|Use Perfect Yeti Hide to accept quest (49.09, 
 T Perfect Yeti Hide |QID|7738| |N|Jangdor Swiftstrider in Camp Mojache (74.43, 42.92)| |Z|Feralas| |O|
 T Natural Materials |QID|3128| |N|Witch Doctor Uzer'i in Camp Mojache (74.42, 43.36)| |Z|Feralas| 
 
+R Valormok |N|Fly to Orgrimmar, then take the zeppelin to Undercity and fly to Valormok in Azshara, or fly directly to Valormok if available| |Z|Azshara|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

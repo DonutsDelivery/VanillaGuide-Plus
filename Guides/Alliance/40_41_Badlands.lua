@@ -107,6 +107,8 @@ A Agmond's Fate |QID|704| |N|Prospector Ironband in Ironband's Excavation Site (
 R Thelsamar |TID|2500| |N|Travel to Thelsamar (37.06, 49.36)| |Z|Loch Modan|
 T Badlands Reagent Run |QID|2500| |N|Ghak Healtouch in Thelsamar (37.06, 49.36)| |Z|Loch Modan|
 
+R Swamp of Sorrows |N|Travel to Swamp of Sorrows: Fly to Stormwind, then travel east through Duskwood and Deadwind Pass to Swamp of Sorrows.| |Z|Loch Modan|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

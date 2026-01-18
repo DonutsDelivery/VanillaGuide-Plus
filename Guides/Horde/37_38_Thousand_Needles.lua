@@ -67,6 +67,8 @@ T Parts of the Swarm (Part 1) |QID|1148| |N|Korran in The Crossroads (51.1, 29.6
 N Cracked Silithid Carapace |N|Destroy Cracked Silithid Carapace, you no longer need this| |L|5877| |O|
 A Parts of the Swarm (Part 2) |QID|1184| |N|Korran in The Crossroads (51.1, 29.6)| |PRE|1148| |Z|The Barrens|
 
+R Brackenwall Village |N|Fly to Brackenwall Village in Dustwallow Marsh| |Z|Dustwallow Marsh|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

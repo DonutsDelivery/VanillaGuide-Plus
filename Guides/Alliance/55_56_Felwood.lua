@@ -93,6 +93,8 @@ T Salve via Hunting |QID|5882| |N|Maybess Riverbreeze in Felwood (46.75, 83.13)|
 T Dousing the Flames of Protection |QID|5165| |N|Greta Mosshoof in Emerald Sanctuary (51.21, 82.10)| |Z|Felwood|
 A A Final Blow |QID|5242| |N|Greta Mosshoof in Emerald Sanctuary (51.07, 82.35)| |Z|Felwood|
 
+R Burning Steppes |N|Travel to Burning Steppes: Fly to Ironforge, then travel south through Searing Gorge to Burning Steppes.| |Z|Felwood|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

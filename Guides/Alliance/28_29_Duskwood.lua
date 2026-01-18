@@ -197,6 +197,8 @@ A The Missing Diplomat (Part 4) |QID|1243| |N|Elling Trias in Trade District (66
 N Sealed Note to Watcher Backus |QID|1243| |N|Store Sealed Note to Watcher Backus to the bank (57.00, 72.81)| |Z|Stormwind City| |L|5960| |O|
 N Tear of Tilloa |QID|335| |N|Store Tear of Tilloa to the bank (57.00, 72.81)| |Z|Stormwind City| |L|2779| |O|
 
+R Ashenvale |N|Take the Deeprun Tram from Stormwind to Ironforge, fly to Menethil Harbor, take the boat to Auberdine, then fly to Astranaar (34.66, 48.85)| |Z|Ashenvale|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

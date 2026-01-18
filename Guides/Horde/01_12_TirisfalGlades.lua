@@ -247,6 +247,8 @@ T The Family Crypt |QID|408| |N|Magistrate Sevren in Brill Town Hall (61.27, 50.
 T Agamand Heirlooms |QID|1821| |N|Coleman Farthing in Gallows' End Tavern (61.73, 52.31)| |C|Warrior|
 T Heirloom Weapon |QID|1822| |N|Coleman Farthing in Gallows' End Tavern (61.73, 52.31)| |C|Warrior|
 
+R Silverpine Forest |N|Travel south from Brill to Silverpine Forest for the next guide| |Z|Silverpine Forest|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

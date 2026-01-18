@@ -74,6 +74,8 @@ N Shattered Sword of Marduk |QID|5181.2| |N|Collect Shattered Sword of Marduk fr
 R Light's Hope Chapel |TID|5181| |N|Travel to Light's Hope Chapel (81.52, 59.75)| |Z|Eastern Plaguelands|
 T Villains of Darrowshire |QID|5181| |N|Carlin Redpath in Light's Hope Chapel (81.52, 59.75)| |Z|Eastern Plaguelands|
 
+R Silithus |N|Travel to Silithus: Fly to Gadgetzan, then travel through Un'Goro Crater to Silithus.| |Z|Eastern Plaguelands|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

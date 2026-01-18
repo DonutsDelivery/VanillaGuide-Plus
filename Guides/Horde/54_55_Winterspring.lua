@@ -71,7 +71,9 @@ N Umi's Mechanical Yeti |QID|5163| |N|Store Umi's Mechanical Yeti in the bank . 
 N Winterfall Ritual Totem |QID|8471| |N|Store Winterfall Ritual Totem in the bank . Tick this step (61.4, 37.0)| |Z|Winterspring| |L|20742| |O| 
 N Blood Amber |QID|4102| |N|Withdraw Winterfall Ritual Totem from the bank . Tick this step (61.4, 37.0)| |Z|Winterspring| |L|11503| |OO| 
 
-N Guide Complete |N|Tick to continue to the next guide| 
+R Felwood |N|Travel south through Timbermaw Hold tunnel to Felwood| |Z|Felwood|
+
+N Guide Complete |N|Tick to continue to the next guide|
 
 ]]
 end)

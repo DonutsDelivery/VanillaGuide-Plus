@@ -94,6 +94,8 @@ A Hints of a New Plague? (Part 5) |QID|661| |N|Quae in Go'Shek Farm (60.20, 53.8
 R Southshore |TID|661| |N|Travel to Southshore (50.34, 59.03)| |Z|Hillsbrad Foothills| |PRE|658|
 T Hints of a New Plague? (Part 5) |QID|661| |N|Phin Odelic in Southshore (50.34, 59.03)| |Z|Hillsbrad Foothills| |PRE|658|
 
+R Dustwallow Marsh |N|Fly from Southshore or Refuge Pointe to Menethil Harbor, take the boat to Theramore Isle (66.14, 46.04)| |Z|Dustwallow Marsh|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

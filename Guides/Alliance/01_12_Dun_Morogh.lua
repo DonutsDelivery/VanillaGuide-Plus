@@ -260,6 +260,10 @@ A Return to Brock |QID|6392| |N|Gryth Thurden in The Great Forge (55.48, 47.87)|
 R Thelsamar |TID|6392| |N|Travel to Thelsamar (37.07, 47.79)| |Z|Loch Modan|
 T Return to Brock |QID|6392| |N|Brock Stoneseeker in Thelsamar (37.07, 47.79)| |Z|Loch Modan|
 
+R Ironforge |N|Travel to Ironforge. Fly from Ironforge to Menethil Harbor by speaking to Gryth Thurden (55.5, 47.8)| |Z|Ironforge|
+R Menethil Harbor |N|Fly to Menethil Harbor in the Wetlands| |Z|Wetlands|
+R Auberdine |N|Take the boat from Menethil Harbor to Auberdine in Darkshore (4.5, 57.3)| |Z|Wetlands|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

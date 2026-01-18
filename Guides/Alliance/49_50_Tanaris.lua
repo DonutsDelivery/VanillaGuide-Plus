@@ -102,6 +102,8 @@ N Level 50 Required |N|You should be close to level 50, grind nearby mobs to rea
 N ACCEPT TIMED QUEST - The Newest Member of the Family|QID|3843| |N|This quest is a TIMED quest to deliver Fragile Sprite Darter Egg if you completed the previous quest line in the last guide. You have 1 hour to turn it in, do NOT accept if you're going to log out or go AFK. Skip this step| |Z|Thousand Needles| |PRE|3842| |O|
 A The Newest Member of the Family |QID|3843| |N|Quentin in Mirage Raceway (78.33, 74.72)| |Z|Thousand Needles| |PRE|3842| |O|
 
+R The Hinterlands |N|Travel to The Hinterlands: Fly to Aerie Peak from Gadgetzan, or travel through Eastern Kingdoms.| |Z|Thousand Needles|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 

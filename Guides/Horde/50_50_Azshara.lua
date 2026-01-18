@@ -59,7 +59,9 @@ A Vivian Lagrave |QID|4133| |N|Apothecary Zinge in The Apothecarium (49.92, 68.2
 A A Sample of Slime... |QID|4293| |N|Chemist Fuely in The Apothecarium (47.46, 73.30)| |Z|Undercity| 
 A ... and a Batch of Ooze |QID|4294| |N|Chemist Fuely in The Apothecarium (47.46, 73.30)| |Z|Undercity| 
 
-N Guide Complete |N|Tick to continue to the next guide| 
+R Revantusk Village |N|Fly from Undercity to Revantusk Village in The Hinterlands| |Z|The Hinterlands|
+
+N Guide Complete |N|Tick to continue to the next guide|
 
 ]]
 end)

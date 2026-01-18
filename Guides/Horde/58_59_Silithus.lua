@@ -73,7 +73,9 @@ T Duskwing, Oh How I Hate Thee... |QID|6135| |N|Nathanos Blightcaller in The Mar
 C The Corpulent One |QID|6136| |N|Kill Borelgore, you will need to group up to complete this quest. This is a popular quest and you should be able to find someone group with, otherwise it is safe to skip (53.62, 31.89) (62.24, 33.17)| |Z|Eastern Plaguelands| 
 T The Corpulent One |QID|6136| |N|Nathanos Blightcaller in The Marris Stead (26.72, 74.74)| |Z|Eastern Plaguelands| 
 
-N Guide Complete |N|Tick to continue to the next guide| 
+R Winterspring |N|Travel to Everlook in Winterspring via Moonglade or fly from Orgrimmar| |Z|Winterspring|
+
+N Guide Complete |N|Tick to continue to the next guide|
 
 ]]
 end)

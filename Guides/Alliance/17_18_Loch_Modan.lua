@@ -71,6 +71,10 @@ N Fandral's Message |QID|952| |N|Store Fandral's Message to the bank (35.48, 60.
 F The Great Forge |TID|301| |N|Speak to Gryth Thurden and grab flight path for The Great Forge (55.60, 47.94)| |Z|Ironforge|
 T Report to Ironforge |QID|301| |N|Prospector Stormpike in The Library (74.31, 12.16)| |Z|Ironforge|
 
+R Deeprun Tram |N|Take the Deeprun Tram from Ironforge to Stormwind City (76.3, 51.1)| |Z|Ironforge|
+R Stormwind City |N|Exit the Deeprun Tram into Stormwind City| |Z|Stormwind City|
+R Redridge Mountains |N|Travel east from Stormwind through Elwynn Forest to Redridge Mountains. Head to Lakeshire (30.0, 44.4)| |Z|Redridge Mountains|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

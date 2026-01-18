@@ -66,6 +66,8 @@ N Package of Empty Ooze Containers |QID|4512| |N|Withdraw Package of Empty Ooze 
 N Linken's Training Sword |QID|3908| |N|Withdraw Linken's Training Sword from the bank. Tick this step (39.88, 42.21)| |Z|Darnassus| |L|11133| |OO|
 N Drawing Kit |QID|3461| |N|Store Drawing Kit to the bank (35.48, 60.70)| |Z|Ironforge| |L|10445| |O|
 
+R Felwood |N|Travel to Felwood: Fly from Darnassus to Talonbranch Glade, or travel north through Ashenvale.| |Z|Darnassus|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

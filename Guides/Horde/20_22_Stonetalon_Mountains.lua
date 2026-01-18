@@ -139,7 +139,9 @@ A Naga at the Zoram Strand |QID|6442| |N|Marukai in Zoram'gar Outpost (11.69, 34
 C Naga at the Zoram Strand |QID|6442| |N|Kill Wrathtail enemies and collect 20 Wrathtail Head (10, 28)| |Z|Ashenvale|
 T Naga at the Zoram Strand |QID|6442| |N|Marukai in Zoram'gar Outpost (11.69, 34.86)| |Z|Ashenvale|
 
-N Guide Complete |N|Tick to continue to the next guide to (guide:"1413(22-23)#1413(22-23)#1413(22-23)")|
+R Camp Taurajo |N|Travel east from Stonetalon Mountains through Honor's Stand, then south along the Gold Road to Camp Taurajo in The Barrens| |Z|The Barrens|
+
+N Guide Complete |N|Tick to continue to the next guide|
 
 ]]
 end)

@@ -39,6 +39,8 @@ A Reagents for Reclaimers Inc. (Part 4) |QID|1467| |N|Kreldig Ungor in Nijel's P
 T Down the Scarlet Path (Part 1) |QID|261| |N|Brother Anton in Nijel's Point (66.51, 7.95)| |Z|Desolace|
 A Down the Scarlet Path (Part 2) |QID|1052| |N|Brother Anton in Nijel's Point (66.51, 7.95)| |Z|Desolace|
 
+R Tanaris |N|Travel to Tanaris: Fly to Gadgetzan from Nijel's Point or travel through Thousand Needles.| |Z|Desolace|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

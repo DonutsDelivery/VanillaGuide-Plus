@@ -93,6 +93,8 @@ N Stoley's Bottle |QID|2874| |N|Store Stoley's Bottle to the bank (52.30, 28.89)
 N Wastewander Water Pouch |QID|379| |N|Store Wastewander Water Pouch to the bank (52.30, 28.89)| |Z|Tanaris| |L|8483| |O|
 N OOX-17/TN Distress Beacon |QID|351| |N|Store OOX-17/TN Distress Beacon to the bank (52.30, 28.89)| |Z|Tanaris| |L|8623| |O|
 
+R Feralas |N|Travel to Feralas: Fly to Feathermoon Stronghold from Gadgetzan, or travel through Thousand Needles.| |Z|Tanaris|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

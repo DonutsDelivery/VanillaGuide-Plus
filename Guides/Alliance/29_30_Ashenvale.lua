@@ -123,6 +123,8 @@ N Velinde's Journal |QID|1038.1| |N|Collect Velinde's Journal from Velinde's Loc
 T Velinde's Effects |QID|1038| |N|Thyn'tel Bladeweaver in Darnassus (61.83, 39.11)| |Z|Darnassus|
 A The Barrens Port |QID|1039| |N|Thyn'tel Bladeweaver in Darnassus (61.83, 39.11)| |Z|Darnassus|
 
+R Wetlands |N|Take the boat from Auberdine to Menethil Harbor (10.60, 60.55)| |Z|Wetlands|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

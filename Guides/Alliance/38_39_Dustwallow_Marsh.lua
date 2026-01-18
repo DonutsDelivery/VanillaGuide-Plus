@@ -94,6 +94,8 @@ T The Deserters |QID|1287| |N|Captain Garran Vimes in Foothold Citadel (68.23, 4
 T Mudrock Soup and Bugs |QID|1204| |N|Morgan Stern in Theramore Isle, skip follow up (66.34, 45.47)| |O|
 A ... and Bugs |QID|1258| |N|Morgan Stern in Theramore Isle (66.34, 45.47)| |PRE|1204|
 
+R Stranglethorn Vale |N|Take the boat from Theramore to Menethil Harbor, fly to Ironforge, take the Deeprun Tram to Stormwind, travel south through Duskwood to Booty Bay (27.20, 76.89)| |Z|Stranglethorn Vale|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

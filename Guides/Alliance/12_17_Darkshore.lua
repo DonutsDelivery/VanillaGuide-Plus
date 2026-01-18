@@ -265,6 +265,10 @@ A Aquatic Form |QID|5061| |N|Dendrite Starblaze in Nighthaven (56.20, 30.63)| |C
 R Cenarion Enclave |TID|5061| |N|Travel to Cenarion Enclave (35.34, 8.36)| |C|Druid| |Z|Darnassus|
 T Aquatic Form |QID|5061| |N|Mathrengyl Bearwalker in Cenarion Enclave (35.34, 8.36)| |C|Druid| |Z|Darnassus|
 
+R Auberdine |N|Travel to Auberdine and take the boat to Menethil Harbor (36.4, 45.5)| |Z|Darkshore|
+R Menethil Harbor |N|Take the boat from Auberdine to Menethil Harbor in the Wetlands (4.5, 57.3)| |Z|Wetlands|
+R Loch Modan |N|Travel east from Menethil Harbor through the Wetlands and Dun Algaz tunnel to reach Loch Modan| |Z|Wetlands|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

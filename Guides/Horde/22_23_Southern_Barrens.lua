@@ -140,6 +140,8 @@ A Cry of the Thunderhawk |QID|913| |N|Jorn Skyseer in Camp Taurajo (44.86, 59.13
 C Cry of the Thunderhawk |QID|913| |N|Kill Thunderhawk Cloudscraper or Thunderhawk Hatchling to collect Thunderhawk Wings (44.0, 55.0) (48.3, 56.9) (48.1, 60.0) (48.7, 62.1) (44.9, 63.0) (44.5, 61.6)| |Z|The Barrens| |PRE|907|
 T Cry of the Thunderhawk |QID|913| |N|Jorn Skyseer in Camp Taurajo (44.89, 59.15)| |Z|The Barrens| |PRE|907|
 
+R Sun Rock Retreat |N|Travel northwest from Camp Taurajo to Honor's Stand, then west into Stonetalon Mountains and south to Sun Rock Retreat| |Z|Stonetalon Mountains|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

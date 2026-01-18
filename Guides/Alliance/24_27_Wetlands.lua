@@ -112,6 +112,8 @@ A Ineptitude + Chemicals = Fun (Part 1) |QID|1073| |N|Lomac Gearstrip in Tinker 
 C Ineptitude + Chemicals = Fun (Part 1) |QID|1073| |N|Buy 4 Minor Mana Potion and 2 Elixir of Minor Fortitude from the Auction House, skip the quest if items are too expensive for you or not available (24.2, 74.4)| |Z|Ironforge| |PRE|1072|
 T Ineptitude + Chemicals = Fun (Part 1) |QID|1073| |N|Lomac Gearstrip in Tinker Town (71.8, 51.4)| |Z|Ironforge| |PRE|1072|
 T The Powers Below |QID|968| |N|Gerrig Bonegrip in The Great Forge (50.8, 6.0)| |Z|Ironforge| |O|
+R Redridge Mountains |N|Take the Deeprun Tram from Ironforge to Stormwind, then travel east through Elwynn Forest to Redridge Mountains (31.52, 57.90)| |Z|Redridge Mountains|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

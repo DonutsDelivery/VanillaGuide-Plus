@@ -394,6 +394,8 @@ N Optional Quest |QID|442| |N|'Assault on Fenris Isle' is a difficult quest to s
 C Assault on Fenris Isle |QID|442| |N|Kill Thule Ravenclaw and collect Thule's Head in Fenris Keep (65.66, 24.16)| |Z|Silverpine Forest|
 T Assault on Fenris Isle |QID|442| |N|High Executor Hadrec in The Sepulcher (43.41, 40.85)| |Z|Silverpine Forest|
 
+R Sun Rock Retreat |N|Take the zeppelin from Undercity to Orgrimmar, then travel to The Crossroads in The Barrens, head west through Honor's Stand into Stonetalon Mountains, then south to Sun Rock Retreat| |Z|Stonetalon Mountains|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

@@ -374,6 +374,8 @@ T Thelsamar Blood Sausages |QID|418| |N|Vidra Hearthstove in Stoutlager Inn (34.
 T A Rat Catching|QID|416| |N|Mountaineer Kadrell in Thelsamar; He patrols around (32.91, 49.53)| |Z|Loch Modan|
 A Ironband's Excavation |QID|436| |N|Jern Hornhelm in Thelsamar (37.25, 47.71)| |Z|Loch Modan|
 
+R Westfall |N|Travel west from Goldshire through the gate to reach Westfall. The next guide begins at The Jansen Stead (60.0, 19.4)| |Z|Westfall|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

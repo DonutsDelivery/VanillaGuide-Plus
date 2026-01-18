@@ -27,6 +27,8 @@ T Crushridge Bounty |QID|500| |N|Marshal Redpath in Southshore (49.67, 58.73)| |
 T Noble Deaths |QID|512| |N|Magistrate Henry Maleb in Southshore (48.15, 59.12)| |Z|Hillsbrad Foothills|
 T Dark Council |QID|537| |N|Magistrate Henry Maleb in Southshore (48.15, 59.12)| |Z|Hillsbrad Foothills|
 
+R Arathi Highlands |N|Travel east from Southshore through Hillsbrad Foothills into Arathi Highlands. Head to Refuge Pointe (45.85, 47.59)| |Z|Arathi Highlands|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

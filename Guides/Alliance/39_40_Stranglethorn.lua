@@ -104,6 +104,8 @@ A The Tome of Nobility |QID|4485| |N|Arthur the Faithful in Cathedral of Light (
 T The Tome of Nobility |QID|4485| |N|Duthorian Rall in Cathedral of Light (39.86, 29.78)| |Z||Stranglethorn Vale|  |C|Paladin| |R|Human|
 N (spell:13819) |N|Speak to Arthur the Faithful and train (spell:13819) (38.67, 32.91)| |Z||Stranglethorn Vale|  |C|Paladin|  |BUFF|136103|
 
+R Badlands |N|Take the boat from Booty Bay to Ratchet, fly to Gadgetzan, then fly to Ironforge and travel east through Loch Modan into the Badlands (42.43, 52.69)| |Z|Badlands|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

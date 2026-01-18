@@ -58,6 +58,8 @@ N Kravel's Parts Order |QID|1111| |N|Store Kravel's Parts Order to the bank (52.
 N Kravel's Crate |QID|5762| |N|Store Kravel's Crate to the bank (52.30, 28.89)| |Z|Tanaris| |L|14542| |O|
 N Fizzle Brassbolts' Letter |QID|1106| |N|Store Fizzle Brassbolts' Letter to the bank (52.30, 28.89)| |Z|Tanaris| |L|5827| |O|
 
+R Desolace |N|Fly from Gadgetzan or Thalanaar to Nijel's Point, or travel north through Thousand Needles and Stonetalon Mountains to Desolace (66.67, 10.92)| |Z|Desolace|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

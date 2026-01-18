@@ -34,7 +34,9 @@ N Box of Empty Vials |QID|3568| |N|Store Box of Empty Vials at the bank. Tick th
 N Bundle of Atal'ai Artifacts |QID|1429| |N|Withdraw Bundle of Atal'ai Artifacts at the bank. Tick this step (66.0, 45.2)| |Z|Undercity| |L|6193| |OO| 
 N Nimboya's Pike |QID|2932| |N|Withdraw Nimboya's Pike at the bank. Tick this step (66.0, 45.2)| |Z|Undercity| |L|15002| |OO| 
 
-N Guide Complete |N|Tick to continue to the next guide| 
+R Revantusk Village |N|Fly to Hammerfall in Arathi Highlands, then travel south to The Hinterlands| |Z|The Hinterlands|
+
+N Guide Complete |N|Tick to continue to the next guide|
 
 ]]
 end)

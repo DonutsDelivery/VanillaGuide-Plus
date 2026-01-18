@@ -106,7 +106,9 @@ T Rin'ji's Secret |QID|2782| |N|Oran Snakewrithe in Magic Quarter (73.09, 32.77)
 T Lines of Communication |QID|2995| |N|Oran Snakewrithe in Magic Quarter (73.09, 32.77)| |Z|Undercity| 
 T Oran's Gratitude |QID|8273| |N|Oran Snakewrithe in Magic Quarter (73.09, 32.77)| |Z|Undercity|  
 
-N Guide Complete |N|Tick to continue to the next guide| 
+R Grom'gol Base Camp |N|Take the zeppelin from Undercity to Grom'gol Base Camp in Stranglethorn Vale| |Z|Stranglethorn Vale|
+
+N Guide Complete |N|Tick to continue to the next guide|
 
 ]]
 end)

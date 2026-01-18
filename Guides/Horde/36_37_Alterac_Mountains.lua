@@ -32,6 +32,8 @@ R Tarren Mill |TID|557| |N|Travel to Tarren Mill. You can die on purpose and res
 T Dalaran Patrols |QID|545| |N|Magus Wordeen Voidglare in Tarren Mill (61.58, 20.80)| |Z|Hillsbrad Foothills|
 T Bracers of Binding |QID|557| |N|Keeper Bel'varil in Tarren Mill (61.51, 20.86)| |Z|Hillsbrad Foothills|
 
+R Hammerfall |N|Travel east to Hammerfall in Arathi Highlands| |Z|Arathi Highlands|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]

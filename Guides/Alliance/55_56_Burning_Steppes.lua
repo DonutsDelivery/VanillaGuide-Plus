@@ -112,6 +112,8 @@ T A Donation of Mageweave |QID|7804| |N|Mistina Steelshield in The Great Forge (
 N Everlook Report |QID|6028| |N|Withdraw Everlook Report from the bank. Tick this step (35.48, 60.70)| |Z|Ironforge| |L|15788| |OO|
 N Tinkee's Letter |QID|4808| |N|Store Tinkee's Letter to the bank (35.48, 60.70)| |Z|Ironforge| |L|12438| |O|
 
+R Western Plaguelands |N|Travel to Western Plaguelands: Fly to Chillwind Camp from Ironforge.| |Z|Ironforge|
+
 N Guide Complete |N|Tick to continue to the next guide|
 
 ]]
