@@ -8,9 +8,10 @@ local hadquest
 
 TurtleGuide.TrackEvents = {
 	"UI_INFO_MESSAGE", "CHAT_MSG_LOOT", "CHAT_MSG_SYSTEM",
-	"QUEST_WATCH_UPDATE", "QUEST_LOG_UPDATE", "ZONE_CHANGED",
-	"ZONE_CHANGED_INDOORS", "MINIMAP_ZONE_CHANGED", "ZONE_CHANGED_NEW_AREA",
-	"PLAYER_LEVEL_UP", "ADDON_LOADED", "CRAFT_SHOW", "PLAYER_DEAD"
+	"QUEST_WATCH_UPDATE", "QUEST_LOG_UPDATE", "UNIT_QUEST_LOG_CHANGED",
+	"ZONE_CHANGED", "ZONE_CHANGED_INDOORS", "MINIMAP_ZONE_CHANGED",
+	"ZONE_CHANGED_NEW_AREA", "PLAYER_LEVEL_UP", "ADDON_LOADED",
+	"CRAFT_SHOW", "PLAYER_DEAD"
 }
 
 
@@ -102,6 +103,14 @@ function TurtleGuide:QUEST_LOG_UPDATE(event)
 			CloseQuest()
 			TurtleGuide:Print(L["Automatically skipping the follow-up"])
 		end
+	end
+end
+
+function TurtleGuide:UNIT_QUEST_LOG_CHANGED(event, unit)
+	if unit ~= "player" then return end
+	local action = self:GetObjectiveInfo()
+	if action == "COMPLETE" then
+		self:UpdateStatusFrame()
 	end
 end
 
