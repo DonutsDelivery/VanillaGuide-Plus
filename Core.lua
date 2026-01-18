@@ -980,9 +980,13 @@ function TurtleGuide:ShowBranchSelector()
 end
 
 function TurtleGuide:CreateBranchSelectorFrame()
+	local NUMROWS = 16
+	local COLWIDTH = 210
+	local ROWHEIGHT = 19
+
 	local f = CreateFrame("Frame", "TurtleGuideBranchSelectorFrame", UIParent)
-	f:SetWidth(350)
-	f:SetHeight(400)
+	f:SetWidth(660)
+	f:SetHeight(380)
 	f:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	f:SetBackdrop({
 		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
@@ -996,38 +1000,35 @@ function TurtleGuide:CreateBranchSelectorFrame()
 	f:SetScript("OnDragStart", function() this:StartMoving() end)
 	f:SetScript("OnDragStop", function() this:StopMovingOrSizing() end)
 	f:SetFrameStrata("DIALOG")
-	f:EnableMouseWheel(true)
 
 	local title = f:CreateFontString(nil, "ARTWORK")
 	title:SetFontObject(GameFontNormalLarge)
-	title:SetPoint("TOP", f, "TOP", 0, -20)
+	title:SetPoint("TOP", f, "TOP", 0, -16)
 	title:SetText("Branch to Zone")
+	f.title = title
 
 	-- Branch status indicator
 	local statusText = f:CreateFontString(nil, "ARTWORK")
 	statusText:SetFontObject(GameFontHighlight)
-	statusText:SetPoint("TOP", title, "BOTTOM", 0, -5)
-	statusText:SetWidth(320)
+	statusText:SetPoint("TOP", title, "BOTTOM", 0, -4)
+	statusText:SetWidth(600)
 	f.statusText = statusText
 
-	-- Scroll frame for guide list
-	local scrollFrame = CreateFrame("ScrollFrame", "TurtleGuideBranchScrollFrame", f)
-	scrollFrame:SetPoint("TOPLEFT", f, "TOPLEFT", 16, -60)
-	scrollFrame:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -32, 50)
-
-	local content = CreateFrame("Frame", nil, scrollFrame)
-	content:SetWidth(300)
-	content:SetHeight(1) -- Will be updated dynamically
-	scrollFrame:SetScrollChild(content)
-	f.content = content
-
-	-- Create guide buttons
+	-- Create guide buttons in 3 columns (like GuideListFrame)
 	f.guideButtons = {}
-	for i = 1, 20 do
-		local btn = CreateFrame("Button", nil, content)
-		btn:SetWidth(300)
-		btn:SetHeight(22)
-		btn:SetPoint("TOPLEFT", content, "TOPLEFT", 0, -(i-1) * 24)
+	for i = 1, NUMROWS * 3 do
+		local col = math.floor((i - 1) / NUMROWS)
+		local row = ((i - 1) % NUMROWS)
+
+		local btn = CreateFrame("Button", nil, f)
+		btn:SetWidth(COLWIDTH)
+		btn:SetHeight(ROWHEIGHT)
+
+		if col == 0 then
+			btn:SetPoint("TOPLEFT", f, "TOPLEFT", 15, -55 - row * ROWHEIGHT)
+		else
+			btn:SetPoint("TOPLEFT", f.guideButtons[(col - 1) * NUMROWS + row + 1], "TOPRIGHT", 0, 0)
+		end
 
 		local highlight = btn:CreateTexture(nil, "HIGHLIGHT")
 		highlight:SetTexture("Interface\\HelpFrame\\HelpFrameButton-Highlight")
@@ -1036,8 +1037,8 @@ function TurtleGuide:CreateBranchSelectorFrame()
 
 		local text = btn:CreateFontString(nil, "ARTWORK")
 		text:SetFontObject(GameFontNormal)
-		text:SetPoint("LEFT", 4, 0)
-		text:SetWidth(290)
+		text:SetPoint("LEFT", btn, "LEFT", 4, 0)
+		text:SetWidth(COLWIDTH - 8)
 		text:SetJustifyH("LEFT")
 		btn.text = text
 
@@ -1051,11 +1052,12 @@ function TurtleGuide:CreateBranchSelectorFrame()
 		f.guideButtons[i] = btn
 	end
 
-	-- Scroll handling
+	-- Mouse wheel for pagination
 	f.offset = 0
+	f:EnableMouseWheel(true)
 	f:SetScript("OnMouseWheel", function()
 		local delta = arg1
-		f.offset = f.offset - delta * 3
+		f.offset = f.offset - delta * NUMROWS
 		if f.offset < 0 then f.offset = 0 end
 		TurtleGuide:UpdateBranchSelectorPanel()
 	end)
@@ -1064,7 +1066,7 @@ function TurtleGuide:CreateBranchSelectorFrame()
 	local returnBtn = CreateFrame("Button", nil, f, "UIPanelButtonTemplate")
 	returnBtn:SetWidth(140)
 	returnBtn:SetHeight(24)
-	returnBtn:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 20, 16)
+	returnBtn:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 20, 12)
 	returnBtn:SetText("Return to Main")
 	returnBtn:SetScript("OnClick", function()
 		TurtleGuide:ReturnFromBranch()
@@ -1152,12 +1154,12 @@ function TurtleGuide:UpdateBranchSelectorPanel()
 		end
 	end
 
-	-- Clamp offset
-	local maxOffset = math.max(0, table.getn(displayList) - 20)
+	-- Clamp offset (48 buttons = 3 columns × 16 rows)
+	local maxOffset = math.max(0, table.getn(displayList) - 48)
 	if f.offset > maxOffset then f.offset = maxOffset end
 
 	-- Update buttons from displayList (matching GuideListFrame pattern)
-	for i = 1, 20 do
+	for i = 1, 48 do
 		local btn = f.guideButtons[i]
 		local entry = displayList[i + f.offset]
 		if entry then
@@ -1173,7 +1175,7 @@ function TurtleGuide:UpdateBranchSelectorPanel()
 				if complete and complete > 0 then
 					displayText = string.format("|cff%02x%02x%02x%s|r", r * 255, g * 255, b * 255, entry.text)
 				end
-				btn.text:SetText("  " .. displayText)
+				btn.text:SetText(displayText)
 				btn.guideName = entry.guide
 			end
 			btn:Show()
@@ -1183,8 +1185,6 @@ function TurtleGuide:UpdateBranchSelectorPanel()
 			btn:Hide()
 		end
 	end
-
-	f.content:SetHeight(table.getn(displayList) * 24)
 end
 
 
