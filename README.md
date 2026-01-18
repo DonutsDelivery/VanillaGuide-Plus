@@ -55,9 +55,11 @@ Full coverage of all vanilla leveling zones for both factions from 1-60.
 
 ## Leveling Routes
 
-Each race has a unique leveling path optimized for efficient questing. The addon automatically selects your route based on your race.
+Each race has a unique leveling path optimized for efficient questing based on the classic Joana/Brian Kopp guides. The addon automatically selects your route based on your race.
 
 ### Alliance Routes
+
+All Alliance races follow the same optimized path after their starting zones, bouncing between zones to complete quest chains efficiently.
 
 #### Human
 | Level | Zone |
@@ -76,43 +78,40 @@ Each race has a unique leveling path optimized for efficient questing. The addon
 | 29-30 | Ashenvale |
 | 30-31 | Wetlands |
 | 31-32 | Hillsbrad Foothills |
-| 32-37 | Stranglethorn Vale / Thousand Needles / Desolace |
-| 37-40 | Alterac / Arathi / Dustwallow / STV |
-| 40-46 | Badlands / Swamp of Sorrows / Tanaris / Feralas |
-| 46-53 | Hinterlands / Searing Gorge / Un'Goro / Azshara |
-| 53-60 | Felwood / Winterspring / Plaguelands / Silithus |
+| 32-35 | Stranglethorn Vale / Thousand Needles / Desolace |
+| 36-40 | STV / Alterac / Arathi / Dustwallow |
+| 40-46 | Badlands / Swamp of Sorrows / Desolace / Tanaris / Feralas / Azshara / Hinterlands |
+| 46-52 | STV / Searing Gorge / Feralas / Tanaris / Hinterlands / Blasted Lands / Un'Goro / Azshara |
+| 53-60 | Felwood / Winterspring / Burning Steppes / Plaguelands / Silithus |
 
 #### Dwarf / Gnome
 | Level | Zone |
 |-------|------|
-| 1-11 | Dun Morogh |
-| 11-17 | Loch Modan |
-| 17-20 | Westfall / Redridge Mountains |
-| 20-32 | *(Same as Human route)* |
-| 32-60 | Stranglethorn Vale progression |
+| 1-12 | Dun Morogh |
+| 12-17 | Darkshore |
+| 17-60 | *(Same as Human route from Loch Modan onward)* |
 
 #### Night Elf
 | Level | Zone |
 |-------|------|
 | 1-12 | Teldrassil |
 | 12-17 | Darkshore |
-| 17-18 | Loch Modan |
-| 18-32 | *(Same as Human route)* |
-| 32-60 | Stranglethorn Vale progression |
+| 17-60 | *(Same as Human route from Loch Modan onward)* |
 
 #### High Elf (Turtle WoW)
 | Level | Zone |
 |-------|------|
 | 1-10 | **Thalassian Highlands** |
-| 10-17 | Darkshore |
-| 17-27 | *(Standard Alliance zones)* |
+| 12-27 | Darkshore / Loch Modan / Redridge / Ashenvale / Stonetalon / Wetlands |
 | 28-34 | **Northwind** |
-| 34-39 | Desolace / STV / Arathi / Dustwallow |
+| 34-39 | Desolace / STV / Alterac / Arathi / Dustwallow |
 | 39-46 | **Gilneas** |
-| 46-53 | STV / Searing Gorge / **Gillijim's Isle** |
+| 46-53 | STV / Searing Gorge / **Lapidis Isle** |
 | 53-60 | Felwood / **Tel'Abim** / **Hyjal** |
 
 ### Horde Routes
+
+Horde races share a similar path after their starting zones, with the route bouncing between Kalimdor and Eastern Kingdoms.
 
 #### Orc / Troll
 | Level | Zone |
@@ -120,38 +119,34 @@ Each race has a unique leveling path optimized for efficient questing. The addon
 | 1-12 | Durotar |
 | 12-20 | The Barrens |
 | 20-25 | Stonetalon Mountains / Southern Barrens |
-| 25-29 | Thousand Needles / Ashenvale |
-| 29-32 | Hillsbrad / Arathi / Stranglethorn Vale |
-| 32-40 | Desolace / STV / Alterac / Dustwallow |
-| 40-47 | Badlands / Swamp of Sorrows / Tanaris / Feralas |
-| 47-53 | Azshara / Hinterlands / Searing Gorge / Un'Goro |
-| 53-60 | Burning Steppes / Felwood / Plaguelands / Silithus |
+| 25-29 | Thousand Needles / Ashenvale / Stonetalon |
+| 29-32 | Hillsbrad / Arathi / Stranglethorn Vale / Thousand Needles |
+| 32-40 | Desolace / STV / Alterac / Arathi / Dustwallow |
+| 40-50 | Badlands / Swamp of Sorrows / STV / Dustwallow / Desolace / Tanaris / Feralas / Azshara / Hinterlands / Searing Gorge |
+| 50-60 | Azshara / Hinterlands / Blasted Lands / Un'Goro / Burning Steppes / Felwood / Winterspring / Plaguelands / Silithus |
 
 #### Tauren
 | Level | Zone |
 |-------|------|
 | 1-12 | Mulgore |
-| 12-20 | The Barrens |
-| 20-60 | *(Same as Orc/Troll route)* |
+| 12-60 | *(Same as Orc/Troll route from The Barrens onward)* |
 
 #### Undead
 | Level | Zone |
 |-------|------|
 | 1-12 | Tirisfal Glades |
 | 12-20 | Silverpine Forest |
-| 20-60 | *(Merges with Orc/Troll route via Barrens)* |
+| 20-60 | *(Joins Orc/Troll route via Stonetalon Mountains)* |
 
 #### Goblin (Turtle WoW)
 | Level | Zone |
 |-------|------|
-| 1-16 | **Blackstone Island** |
-| 16-22 | Stonetalon Mountains / Ashenvale |
-| 22-29 | Thousand Needles |
-| 28-34 | **Northwind** |
-| 33-38 | Desolace / STV / **Grim Reaches** |
-| 39-46 | **Gilneas** |
-| 46-53 | Tanaris / Feralas / **Gillijim's Isle** |
-| 53-60 | **Tel'Abim** / **Hyjal** |
+| 1-10 | **Blackstone Island** |
+| 12-32 | Durotar / Barrens / Stonetalon / Thousand Needles / Ashenvale / Hillsbrad / Arathi / STV |
+| 32-38 | Desolace / **Grim Reaches** / STV / Alterac / Arathi / Dustwallow |
+| 39-46 | **Gilneas** / STV / Badlands / Swamp of Sorrows |
+| 44-53 | STV / Dustwallow / Tanaris / Feralas / Azshara / Hinterlands / Searing Gorge / **Gillijim's Isle** |
+| 53-60 | Burning Steppes / **Tel'Abim** / Winterspring / Felwood / **Hyjal** |
 
 *Zones in **bold** are Turtle WoW exclusive content.*
 
