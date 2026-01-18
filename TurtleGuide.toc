@@ -41,10 +41,14 @@ ObjectivesFrame.lua
 # Routes
 Routes\Routes.lua
 
-# Alliance Guides
+# Optimized Guides (VanillaGuide quest order)
+Guides\Optimized\Alliance\Guides.xml
+Guides\Optimized\Horde\Guides.xml
+
+# Alliance Zone Completion Guides
 Guides\Alliance\Guides.xml
 
-# Horde Guides
+# Horde Zone Completion Guides
 Guides\Horde\Guides.xml
 
 # Both Factions Guides

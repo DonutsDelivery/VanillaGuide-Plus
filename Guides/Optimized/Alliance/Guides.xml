@@ -1,0 +1,29 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<!-- Optimized Alliance Guides - VanillaGuide quest order, TurtleGuide format -->
+
+	<!-- Starting Zones (1-12) -->
+	<!-- <Script file="01_12_Elwynn_Forest.lua"/> -->
+	<!-- <Script file="01_12_Teldrassil.lua"/> -->
+	<!-- <Script file="01_12_Dun_Morogh.lua"/> -->
+
+	<!-- Level 12-20 progression -->
+	<!-- <Script file="12_14_Darkshore.lua"/> -->
+	<!-- <Script file="14_17_Darkshore.lua"/> -->
+	<!-- <Script file="17_18_Loch_Modan.lua"/> -->
+	<!-- <Script file="18_20_Redridge.lua"/> -->
+
+	<!-- Level 20-30 progression -->
+	<!-- <Script file="20_21_Darkshore.lua"/> -->
+	<!-- <Script file="21_22_Ashenvale.lua"/> -->
+	<!-- <Script file="22_23_Stonetalon.lua"/> -->
+	<!-- <Script file="23_24_Darkshore.lua"/> -->
+	<!-- <Script file="24_25_Ashenvale.lua"/> -->
+	<!-- <Script file="25_27_Wetlands.lua"/> -->
+	<!-- <Script file="27_28_Redridge.lua"/> -->
+	<!-- <Script file="28_29_Duskwood.lua"/> -->
+	<!-- <Script file="29_30_Ashenvale.lua"/> -->
+	<!-- <Script file="30_30_Wetlands.lua"/> -->
+
+	<!-- More levels will be added as converted -->
+</Ui>

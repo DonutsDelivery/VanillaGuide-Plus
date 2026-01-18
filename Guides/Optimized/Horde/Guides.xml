@@ -1,0 +1,14 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<!-- Optimized Horde Guides - VanillaGuide quest order, TurtleGuide format -->
+
+	<!-- Starting Zones (1-12) -->
+	<!-- <Script file="01_12_Durotar.lua"/> -->
+	<!-- <Script file="01_12_Mulgore.lua"/> -->
+	<!-- <Script file="01_12_Tirisfal_Glades.lua"/> -->
+
+	<!-- Level 12-20 progression -->
+	<!-- <Script file="12_20_Barrens.lua"/> -->
+
+	<!-- More levels will be added as converted -->
+</Ui>
