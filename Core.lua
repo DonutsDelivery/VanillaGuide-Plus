@@ -1018,7 +1018,7 @@ function TurtleGuide:CreateBranchSelectorFrame()
 	f.guideButtons = {}
 	for i = 1, NUMROWS * 3 do
 		local col = math.floor((i - 1) / NUMROWS)
-		local row = ((i - 1) % NUMROWS)
+		local row = math.mod(i - 1, NUMROWS)
 
 		local btn = CreateFrame("Button", nil, f)
 		btn:SetWidth(COLWIDTH)
