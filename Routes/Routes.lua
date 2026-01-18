@@ -218,6 +218,6 @@ end
 function TurtleGuide:PrintAllRoutes()
 	self:Print("Available routes:")
 	for name, route in pairs(self.routes) do
-		self:Print(string.format("  %s: %d zones", name, #route))
+		self:Print(string.format("  %s: %d zones", name, table.getn(route)))
 	end
 end
