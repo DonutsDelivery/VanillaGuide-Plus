@@ -72,42 +72,92 @@ All Alliance races follow the same optimized path after their starting zones, bo
 | 21-22 | Ashenvale |
 | 22-23 | Stonetalon Mountains |
 | 23-24 | Darkshore |
+| 24-24 | Ashenvale |
 | 24-27 | Wetlands |
 | 27-28 | Redridge Mountains |
 | 28-29 | Duskwood |
 | 29-30 | Ashenvale |
 | 30-31 | Wetlands |
 | 31-32 | Hillsbrad Foothills |
-| 32-35 | Stranglethorn Vale / Thousand Needles / Desolace |
-| 36-40 | STV / Alterac / Arathi / Dustwallow |
-| 40-46 | Badlands / Swamp of Sorrows / Desolace / Tanaris / Feralas / Azshara / Hinterlands |
-| 46-52 | STV / Searing Gorge / Feralas / Tanaris / Hinterlands / Blasted Lands / Un'Goro / Azshara |
-| 53-60 | Felwood / Winterspring / Burning Steppes / Plaguelands / Silithus |
+| 32-33 | Stranglethorn Vale |
+| 33-34 | Thousand Needles |
+| 34-35 | Desolace |
+| 36-37 | Stranglethorn Vale |
+| 36-37 | Alterac Mountains |
+| 37-38 | Arathi Highlands |
+| 38-39 | Dustwallow Marsh |
+| 39-40 | Stranglethorn Vale |
+| 40-41 | Badlands |
+| 41-42 | Swamp of Sorrows |
+| 42-43 | Stranglethorn Vale |
+| 43-43 | Desolace |
+| 43-44 | Tanaris |
+| 44-46 | Feralas |
+| 46-46 | Azshara |
+| 46-46 | The Hinterlands |
+| 46-47 | Stranglethorn Vale |
+| 47-48 | Searing Gorge |
+| 48-49 | Feralas |
+| 49-50 | Tanaris |
+| 50-50 | The Hinterlands |
+| 50-51 | Blasted Lands |
+| 51-52 | Un'Goro Crater |
+| 52-53 | Azshara |
+| 53-54 | Felwood |
+| 54-55 | Winterspring |
+| 55-56 | Felwood |
+| 55-56 | Burning Steppes |
+| 56-57 | Western Plaguelands |
+| 57-58 | Eastern Plaguelands |
+| 57-58 | Western Plaguelands |
+| 58-59 | Silithus |
+| 59-60 | Winterspring |
 
 #### Dwarf / Gnome
 | Level | Zone |
 |-------|------|
 | 1-12 | Dun Morogh |
 | 12-17 | Darkshore |
-| 17-60 | *(Same as Human route from Loch Modan onward)* |
+| 17-18 | Loch Modan |
+| 18-20 | Redridge Mountains |
+| 20-60 | *(Same as Human route)* |
 
 #### Night Elf
 | Level | Zone |
 |-------|------|
 | 1-12 | Teldrassil |
 | 12-17 | Darkshore |
-| 17-60 | *(Same as Human route from Loch Modan onward)* |
+| 17-18 | Loch Modan |
+| 18-20 | Redridge Mountains |
+| 20-60 | *(Same as Human route)* |
 
 #### High Elf (Turtle WoW)
 | Level | Zone |
 |-------|------|
 | 1-10 | **Thalassian Highlands** |
-| 12-27 | Darkshore / Loch Modan / Redridge / Ashenvale / Stonetalon / Wetlands |
+| 12-17 | Darkshore |
+| 17-18 | Loch Modan |
+| 18-20 | Redridge Mountains |
+| 20-21 | Darkshore |
+| 21-22 | Ashenvale |
+| 22-23 | Stonetalon Mountains |
+| 23-24 | Darkshore |
+| 24-24 | Ashenvale |
+| 24-27 | Wetlands |
+| 27-28 | Redridge Mountains |
 | 28-34 | **Northwind** |
-| 34-39 | Desolace / STV / Alterac / Arathi / Dustwallow |
+| 34-35 | Desolace |
+| 36-37 | Stranglethorn Vale |
+| 36-37 | Alterac Mountains |
+| 37-38 | Arathi Highlands |
+| 38-39 | Dustwallow Marsh |
 | 39-46 | **Gilneas** |
-| 46-53 | STV / Searing Gorge / **Lapidis Isle** |
-| 53-60 | Felwood / **Tel'Abim** / **Hyjal** |
+| 46-47 | Stranglethorn Vale |
+| 47-48 | Searing Gorge |
+| 48-53 | **Lapidis Isle** |
+| 53-54 | Felwood |
+| 54-60 | **Tel'Abim** |
+| 58-60 | **Hyjal** |
 
 ### Horde Routes
 
@@ -118,35 +168,110 @@ Horde races share a similar path after their starting zones, with the route boun
 |-------|------|
 | 1-12 | Durotar |
 | 12-20 | The Barrens |
-| 20-25 | Stonetalon Mountains / Southern Barrens |
-| 25-29 | Thousand Needles / Ashenvale / Stonetalon |
-| 29-32 | Hillsbrad / Arathi / Stranglethorn Vale / Thousand Needles |
-| 32-40 | Desolace / STV / Alterac / Arathi / Dustwallow |
-| 40-50 | Badlands / Swamp of Sorrows / STV / Dustwallow / Desolace / Tanaris / Feralas / Azshara / Hinterlands / Searing Gorge |
-| 50-60 | Azshara / Hinterlands / Blasted Lands / Un'Goro / Burning Steppes / Felwood / Winterspring / Plaguelands / Silithus |
+| 20-22 | Stonetalon Mountains |
+| 22-23 | Southern Barrens |
+| 23-25 | Stonetalon Mountains |
+| 25-25 | Southern Barrens |
+| 25-26 | Thousand Needles |
+| 26-27 | Ashenvale |
+| 27-27 | Stonetalon Mountains |
+| 27-29 | Thousand Needles |
+| 29-30 | Hillsbrad Foothills |
+| 30-30 | Arathi Highlands |
+| 30-31 | Stranglethorn Vale |
+| 31-32 | Thousand Needles |
+| 32-34 | Desolace |
+| 34-36 | Stranglethorn Vale |
+| 36-37 | Alterac Mountains |
+| 37-38 | Arathi Highlands |
+| 37-38 | Thousand Needles |
+| 38-38 | Dustwallow Marsh |
+| 38-40 | Stranglethorn Vale |
+| 40-41 | Badlands |
+| 41-42 | Swamp of Sorrows |
+| 42-43 | Stranglethorn Vale |
+| 43-44 | Dustwallow Marsh |
+| 44-44 | Desolace |
+| 44-45 | Tanaris |
+| 45-46 | Feralas |
+| 46-47 | Azshara |
+| 47-47 | The Hinterlands |
+| 47-47 | Stranglethorn Vale |
+| 47-48 | Searing Gorge |
+| 48-49 | Swamp of Sorrows |
+| 49-49 | Dustwallow Marsh |
+| 49-50 | Feralas |
+| 49-50 | Tanaris |
+| 50-50 | Azshara |
+| 50-51 | The Hinterlands |
+| 51-51 | Blasted Lands |
+| 51-53 | Un'Goro Crater |
+| 53-54 | Burning Steppes |
+| 54-54 | Felwood |
+| 54-55 | Winterspring |
+| 55-56 | Felwood |
+| 56-56 | Western Plaguelands |
+| 56-57 | Eastern Plaguelands |
+| 57-58 | Western Plaguelands |
+| 58-59 | Silithus |
+| 59-60 | Winterspring |
 
 #### Tauren
 | Level | Zone |
 |-------|------|
 | 1-12 | Mulgore |
-| 12-60 | *(Same as Orc/Troll route from The Barrens onward)* |
+| 12-20 | The Barrens |
+| 20-60 | *(Same as Orc/Troll route)* |
 
 #### Undead
 | Level | Zone |
 |-------|------|
 | 1-12 | Tirisfal Glades |
 | 12-20 | Silverpine Forest |
-| 20-60 | *(Joins Orc/Troll route via Stonetalon Mountains)* |
+| 20-60 | *(Same as Orc/Troll route from Stonetalon)* |
 
 #### Goblin (Turtle WoW)
 | Level | Zone |
 |-------|------|
 | 1-10 | **Blackstone Island** |
-| 12-32 | Durotar / Barrens / Stonetalon / Thousand Needles / Ashenvale / Hillsbrad / Arathi / STV |
-| 32-38 | Desolace / **Grim Reaches** / STV / Alterac / Arathi / Dustwallow |
-| 39-46 | **Gilneas** / STV / Badlands / Swamp of Sorrows |
-| 44-53 | STV / Dustwallow / Tanaris / Feralas / Azshara / Hinterlands / Searing Gorge / **Gillijim's Isle** |
-| 53-60 | Burning Steppes / **Tel'Abim** / Winterspring / Felwood / **Hyjal** |
+| 1-12 | Durotar (fallback) |
+| 12-20 | The Barrens |
+| 20-22 | Stonetalon Mountains |
+| 22-23 | Southern Barrens |
+| 23-25 | Stonetalon Mountains |
+| 25-25 | Southern Barrens |
+| 25-26 | Thousand Needles |
+| 26-27 | Ashenvale |
+| 27-27 | Stonetalon Mountains |
+| 27-29 | Thousand Needles |
+| 29-30 | Hillsbrad Foothills |
+| 30-30 | Arathi Highlands |
+| 30-31 | Stranglethorn Vale |
+| 31-32 | Thousand Needles |
+| 32-34 | Desolace |
+| 33-38 | **Grim Reaches** |
+| 34-36 | Stranglethorn Vale |
+| 36-37 | Alterac Mountains |
+| 37-38 | Arathi Highlands |
+| 38-38 | Dustwallow Marsh |
+| 39-46 | **Gilneas** |
+| 38-40 | Stranglethorn Vale |
+| 40-41 | Badlands |
+| 41-42 | Swamp of Sorrows |
+| 42-43 | Stranglethorn Vale |
+| 43-44 | Dustwallow Marsh |
+| 44-44 | Desolace |
+| 44-45 | Tanaris |
+| 45-46 | Feralas |
+| 46-47 | Azshara |
+| 47-47 | The Hinterlands |
+| 47-48 | Searing Gorge |
+| 48-53 | **Gillijim's Isle** |
+| 53-54 | Burning Steppes |
+| 54-60 | **Tel'Abim** |
+| 54-55 | Winterspring |
+| 55-56 | Felwood |
+| 58-60 | **Hyjal** |
 
 *Zones in **bold** are Turtle WoW exclusive content.*
 
