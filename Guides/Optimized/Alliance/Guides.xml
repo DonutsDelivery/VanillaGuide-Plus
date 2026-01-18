@@ -7,28 +7,68 @@
 	<Script file="10_12_Westfall.lua"/>
 
 	<!-- Dwarf/Gnome Starting Zone (1-12) -->
-	<!-- <Script file="01_12_Dun_Morogh.lua"/> -->
+	<Script file="01_12_Dun_Morogh.lua"/>
 
 	<!-- Night Elf Starting Zone (1-12) -->
-	<!-- <Script file="01_12_Teldrassil.lua"/> -->
+	<Script file="01_12_Teldrassil.lua"/>
 
 	<!-- Level 12-20 progression (All Alliance) -->
 	<Script file="12_14_Darkshore.lua"/>
 	<Script file="14_17_Darkshore.lua"/>
-	<!-- <Script file="17_18_Loch_Modan.lua"/> -->
-	<!-- <Script file="18_20_Redridge.lua"/> -->
+	<Script file="17_18_Loch_Modan.lua"/>
+	<Script file="18_20_Redridge.lua"/>
 
 	<!-- Level 20-30 progression -->
-	<!-- <Script file="20_21_Darkshore.lua"/> -->
-	<!-- <Script file="21_22_Ashenvale.lua"/> -->
-	<!-- <Script file="22_23_Stonetalon.lua"/> -->
-	<!-- <Script file="23_24_Darkshore.lua"/> -->
-	<!-- <Script file="24_25_Ashenvale.lua"/> -->
-	<!-- <Script file="25_27_Wetlands.lua"/> -->
-	<!-- <Script file="27_28_Redridge.lua"/> -->
-	<!-- <Script file="28_29_Duskwood.lua"/> -->
-	<!-- <Script file="29_30_Ashenvale.lua"/> -->
-	<!-- <Script file="30_30_Wetlands.lua"/> -->
+	<Script file="20_21_Darkshore.lua"/>
+	<Script file="21_22_Ashenvale.lua"/>
+	<Script file="22_23_Stonetalon.lua"/>
+	<Script file="23_24_Darkshore.lua"/>
+	<Script file="24_25_Ashenvale.lua"/>
+	<Script file="25_27_Wetlands.lua"/>
+	<Script file="27_28_Redridge.lua"/>
+	<Script file="28_29_Duskwood.lua"/>
+	<Script file="29_30_Ashenvale.lua"/>
+	<Script file="30_30_Wetlands.lua"/>
 
-	<!-- More levels will be added as converted -->
+	<!-- Level 30-40 progression -->
+	<Script file="30_31_Hillsbrad.lua"/>
+	<Script file="31_31_Alterac.lua"/>
+	<Script file="31_32_Arathi.lua"/>
+	<Script file="32_32_Stranglethorn.lua"/>
+	<Script file="32_33_Thousand_Needles.lua"/>
+	<Script file="33_33_Stonetalon.lua"/>
+	<Script file="33_35_Desolace.lua"/>
+	<Script file="35_36_Stranglethorn.lua"/>
+	<Script file="36_37_Alterac.lua"/>
+	<Script file="37_38_Arathi.lua"/>
+	<Script file="38_38_Dustwallow.lua"/>
+	<Script file="38_40_Stranglethorn.lua"/>
+
+	<!-- Level 40-50 progression -->
+	<Script file="40_41_Badlands.lua"/>
+	<Script file="41_41_Swamp_of_Sorrows.lua"/>
+	<Script file="41_42_Desolace.lua"/>
+	<Script file="42_43_Stranglethorn.lua"/>
+	<Script file="43_43_Tanaris.lua"/>
+	<Script file="43_45_Feralas.lua"/>
+	<Script file="45_46_Uldaman.lua"/>
+	<Script file="46_47_Hinterlands.lua"/>
+	<Script file="47_47_Feralas.lua"/>
+	<Script file="47_48_Tanaris.lua"/>
+	<Script file="48_48_Hinterlands.lua"/>
+	<Script file="48_49_Stranglethorn.lua"/>
+	<Script file="49_50_Blasted_Lands.lua"/>
+
+	<!-- Level 50-60 progression -->
+	<Script file="50_51_Searing_Gorge.lua"/>
+	<Script file="51_52_UnGoro.lua"/>
+	<Script file="52_53_Azshara.lua"/>
+	<Script file="53_54_Felwood.lua"/>
+	<Script file="54_55_Winterspring.lua"/>
+	<Script file="55_56_Burning_Steppes.lua"/>
+	<Script file="56_57_Silithus.lua"/>
+	<Script file="57_58_Western_Plaguelands.lua"/>
+	<Script file="58_59_Eastern_Plaguelands.lua"/>
+	<Script file="59_60_Winterspring.lua"/>
+
 </Ui>

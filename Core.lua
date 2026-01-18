@@ -118,6 +118,11 @@ local defaults = {
 	branchsavedguide = nil,
 	branchsavedstep = nil,
 	autobranch = false,  -- auto-branch to Turtle WoW zones
+	-- Starting zone selection (branch-and-rejoin)
+	startingzoneselected = false,  -- has player picked a starting zone?
+	selectedstartingzone = nil,    -- which starting zone was selected (e.g., "Human", "Dwarf")
+	startingzonecomplete = false,  -- has player finished their starting zone?
+	rejoinlevel = 12,              -- level at which all paths rejoin (default 12)
 }
 
 local options = {
@@ -318,6 +323,25 @@ local options = {
 			end,
 			order = 18,
 		},
+		StartingZone = {
+			name = "Starting Zone",
+			desc = "Choose a different starting zone (branch-and-rejoin)",
+			type = "execute",
+			func = function() TurtleGuide:ShowStartingZoneSelector() end,
+			order = 19,
+		},
+		ResetStartingZone = {
+			name = "Reset Starting Zone",
+			desc = "Reset starting zone selection and start fresh",
+			type = "execute",
+			func = function()
+				TurtleGuide.db.char.startingzoneselected = false
+				TurtleGuide.db.char.selectedstartingzone = nil
+				TurtleGuide.db.char.startingzonecomplete = false
+				TurtleGuide:ShowStartingZoneSelector()
+			end,
+			order = 20,
+		},
 	},
 }
 
@@ -366,32 +390,42 @@ function TurtleGuide:OnEnable()
 end
 
 function TurtleGuide:InitializeRoute()
-	-- If no route selected yet, show race selector on first login
+	-- If no route selected yet, use the new starting zone selection system
 	if not self.db.char.routeselected then
-		-- Auto-detect race and suggest route
-		local _, race = UnitRace("player")
-		local routeName = self:GetRouteForRace(race)
-		if routeName and self.routes[routeName] then
-			self:ApplyRouteSelection(routeName)
-			local message = L["You have been assigned the %s leveling route."]
-			if not message then
-				message = "You have been assigned the %s leveling route."
-			end
-			self:Print(string.format(message, tostring(race)))
+		-- Try the new branch-and-rejoin starting zone system first
+		if self:InitializeRouteWithStartingZone() then
+			-- Starting zone was handled, continue with initialization
 		else
-			-- Fallback to default start guides (including Turtle WoW races)
-			local startguides = {
-				Orc = "Durotar (1-12)", Troll = "Durotar (1-12)",
-				Tauren = "Mulgore (1-12)", Undead = "Tirisfal Glades (1-12)",
-				Dwarf = "Dun Morogh (1-11)", Gnome = "Dun Morogh (1-11)",
-				Human = "Elwynn Forest (1-12)", NightElf = "Teldrassil (1-12)",
-				-- Turtle WoW custom races
-				HighElf = "Thalassian Highlands (1-10)",  -- High Elf starting zone
-				Goblin = "Blackstone Island (1-16)",      -- Goblin starting zone
-			}
-			-- Use normalized route name for lookup
-			self.db.char.currentguide = startguides[routeName] or startguides[race] or self.guidelist[1]
-			self.db.char.routeselected = true
+			-- Fallback: Auto-detect race and suggest route
+			local _, race = UnitRace("player")
+			local routeName = self:GetRouteForRace(race)
+			if routeName and self.routes[routeName] then
+				self:ApplyRouteSelection(routeName)
+				local message = L["You have been assigned the %s leveling route."]
+				if not message then
+					message = "You have been assigned the %s leveling route."
+				end
+				self:Print(string.format(message, tostring(race)))
+			else
+				-- Fallback to default start guides (including Turtle WoW races)
+				local startguides = {
+					Orc = "Durotar (1-12)", Troll = "Durotar (1-12)",
+					Tauren = "Mulgore (1-12)", Undead = "Tirisfal (1-12)",
+					Dwarf = "Dun Morogh (1-12)", Gnome = "Dun Morogh (1-12)",
+					Human = "Elwynn Forest (1-12)", NightElf = "Teldrassil (1-12)",
+					-- Turtle WoW custom races
+					HighElf = "Thalassian Highlands (1-10)",  -- High Elf starting zone
+					Goblin = "Blackstone Island (1-10)",      -- Goblin starting zone
+				}
+				-- Use normalized route name for lookup
+				self.db.char.currentguide = startguides[routeName] or startguides[race] or self.guidelist[1]
+				self.db.char.routeselected = true
+			end
+		end
+	else
+		-- Route already selected - check if we need to transition from starting zone
+		if self.db.char.startingzoneselected and not self.db.char.startingzonecomplete then
+			self:CheckStartingZoneCompletion()
 		end
 	end
 
@@ -402,6 +436,8 @@ function TurtleGuide:InitializeRoute()
 	self:RegisterEvent("QUEST_COMPLETE", "UpdateStatusFrame")
 	self:RegisterEvent("QUEST_DETAIL", "UpdateStatusFrame")
 	self:RegisterEvent("QUEST_QUERY_COMPLETE")
+	-- Register for level up to check starting zone completion
+	self:RegisterEvent("PLAYER_LEVEL_UP")
 	self.TrackEvents = nil
 	self:QueryServerCompletedQuests()
 	self:UpdateStatusFrame()
@@ -412,6 +448,14 @@ end
 
 function TurtleGuide:OnDisable()
 	self:UnregisterAllEvents()
+end
+
+-- Handle level up events for starting zone transition
+function TurtleGuide:PLAYER_LEVEL_UP()
+	-- Check if we should transition from starting zone to shared path
+	if self.db.char.startingzoneselected and not self.db.char.startingzonecomplete then
+		self:CheckStartingZoneCompletion()
+	end
 end
 
 function TurtleGuide:OnTooltipUpdate()
@@ -1214,6 +1258,380 @@ function TurtleGuide:ApplyRouteSelection(race)
 		self.db.char.currentguide = nextguide
 		self:LoadGuide(self.db.char.currentguide)
 	end
+end
+
+
+---------------------------------
+--  Starting Zone Selection    --
+--  (Branch-and-Rejoin Logic)  --
+---------------------------------
+
+-- Define starting zones for each faction
+-- These are the "branch" points - race-specific 1-12 zones
+TurtleGuide.startingZones = {
+	Alliance = {
+		{race = "Human", zone = "Elwynn Forest", guide = "Elwynn Forest (1-12)", levels = "1-12", rejoinLevel = 12},
+		{race = "Dwarf", zone = "Dun Morogh", guide = "Dun Morogh (1-12)", levels = "1-12", rejoinLevel = 12},
+		{race = "NightElf", zone = "Teldrassil", guide = "Teldrassil (1-12)", levels = "1-12", rejoinLevel = 12},
+		{race = "Gnome", zone = "Dun Morogh", guide = "Dun Morogh (1-12)", levels = "1-12", rejoinLevel = 12},
+		{race = "HighElf", zone = "Thalassian Highlands", guide = "Thalassian Highlands (1-10)", levels = "1-10", rejoinLevel = 12},  -- Turtle WoW
+	},
+	Horde = {
+		{race = "Orc", zone = "Durotar", guide = "Durotar (1-12)", levels = "1-12", rejoinLevel = 12},
+		{race = "Troll", zone = "Durotar", guide = "Durotar (1-12)", levels = "1-12", rejoinLevel = 12},
+		{race = "Tauren", zone = "Mulgore", guide = "Mulgore (1-12)", levels = "1-12", rejoinLevel = 12},
+		{race = "Undead", zone = "Tirisfal Glades", guide = "Tirisfal (1-12)", levels = "1-12", rejoinLevel = 12},
+		{race = "Goblin", zone = "Blackstone Island", guide = "Blackstone Island (1-10)", levels = "1-10", rejoinLevel = 10},  -- Turtle WoW
+	},
+}
+
+-- Get available starting zones for the player's faction
+function TurtleGuide:GetAvailableStartingZones()
+	local faction = self.myfaction
+	local zones = self.startingZones[faction] or {}
+	local available = {}
+
+	-- Filter to only include zones with existing guides
+	for _, zoneInfo in ipairs(zones) do
+		if self.guides[zoneInfo.guide] then
+			table.insert(available, zoneInfo)
+		end
+	end
+
+	return available
+end
+
+-- Get the player's native starting zone based on their race
+function TurtleGuide:GetNativeStartingZone()
+	local _, race = UnitRace("player")
+	local routeName = self:GetRouteForRace(race)
+	local faction = self.myfaction
+	local zones = self.startingZones[faction] or {}
+
+	for _, zoneInfo in ipairs(zones) do
+		if zoneInfo.race == routeName then
+			return zoneInfo
+		end
+	end
+
+	-- Fallback to first zone for faction
+	return zones[1]
+end
+
+-- Check if the current guide is a starting zone guide
+function TurtleGuide:IsInStartingZone()
+	local currentGuide = self.db.char.currentguide
+	if not currentGuide then return false end
+
+	local faction = self.myfaction
+	local zones = self.startingZones[faction] or {}
+
+	for _, zoneInfo in ipairs(zones) do
+		if zoneInfo.guide == currentGuide then
+			return true, zoneInfo
+		end
+	end
+
+	return false
+end
+
+-- Get the rejoin point (shared route) based on current starting zone
+-- The rejoin point is where all starting zone paths converge
+function TurtleGuide:GetRejoinGuide()
+	local faction = self.myfaction
+	local playerLevel = UnitLevel("player")
+
+	-- Shared routes after starting zone (level 12+)
+	-- Alliance converges to Darkshore/Westfall path
+	-- Horde converges to Barrens path
+	local rejoinGuides = {
+		Alliance = {
+			{guide = "Westfall (12-17)", minLevel = 12, maxLevel = 17},
+			{guide = "Darkshore (12-17)", minLevel = 12, maxLevel = 17},
+			{guide = "Loch Modan (17-18)", minLevel = 17, maxLevel = 18},
+		},
+		Horde = {
+			{guide = "The Barrens (12-20)", minLevel = 12, maxLevel = 20},
+			{guide = "Silverpine Forest (12-20)", minLevel = 12, maxLevel = 20},
+		},
+	}
+
+	local guideList = rejoinGuides[faction] or {}
+
+	-- Find the best rejoin guide for player's level
+	for _, entry in ipairs(guideList) do
+		if self.guides[entry.guide] then
+			if playerLevel >= entry.minLevel and playerLevel <= entry.maxLevel + 2 then
+				return entry.guide
+			end
+		end
+	end
+
+	-- Fallback to first available rejoin guide
+	for _, entry in ipairs(guideList) do
+		if self.guides[entry.guide] then
+			return entry.guide
+		end
+	end
+
+	return nil
+end
+
+-- Handle starting zone completion and transition to shared path
+function TurtleGuide:CheckStartingZoneCompletion()
+	local inStartingZone, zoneInfo = self:IsInStartingZone()
+	if not inStartingZone then return false end
+
+	local playerLevel = UnitLevel("player")
+	local rejoinLevel = zoneInfo and zoneInfo.rejoinLevel or 12
+
+	-- Check if player has outleveled the starting zone
+	if playerLevel >= rejoinLevel then
+		-- Check if current guide is complete (or nearly complete)
+		local totalSteps = self.actions and table.getn(self.actions) or 0
+		if totalSteps == 0 then return false end
+
+		local completedSteps = 0
+		for i, quest in ipairs(self.quests) do
+			if self.turnedin[quest] then
+				completedSteps = completedSteps + 1
+			end
+		end
+
+		local completion = completedSteps / totalSteps
+		-- Transition when guide is 80%+ complete or player is 2+ levels above rejoin
+		if completion >= 0.8 or playerLevel >= rejoinLevel + 2 then
+			self:TransitionFromStartingZone()
+			return true
+		end
+	end
+
+	return false
+end
+
+-- Transition from starting zone to shared leveling path
+function TurtleGuide:TransitionFromStartingZone()
+	local L = self.Locale
+
+	-- Mark starting zone as complete
+	self.db.char.startingzonecomplete = true
+	self.db.char.completion[self.db.char.currentguide] = 1
+
+	self:Print("|cff00ff00" .. L["Starting zone complete!"] .. "|r")
+	self:Print(L["Transitioning to shared leveling path..."])
+
+	-- Get the rejoin guide
+	local rejoinGuide = self:GetRejoinGuide()
+	if rejoinGuide then
+		self.db.char.currentguide = rejoinGuide
+		self:LoadGuide(rejoinGuide)
+		self:UpdateStatusFrame()
+		self:UpdateGuideListPanel()
+	else
+		-- Fallback to standard LoadNextGuide behavior
+		self:LoadNextGuide()
+	end
+end
+
+-- Show the Starting Zone Selector UI
+function TurtleGuide:ShowStartingZoneSelector()
+	if not self.startingZoneSelectorFrame then
+		self:CreateStartingZoneSelectorFrame()
+	end
+	self:UpdateStartingZoneSelectorPanel()
+	self.startingZoneSelectorFrame:Show()
+end
+
+function TurtleGuide:CreateStartingZoneSelectorFrame()
+	local L = self.Locale
+	local f = CreateFrame("Frame", "TurtleGuideStartingZoneSelectorFrame", UIParent)
+	f:SetWidth(380)
+	f:SetHeight(320)
+	f:SetPoint("CENTER", UIParent, "CENTER", 0, 50)
+	f:SetBackdrop({
+		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+		edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
+		tile = true, tileSize = 32, edgeSize = 32,
+		insets = {left = 11, right = 12, top = 12, bottom = 11}
+	})
+	f:SetMovable(true)
+	f:EnableMouse(true)
+	f:RegisterForDrag("LeftButton")
+	f:SetScript("OnDragStart", function() this:StartMoving() end)
+	f:SetScript("OnDragStop", function() this:StopMovingOrSizing() end)
+	f:SetFrameStrata("DIALOG")
+
+	-- Title
+	local title = f:CreateFontString(nil, "ARTWORK")
+	title:SetFontObject(GameFontNormalLarge)
+	title:SetPoint("TOP", f, "TOP", 0, -20)
+	title:SetText(L["Choose Starting Zone"])
+
+	-- Description
+	local desc = f:CreateFontString(nil, "ARTWORK")
+	desc:SetFontObject(GameFontHighlight)
+	desc:SetPoint("TOP", title, "BOTTOM", 0, -10)
+	desc:SetWidth(340)
+	desc:SetText(L["Select which starting zone you want to level through:"])
+
+	-- Native race indicator
+	local nativeText = f:CreateFontString(nil, "ARTWORK")
+	nativeText:SetFontObject(GameFontNormal)
+	nativeText:SetPoint("TOP", desc, "BOTTOM", 0, -15)
+	nativeText:SetWidth(340)
+	f.nativeText = nativeText
+
+	-- Container for zone buttons
+	local buttonContainer = CreateFrame("Frame", nil, f)
+	buttonContainer:SetPoint("TOP", nativeText, "BOTTOM", 0, -10)
+	buttonContainer:SetWidth(340)
+	buttonContainer:SetHeight(180)
+	f.buttonContainer = buttonContainer
+
+	-- Zone buttons (will be populated dynamically)
+	f.zoneButtons = {}
+	for i = 1, 6 do
+		local btn = CreateFrame("Button", nil, buttonContainer, "UIPanelButtonTemplate")
+		btn:SetWidth(300)
+		btn:SetHeight(28)
+		btn:SetPoint("TOP", buttonContainer, "TOP", 0, -(i-1) * 32)
+		btn:Hide()
+
+		btn:SetScript("OnClick", function()
+			if this.zoneInfo then
+				TurtleGuide:SelectStartingZone(this.zoneInfo)
+				f:Hide()
+			end
+		end)
+
+		f.zoneButtons[i] = btn
+	end
+
+	-- Info text at bottom
+	local infoText = f:CreateFontString(nil, "ARTWORK")
+	infoText:SetFontObject(GameFontNormalSmall)
+	infoText:SetPoint("BOTTOM", f, "BOTTOM", 0, 40)
+	infoText:SetWidth(340)
+	infoText:SetTextColor(0.7, 0.7, 0.7)
+	infoText:SetText(L["You can change starting zones from the Options menu"])
+
+	-- Close button
+	local closeBtn = CreateFrame("Button", nil, f, "UIPanelCloseButton")
+	closeBtn:SetPoint("TOPRIGHT", f, "TOPRIGHT", -5, -5)
+
+	self.startingZoneSelectorFrame = f
+	table.insert(UISpecialFrames, "TurtleGuideStartingZoneSelectorFrame")
+	f:Hide()
+end
+
+function TurtleGuide:UpdateStartingZoneSelectorPanel()
+	local f = self.startingZoneSelectorFrame
+	if not f or not f:IsVisible() then return end
+
+	local L = self.Locale
+	local nativeZone = self:GetNativeStartingZone()
+	local availableZones = self:GetAvailableStartingZones()
+
+	-- Show native race info
+	if nativeZone then
+		local _, race = UnitRace("player")
+		f.nativeText:SetText("|cff00ff00" .. L["Recommended for your race"] .. ":|r " .. race .. " - " .. nativeZone.zone)
+	else
+		f.nativeText:SetText("")
+	end
+
+	-- Hide all buttons first
+	for i, btn in ipairs(f.zoneButtons) do
+		btn:Hide()
+		btn.zoneInfo = nil
+	end
+
+	-- Populate buttons with available zones
+	for i, zoneInfo in ipairs(availableZones) do
+		local btn = f.zoneButtons[i]
+		if btn then
+			local isNative = nativeZone and (zoneInfo.race == nativeZone.race)
+			local displayText = zoneInfo.zone .. " (" .. zoneInfo.levels .. ")"
+
+			if isNative then
+				displayText = displayText .. " |cff00ff00*|r"
+			end
+
+			btn:SetText(displayText)
+			btn.zoneInfo = zoneInfo
+			btn:Show()
+		end
+	end
+
+	-- Adjust frame height based on number of zones
+	local numZones = table.getn(availableZones)
+	local height = 180 + (numZones * 32)
+	f:SetHeight(math.max(220, height))
+end
+
+-- Select a starting zone and begin leveling there
+function TurtleGuide:SelectStartingZone(zoneInfo)
+	local L = self.Locale
+
+	-- Save the selection
+	self.db.char.startingzoneselected = true
+	self.db.char.selectedstartingzone = zoneInfo.race
+	self.db.char.startingzonecomplete = false
+	self.db.char.rejoinlevel = zoneInfo.rejoinLevel or 12
+
+	-- Also set the route to match the starting zone's race
+	-- This ensures the shared route after rejoin is appropriate
+	self.db.char.currentroute = zoneInfo.race
+	self.db.char.routeselected = true
+
+	-- Load the starting zone guide
+	if self.guides[zoneInfo.guide] then
+		self.db.char.currentguide = zoneInfo.guide
+		self:LoadGuide(zoneInfo.guide)
+
+		local _, playerRace = UnitRace("player")
+		local playerRoute = self:GetRouteForRace(playerRace)
+
+		if zoneInfo.race ~= playerRoute then
+			self:Print(string.format(L["Cross-race start: %s"], zoneInfo.zone))
+		end
+
+		self:Print(string.format(L["You have been assigned the %s leveling route."], zoneInfo.zone))
+	else
+		self:Print("|cffff0000Error: Guide not found: " .. zoneInfo.guide .. "|r")
+	end
+
+	self:UpdateStatusFrame()
+	self:UpdateGuideListPanel()
+end
+
+-- Modified InitializeRoute to show starting zone selector for new characters
+function TurtleGuide:InitializeRouteWithStartingZone()
+	local playerLevel = UnitLevel("player")
+
+	-- If player is level 1-10 and hasn't selected a starting zone, show selector
+	if playerLevel <= 10 and not self.db.char.startingzoneselected then
+		-- Auto-detect race and pre-select the native starting zone
+		local nativeZone = self:GetNativeStartingZone()
+		if nativeZone and self.guides[nativeZone.guide] then
+			-- Silently apply native zone as default
+			self:SelectStartingZone(nativeZone)
+		else
+			-- Show selector if native zone doesn't exist
+			self:ShowStartingZoneSelector()
+		end
+		return true
+	end
+
+	-- If player already selected a starting zone but hasn't completed it
+	if self.db.char.startingzoneselected and not self.db.char.startingzonecomplete then
+		-- Check if they've outleveled the starting zone
+		if self:CheckStartingZoneCompletion() then
+			return true
+		end
+	end
+
+	return false
 end
 
 function TurtleGuide:SetupErrorCapture()

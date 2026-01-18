@@ -24,6 +24,16 @@ local engrish = {
 	["You have learned a new spell: (.*)."] = "You have learned a new spell: (.*).",
 	["Map MetaMap/BWP"] = "Map MetaMap/BWP",
 	["Use BWP arrow"] = "Use BWP arrow",
+	-- Starting Zone Selector
+	["Choose Starting Zone"] = "Choose Starting Zone",
+	["Select which starting zone you want to level through:"] = "Select which starting zone you want to level through:",
+	["Your race's starting zone"] = "Your race's starting zone",
+	["Alternative starting zone"] = "Alternative starting zone",
+	["Recommended for your race"] = "Recommended for your race",
+	["Starting zone complete!"] = "Starting zone complete!",
+	["Transitioning to shared leveling path..."] = "Transitioning to shared leveling path...",
+	["You can change starting zones from the Options menu"] = "You can change starting zones from the Options menu",
+	["Cross-race start: %s"] = "Cross-race start: %s",
 }
 
 
