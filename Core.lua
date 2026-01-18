@@ -1105,7 +1105,8 @@ function TurtleGuide:UpdateBranchSelectorPanel()
 		zone = {},
 	}
 
-	for name, _ in pairs(self.guides) do
+	-- Use guidelist array for consistent iteration (same as GuideListFrame)
+	for _, name in ipairs(self.guidelist) do
 		if name ~= self.db.char.currentguide then
 			-- Parse level range from guide name
 			local minLevel, maxLevel = self:ParseGuideLevelRange(name)
@@ -1155,27 +1156,31 @@ function TurtleGuide:UpdateBranchSelectorPanel()
 	local maxOffset = math.max(0, table.getn(displayList) - 20)
 	if f.offset > maxOffset then f.offset = maxOffset end
 
-	-- Update buttons from displayList
-	for i, btn in ipairs(f.guideButtons) do
+	-- Update buttons from displayList (matching GuideListFrame pattern)
+	for i = 1, 20 do
+		local btn = f.guideButtons[i]
 		local entry = displayList[i + f.offset]
 		if entry then
 			if entry.header then
 				-- Header row: yellow/gold, not clickable
 				btn.text:SetText("|cffffd100" .. entry.text .. "|r")
 				btn.guideName = nil
-				btn:Show()
 			else
-				-- Guide row: colored by completion, clickable, indented
+				-- Guide row: colored by completion, clickable
 				local complete = self.db.char.completion[entry.guide] or 0
 				local r, g, b = self.ColorGradient(complete)
-				local coloredName = string.format("  |cff%02x%02x%02x%s|r", math.floor(r * 255), math.floor(g * 255), math.floor(b * 255), entry.text)
-				btn.text:SetText(coloredName)
+				local displayText = entry.text
+				if complete and complete > 0 then
+					displayText = string.format("|cff%02x%02x%02x%s|r", r * 255, g * 255, b * 255, entry.text)
+				end
+				btn.text:SetText("  " .. displayText)
 				btn.guideName = entry.guide
-				btn:Show()
 			end
+			btn:Show()
 		else
-			btn:Hide()
+			btn.text:SetText("")
 			btn.guideName = nil
+			btn:Hide()
 		end
 	end
 
