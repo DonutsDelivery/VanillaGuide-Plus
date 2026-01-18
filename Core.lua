@@ -986,7 +986,7 @@ function TurtleGuide:CreateBranchSelectorFrame()
 
 	local f = CreateFrame("Frame", "TurtleGuideBranchSelectorFrame", UIParent)
 	f:SetWidth(720)
-	f:SetHeight(380)
+	f:SetHeight(410)
 	f:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	f:SetBackdrop({
 		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
