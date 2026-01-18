@@ -856,30 +856,62 @@ function TurtleGuide:ReturnFromBranch()
 
 	local savedGuide = self.db.char.branchsavedguide
 	local savedStep = self.db.char.branchsavedstep
-
-	if not savedGuide or not self.guides[savedGuide] then
-		self:Print("Saved guide not found. Clearing branch state.")
-		self.db.char.isbranching = false
-		self.db.char.branchsavedguide = nil
-		self.db.char.branchsavedstep = nil
-		return
-	end
-
-	self:Print(string.format("Returning to main route: %s", savedGuide))
+	local playerLevel = UnitLevel("player")
 
 	-- Clear branch state
 	self.db.char.isbranching = false
 	self.db.char.branchsavedguide = nil
 	self.db.char.branchsavedstep = nil
 
-	-- Load the saved guide
-	self:LoadGuide(savedGuide)
+	-- Find level-appropriate guide for current level
+	local optimalGuide = self:GetOptimizedGuideForLevel(playerLevel)
 
-	-- Find appropriate step based on player level
-	-- SmartSkipToStep already handles this in LoadGuide
+	if optimalGuide and optimalGuide ~= savedGuide and self.guides[optimalGuide] then
+		-- Player has leveled past their saved guide, load level-appropriate one
+		self:Print("Returning to optimized path: " .. optimalGuide)
+		self:LoadGuide(optimalGuide)
+	elseif savedGuide and self.guides[savedGuide] then
+		-- Return to saved guide
+		self:Print("Returning to: " .. savedGuide)
+		self:LoadGuide(savedGuide)
+		-- SmartSkipToStep will handle positioning
+	else
+		self:Print("No saved guide to return to.")
+	end
 
 	self:UpdateStatusFrame()
 	self:UpdateGuideListPanel()
+end
+
+-- Get the optimized guide for a given level based on the player's race route
+function TurtleGuide:GetOptimizedGuideForLevel(level)
+	-- Get the player's race
+	local _, race = UnitRace("player")
+	local routeName = self:GetRouteForRace(race)
+	local route = self.routes and self.routes[routeName]
+	if not route then return nil end
+
+	-- Find the guide entry where level falls within range
+	for _, entry in ipairs(route) do
+		-- Parse level range like "12-20" or "1-12"
+		local _, _, minText, maxText = string.find(entry.levels or "", "(%d+)%-(%d+)")
+		local minLevel = tonumber(minText)
+		local maxLevel = tonumber(maxText)
+		if minLevel and maxLevel and level >= minLevel and level <= maxLevel then
+			-- Only return if the guide exists
+			if self.guides[entry.guide] then
+				return entry.guide
+			end
+		end
+	end
+
+	-- If above all ranges, return the last guide that exists
+	for i = table.getn(route), 1, -1 do
+		if self.guides[route[i].guide] then
+			return route[i].guide
+		end
+	end
+	return nil
 end
 
 -- Check if current guide is complete and handle branch return
@@ -905,6 +937,37 @@ function TurtleGuide:CheckBranchCompletion()
 	end
 
 	return false
+end
+
+-- Turtle WoW custom zones for categorization
+local TURTLE_ZONES = {
+	["Gilneas"] = true, ["Balor"] = true, ["Northwind"] = true,
+	["Grim Reaches"] = true, ["Icepoint Rock"] = true, ["Lapidis Isle"] = true,
+	["Tel'Abim"] = true, ["Gillijim's Isle"] = true, ["Gillijims Isle"] = true,
+	["Thalassian Highlands"] = true, ["Blackstone Island"] = true,
+}
+
+-- Categorize a guide by its name
+function TurtleGuide:GetGuideCategory(guideName)
+	if string.find(guideName, "^Optimized/") then
+		return "optimized"
+	end
+	-- Check if any turtle zone name appears in guide name
+	for zone in pairs(TURTLE_ZONES) do
+		if string.find(guideName, zone) then
+			return "turtle"
+		end
+	end
+	return "zone"
+end
+
+-- Parse level range from guide name (e.g., "(1-12)" or "(12-20)")
+function TurtleGuide:ParseGuideLevelRange(guideName)
+	local _, _, minText, maxText = string.find(guideName, "%((%d+)%-(%d+)%)")
+	if minText and maxText then
+		return tonumber(minText), tonumber(maxText)
+	end
+	return nil, nil
 end
 
 -- Show branch selector UI
@@ -1033,48 +1096,90 @@ function TurtleGuide:UpdateBranchSelectorPanel()
 
 	-- Get player level for filtering
 	local playerLevel = UnitLevel("player")
+	local margin = 5  -- Show guides +/- 5 levels
 
-	-- Build filtered guide list (exclude current guide)
-	local filteredGuides = {}
-	for _, name in ipairs(self.guidelist) do
+	-- Collect and categorize level-appropriate guides
+	local categories = {
+		optimized = {},
+		turtle = {},
+		zone = {},
+	}
+
+	for name, _ in pairs(self.guides) do
 		if name ~= self.db.char.currentguide then
 			-- Parse level range from guide name
-			local _, _, minText, maxText = string.find(name, "%((%d+)%-(%d+)%)")
-			local minLevel = tonumber(minText) or 1
-			local maxLevel = tonumber(maxText) or 60
-
-			-- Show guides within reasonable level range
-			if playerLevel >= minLevel - 2 and playerLevel <= maxLevel + 5 then
-				table.insert(filteredGuides, {
-					name = name,
-					minLevel = minLevel,
-					maxLevel = maxLevel
-				})
+			local minLevel, maxLevel = self:ParseGuideLevelRange(name)
+			if minLevel and maxLevel then
+				if playerLevel >= (minLevel - margin) and playerLevel <= (maxLevel + margin) then
+					local cat = self:GetGuideCategory(name)
+					table.insert(categories[cat], name)
+				end
+			else
+				-- Guides without level range - include them in zone category
+				local cat = self:GetGuideCategory(name)
+				table.insert(categories[cat], name)
 			end
 		end
 	end
 
+	-- Sort each category
+	table.sort(categories.optimized)
+	table.sort(categories.turtle)
+	table.sort(categories.zone)
+
+	-- Build display list with headers
+	local displayList = {}
+
+	if table.getn(categories.optimized) > 0 then
+		table.insert(displayList, {header = true, text = "--- Optimized Path ---"})
+		for _, name in ipairs(categories.optimized) do
+			table.insert(displayList, {header = false, text = name, guide = name})
+		end
+	end
+
+	if table.getn(categories.turtle) > 0 then
+		table.insert(displayList, {header = true, text = "--- TurtleWoW Zones ---"})
+		for _, name in ipairs(categories.turtle) do
+			table.insert(displayList, {header = false, text = name, guide = name})
+		end
+	end
+
+	if table.getn(categories.zone) > 0 then
+		table.insert(displayList, {header = true, text = "--- Zone Guides ---"})
+		for _, name in ipairs(categories.zone) do
+			table.insert(displayList, {header = false, text = name, guide = name})
+		end
+	end
+
 	-- Clamp offset
-	local maxOffset = math.max(0, table.getn(filteredGuides) - 20)
+	local maxOffset = math.max(0, table.getn(displayList) - 20)
 	if f.offset > maxOffset then f.offset = maxOffset end
 
-	-- Update buttons
+	-- Update buttons from displayList
 	for i, btn in ipairs(f.guideButtons) do
-		local guideInfo = filteredGuides[i + f.offset]
-		if guideInfo then
-			local complete = self.db.char.completion[guideInfo.name] or 0
-			local r, g, b = self.ColorGradient(complete)
-			local coloredName = string.format("|cff%02x%02x%02x%s|r", math.floor(r * 255), math.floor(g * 255), math.floor(b * 255), guideInfo.name)
-			btn.text:SetText(coloredName)
-			btn.guideName = guideInfo.name
-			btn:Show()
+		local entry = displayList[i + f.offset]
+		if entry then
+			if entry.header then
+				-- Header row: yellow/gold, not clickable
+				btn.text:SetText("|cffffd100" .. entry.text .. "|r")
+				btn.guideName = nil
+				btn:Show()
+			else
+				-- Guide row: colored by completion, clickable, indented
+				local complete = self.db.char.completion[entry.guide] or 0
+				local r, g, b = self.ColorGradient(complete)
+				local coloredName = string.format("  |cff%02x%02x%02x%s|r", math.floor(r * 255), math.floor(g * 255), math.floor(b * 255), entry.text)
+				btn.text:SetText(coloredName)
+				btn.guideName = entry.guide
+				btn:Show()
+			end
 		else
 			btn:Hide()
 			btn.guideName = nil
 		end
 	end
 
-	f.content:SetHeight(table.getn(filteredGuides) * 24)
+	f.content:SetHeight(table.getn(displayList) * 24)
 end
 
 

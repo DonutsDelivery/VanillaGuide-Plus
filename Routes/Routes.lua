@@ -162,10 +162,9 @@ TurtleGuide:RegisterRoute("NightElf", MergeRoutes({
 	{zone = "Teldrassil", levels = "1-12", guide = "Optimized/Teldrassil (1-12)"},
 }, AllianceSharedPath))
 
--- High Elf (Turtle WoW) - Uses Night Elf starting zone, then shared path
--- Note: Thalassian Highlands guide not yet available in Optimized, using Teldrassil fallback
+-- High Elf (Turtle WoW) - Thalassian Highlands 1-10 → shared path
 TurtleGuide:RegisterRoute("HighElf", MergeRoutes({
-	{zone = "Teldrassil", levels = "1-12", guide = "Optimized/Teldrassil (1-12)"},
+	{zone = "Thalassian Highlands", levels = "1-10", guide = "Thalassian Highlands (1-10)"},
 }, AllianceSharedPath))
 
 -- ============================================================================
@@ -192,10 +191,9 @@ TurtleGuide:RegisterRoute("Undead", MergeRoutes({
 	{zone = "Tirisfal Glades", levels = "1-12", guide = "Optimized/Tirisfal Glades (1-12)"},
 }, HordeSharedPath))
 
--- Goblin (Turtle WoW) - Uses Durotar starting zone, then shared path
--- Note: Blackstone Island guide not yet available in Optimized, using Durotar fallback
+-- Goblin (Turtle WoW) - Blackstone Island 1-10 → shared path
 TurtleGuide:RegisterRoute("Goblin", MergeRoutes({
-	{zone = "Durotar", levels = "1-12", guide = "Optimized/Durotar (1-12)"},
+	{zone = "Blackstone Island", levels = "1-10", guide = "Blackstone Island (1-10)"},
 }, HordeSharedPath))
 
 -- ============================================================================
