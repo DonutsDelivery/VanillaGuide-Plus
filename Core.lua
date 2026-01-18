@@ -975,8 +975,8 @@ function TurtleGuide:ShowBranchSelector()
 	if not self.branchSelectorFrame then
 		self:CreateBranchSelectorFrame()
 	end
-	self:UpdateBranchSelectorPanel()
 	self.branchSelectorFrame:Show()
+	self:UpdateBranchSelectorPanel()
 end
 
 function TurtleGuide:CreateBranchSelectorFrame()
