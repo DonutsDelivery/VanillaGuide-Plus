@@ -2,13 +2,18 @@
 ..\FrameXML\UI.xsd">
 	<!-- Optimized Alliance Guides - VanillaGuide quest order, TurtleGuide format -->
 
-	<!-- Starting Zones (1-12) -->
-	<!-- <Script file="01_12_Elwynn_Forest.lua"/> -->
-	<!-- <Script file="01_12_Teldrassil.lua"/> -->
+	<!-- Human Starting Zone (1-12) -->
+	<Script file="01_10_Elwynn_Forest.lua"/>
+	<Script file="10_12_Westfall.lua"/>
+
+	<!-- Dwarf/Gnome Starting Zone (1-12) -->
 	<!-- <Script file="01_12_Dun_Morogh.lua"/> -->
 
-	<!-- Level 12-20 progression -->
-	<!-- <Script file="12_14_Darkshore.lua"/> -->
+	<!-- Night Elf Starting Zone (1-12) -->
+	<!-- <Script file="01_12_Teldrassil.lua"/> -->
+
+	<!-- Level 12-20 progression (Human) -->
+	<!-- <Script file="12_14_Westfall.lua"/> -->
 	<!-- <Script file="14_17_Darkshore.lua"/> -->
 	<!-- <Script file="17_18_Loch_Modan.lua"/> -->
 	<!-- <Script file="18_20_Redridge.lua"/> -->
