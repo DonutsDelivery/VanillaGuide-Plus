@@ -38,7 +38,14 @@ end
 
 
 function WidgetWarlock.SummonFontString(parent, layer, inherit, text, a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20)
-	local fs = parent:CreateFontString(nil, layer, inherit)
+	local fs = parent:CreateFontString(nil, layer)
+	-- Explicitly set font object for WoW 1.12 compatibility
+	if inherit then
+		local fontObj = getglobal(inherit)
+		if fontObj then
+			fs:SetFontObject(fontObj)
+		end
+	end
 	fs:SetText(text)
 	if TurtleGuide.select(1, a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20) then fs:SetPoint(a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20) end
 	return fs

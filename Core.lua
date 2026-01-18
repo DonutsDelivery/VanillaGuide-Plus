@@ -891,12 +891,14 @@ function TurtleGuide:CreateBranchSelectorFrame()
 	f:SetFrameStrata("DIALOG")
 	f:EnableMouseWheel(true)
 
-	local title = f:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+	local title = f:CreateFontString(nil, "ARTWORK")
+	title:SetFontObject(GameFontNormalLarge)
 	title:SetPoint("TOP", f, "TOP", 0, -20)
 	title:SetText("Branch to Zone")
 
 	-- Branch status indicator
-	local statusText = f:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+	local statusText = f:CreateFontString(nil, "ARTWORK")
+	statusText:SetFontObject(GameFontHighlight)
 	statusText:SetPoint("TOP", title, "BOTTOM", 0, -5)
 	statusText:SetWidth(320)
 	f.statusText = statusText
@@ -925,7 +927,8 @@ function TurtleGuide:CreateBranchSelectorFrame()
 		highlight:SetTexCoord(0, 1, 0, 0.578125)
 		highlight:SetAllPoints()
 
-		local text = btn:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+		local text = btn:CreateFontString(nil, "ARTWORK")
+		text:SetFontObject(GameFontNormal)
 		text:SetPoint("LEFT", 4, 0)
 		text:SetWidth(290)
 		text:SetJustifyH("LEFT")
@@ -1061,11 +1064,13 @@ function TurtleGuide:CreateRouteSelectorFrame()
 	f:SetScript("OnDragStop", function() this:StopMovingOrSizing() end)
 	f:SetFrameStrata("DIALOG")
 
-	local title = f:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+	local title = f:CreateFontString(nil, "ARTWORK")
+	title:SetFontObject(GameFontNormalLarge)
 	title:SetPoint("TOP", f, "TOP", 0, -20)
 	title:SetText(L["Select Your Race"])
 
-	local desc = f:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+	local desc = f:CreateFontString(nil, "ARTWORK")
+	desc:SetFontObject(GameFontHighlight)
 	desc:SetPoint("TOP", title, "BOTTOM", 0, -10)
 	desc:SetWidth(260)
 	desc:SetText(L["Choose a leveling route based on your race:"])
@@ -1143,46 +1148,57 @@ end
 
 -- Get the next guide in the current route based on player level
 -- Only returns guides that actually exist in self.guides
--- Returns the FIRST matching guide (stops at first valid match to allow fallback ordering)
+-- Finds the best guide for the player's level:
+-- 1. First preference: guide where player is within the actual level range
+-- 2. Second preference: guide where player is slightly over (within +2 buffer)
+-- 3. Fallback: first future guide if player is somehow ahead of all guides
 function TurtleGuide:GetNextRouteGuideForLevel(route, playerLevel)
 	if not route then return nil end
 
 	local level = playerLevel or UnitLevel("player")
 	local bestGuide
+	local bestMinLevel = -1
+	local fallbackGuide  -- For extended range matches
+	local fallbackMinLevel = -1
+	local futureGuide    -- First guide ahead of player's level
 	local skippedGuides = {}
+
 	for i, zone in ipairs(route) do
 		local _, _, minText, maxText = string.find(zone.levels or "", "(%d+)%-(%d+)")
 		local minLevel = tonumber(minText) or 1
 		local maxLevel = tonumber(maxText) or 60
-		if level >= minLevel and level <= maxLevel + 2 then
-			-- Only use this guide if it actually exists
-			if self.guides[zone.guide] then
-				-- Found a valid guide - use it and stop looking
-				bestGuide = zone.guide
-				break
-			else
-				-- Guide doesn't exist, record it as skipped and continue looking
-				table.insert(skippedGuides, zone.guide)
+
+		if self.guides[zone.guide] then
+			-- Priority 1: Player is within actual level range
+			if level >= minLevel and level <= maxLevel then
+				-- Pick the guide with the highest minLevel that still fits
+				if minLevel > bestMinLevel then
+					bestGuide = zone.guide
+					bestMinLevel = minLevel
+				end
+			-- Priority 2: Player is slightly over (within +2 buffer for overlap)
+			elseif level > maxLevel and level <= maxLevel + 2 then
+				if minLevel > fallbackMinLevel then
+					fallbackGuide = zone.guide
+					fallbackMinLevel = minLevel
+				end
+			-- Priority 3: Guide is ahead of player (for fallback)
+			elseif level < minLevel and not futureGuide then
+				futureGuide = zone.guide
 			end
-		elseif level < minLevel then
-			-- Past our level range - if we have a guide, we're done
-			if bestGuide then
-				break
-			end
-			-- If we haven't found a valid guide yet, take the first available future guide
-			if self.guides[zone.guide] then
-				bestGuide = zone.guide
-				break
-			else
-				table.insert(skippedGuides, zone.guide)
-			end
+		else
+			-- Guide doesn't exist, record it as skipped
+			table.insert(skippedGuides, zone.guide)
 		end
 	end
+
 	-- Warn about skipped guides
 	if table.getn(skippedGuides) > 0 then
 		self:Print("|cffff9900Warning: Skipped missing guides: " .. table.concat(skippedGuides, ", ") .. "|r")
 	end
-	return bestGuide
+
+	-- Return best match in priority order
+	return bestGuide or fallbackGuide or futureGuide
 end
 
 function TurtleGuide:ApplyRouteSelection(race)
@@ -1246,11 +1262,13 @@ function TurtleGuide:CreateErrorLogFrame()
 	f:SetFrameStrata("DIALOG")
 	f:Hide()
 
-	local title = f:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+	local title = f:CreateFontString(nil, "ARTWORK")
+	title:SetFontObject(GameFontNormalLarge)
 	title:SetPoint("TOP", f, "TOP", 0, -16)
 	title:SetText("TurtleGuide Error Log")
 
-	local desc = f:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+	local desc = f:CreateFontString(nil, "ARTWORK")
+	desc:SetFontObject(GameFontHighlight)
 	desc:SetPoint("TOP", title, "BOTTOM", 0, -8)
 	desc:SetWidth(480)
 	desc:SetText("Most recent errors are at the top. Use Ctrl+C to copy.")
