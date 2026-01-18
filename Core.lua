@@ -981,11 +981,11 @@ end
 
 function TurtleGuide:CreateBranchSelectorFrame()
 	local NUMROWS = 14
-	local COLWIDTH = 210
+	local COLWIDTH = 230
 	local ROWHEIGHT = 22
 
 	local f = CreateFrame("Frame", "TurtleGuideBranchSelectorFrame", UIParent)
-	f:SetWidth(660)
+	f:SetWidth(720)
 	f:SetHeight(380)
 	f:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	f:SetBackdrop({
@@ -1011,7 +1011,7 @@ function TurtleGuide:CreateBranchSelectorFrame()
 	local statusText = f:CreateFontString(nil, "ARTWORK")
 	statusText:SetFontObject(GameFontHighlight)
 	statusText:SetPoint("TOP", title, "BOTTOM", 0, -4)
-	statusText:SetWidth(600)
+	statusText:SetWidth(680)
 	f.statusText = statusText
 
 	-- Create guide buttons in 3 columns (like GuideListFrame)
