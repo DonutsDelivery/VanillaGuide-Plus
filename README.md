@@ -183,6 +183,105 @@ Available via branching:
 | **TomTom** | Waypoint arrow navigation | [GitHub](https://github.com/sweetgiorni/TomTom) |
 | **pfQuest-turtle** | Quest database with map markers | [GitHub](https://github.com/shagu/pfQuest-turtle) |
 
+## How It Works
+
+### The Status Bar
+
+When you log in, a small status bar appears near your quest tracker showing your current objective:
+
+```
+[✓] [<] [icon] [15/120] Kill 8 Grell Earring [?] [>]
+ │    │    │       │              │            │   │
+ │    │    │       │              │            │   └─ Next: Skip to next objective
+ │    │    │       │              │            └─ [?] indicates there's a note (hover for details)
+ │    │    │       │              └─ The objective description
+ │    │    │       └─ Step number / Total steps in current guide
+ │    │    └─ Icon shows objective type (see below)
+ │    └─ Prev: Go back to previous objective
+ └─ Checkbox: Mark complete when checked
+```
+
+**Click the status bar** to open the full objectives panel with more details.
+
+### Reading Objectives
+
+Each objective has an **action type** shown by its icon:
+
+| Icon | Code | Action | Meaning |
+|------|------|--------|---------|
+| 📜 | A | ACCEPT | Pick up a quest from an NPC |
+| ⚔️ | C | COMPLETE | Do the quest objectives (kill, collect, etc.) |
+| 📜 | T | TURNIN | Turn in a completed quest |
+| 🏃 | R | RUN | Travel to a location |
+| 🦅 | F | FLY | Take a flight path |
+| 🦅 | f | GETFLIGHTPOINT | Discover a new flight path |
+| 🏠 | H | HEARTH | Use your hearthstone |
+| 🏠 | h | SETHEARTH | Set your hearthstone location |
+| ⛵ | b | BOAT | Take a boat or zeppelin |
+| 💀 | K | KILL | Grind mobs (not for a quest) |
+| 📝 | N | NOTE | Important information or tip |
+| 🛒 | B | BUY | Purchase items from a vendor |
+| 📦 | U | USE | Use an item |
+| 📖 | t | TRAIN | Visit a class trainer |
+
+**Objective tags** in the panel:
+- **(Optional)** - Can be skipped without breaking the guide
+- **[?]** - Has additional notes (hover to see)
+- Orange text on the right shows quest progress or notes
+
+### Navigating the Guide
+
+**Automatic progression:**
+- The addon tracks your quest log and automatically advances when you accept, complete, or turn in quests
+- Travel objectives (RUN, FLY, BOAT) auto-complete when you arrive at the destination (if TomTom is installed)
+
+**Manual navigation:**
+- **< / >** buttons: Move backward/forward one step
+- **>>** button: Mark current step complete and advance
+- **Checkboxes**: Click to manually mark any step complete/incomplete
+- `/tg next` / `/tg prev`: Keyboard shortcuts for navigation
+- `/tg goto 50`: Jump directly to step 50
+
+**Smart skip on guide load:**
+- When loading a guide, TurtleGuide scans your quest log and automatically skips to where you left off
+- If you have quests in progress, it finds the right step
+
+### The Branch System
+
+The **Branch** feature lets you temporarily leave the optimized path to do other content:
+
+1. Click **Branch** in the objectives panel
+2. Select any zone guide (TurtleWoW zones, vanilla zones, etc.)
+3. Complete as much as you want
+4. Click **Return Main** to go back
+
+**When you return:**
+- TurtleGuide finds the appropriate step in the optimized path based on your level
+- Your progress in the branch is saved if you want to return later
+- A green `[Branch]` indicator shows when you're off the main path
+
+**Example workflow:**
+```
+Level 35, doing Joana's route in Stranglethorn Vale
+  ↓
+Branch to Gilneas (TurtleWoW zone) for custom content
+  ↓
+Do some quests, get to level 37
+  ↓
+Click "Return Main" → Resumes at level 37 section of optimized path
+```
+
+### Waypoints & Map Integration
+
+With **TomTom** installed:
+- Arrow points to your current objective
+- Coordinates from the guide are automatically mapped
+- Travel objectives auto-complete when you arrive
+
+With **pfQuest** installed:
+- Quest giver/turn-in locations are automatically looked up
+- Prerequisite chains are detected to warn about missing requirements
+
 ## Installation
 
 1. Download or clone this repository

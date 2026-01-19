@@ -123,7 +123,8 @@ function TurtleGuide:LoadGuide(name, complete)
 
 	self:Debug(string.format("Loading guide: %s", name))
 	self.guidechanged = true
-	local _, _, zonename = string.find(name, "^(.*) %(.*%)$")
+	-- Extract zone name from guide name, stripping any path prefix (e.g., "Optimized/")
+	local _, _, zonename = string.find(name, "([^/]+) %(.*%)$")
 	self.zonename = zonename
 	self.actions, self.quests, self.tags = StepParse(self.guides[self.db.char.currentguide]())
 
@@ -227,6 +228,10 @@ function TurtleGuide:GetQuestNameByQid(qid)
 	if pfDB and pfDB["quests"] and pfDB["quests"]["loc"] then
 		local locData = pfDB["quests"]["loc"][qid]
 		if locData then
+			-- pfQuest stores quest data as table with "T" (title) field
+			if type(locData) == "table" then
+				return locData["T"]
+			end
 			return locData
 		end
 	end
