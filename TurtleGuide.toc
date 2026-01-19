@@ -53,3 +53,7 @@ Guides\Horde\Guides.xml
 
 # Both Factions Guides
 Guides\Both\Guides.xml
+
+# RestedXP Converted Guides (Survival routes)
+Guides\RXP\Alliance\Guides.xml
+Guides\RXP\Horde\Guides.xml

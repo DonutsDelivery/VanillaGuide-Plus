@@ -1,0 +1,48 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<!-- RestedXP Survival Guide - Horde 1-23 -->
+
+	<!-- Orc/Troll Starting Path -->
+	<Script file="01_06_1-6_OrcTroll.lua"/>
+	<Script file="06_13_6-13_OrcTroll.lua"/>
+
+	<!-- Undead Starting Path -->
+	<Script file="01_06_1-6_Undead.lua"/>
+	<Script file="06_13_6-13_Undead.lua"/>
+
+	<!-- Tauren Starting Path -->
+	<Script file="01_06_1-6_Tauren.lua"/>
+	<Script file="06_13_6-13_Tauren.lua"/>
+
+	<!-- Shared Horde Paths (13+) -->
+	<Script file="13_15_13-15_Silverpine_Forest.lua"/>
+	<Script file="15_19_15-19_The_Barrens.lua"/>
+	<Script file="19_23_19-23_StonetalonBarrensAshenvale.lua"/>
+
+	<!-- Kamisayo Hardcore Warrior Speedrun 1-60 -->
+	<Script file="01_13_Kamisayo_Speedrun_1-13.lua"/>
+	<Script file="13_16_Kamisayo_Speedrun_13-16.lua"/>
+	<Script file="16_22_Kamisayo_Speedrun_16-22.lua"/>
+	<Script file="22_24_Kamisayo_Speedrun_22-24.lua"/>
+	<Script file="24_28_Kamisayo_Speedrun_24-28.lua"/>
+	<Script file="28_30_Kamisayo_Speedrun_28-30.lua"/>
+	<Script file="30_33_Kamisayo_Speedrun_30-33.lua"/>
+	<Script file="33_34_Kamisayo_Speedrun_33-34.lua"/>
+	<Script file="34_37_Kamisayo_Speedrun_34-37.lua"/>
+	<Script file="37_38_Kamisayo_Speedrun_37-38.lua"/>
+	<Script file="38_39_Kamisayo_Speedrun_38-39.lua"/>
+	<Script file="39_40_Kamisayo_Speedrun_39-40.lua"/>
+	<Script file="40_41_Kamisayo_Speedrun_40-41.lua"/>
+	<Script file="41_42_Kamisayo_Speedrun_41-42.lua"/>
+	<Script file="42_43_Kamisayo_Speedrun_42-43.lua"/>
+	<Script file="43_44_Kamisayo_Speedrun_43-44.lua"/>
+	<Script file="44_46_Kamisayo_Speedrun_44-46.lua"/>
+	<Script file="46_49_Kamisayo_Speedrun_46-49.lua"/>
+	<Script file="49_50_Kamisayo_Speedrun_49-50.lua"/>
+	<Script file="50_51_Kamisayo_Speedrun_50-51.lua"/>
+	<Script file="51_52_Kamisayo_Speedrun_51-52.lua"/>
+	<Script file="52_54_Kamisayo_Speedrun_52-54.lua"/>
+	<Script file="54_56_Kamisayo_Speedrun_54-56.lua"/>
+	<Script file="56_58_Kamisayo_Speedrun_56-58.lua"/>
+	<Script file="58_59_Kamisayo_Speedrun_58-59.lua"/>
+	<Script file="59_60_Kamisayo_Speedrun_59-60.lua"/>
+</Ui>

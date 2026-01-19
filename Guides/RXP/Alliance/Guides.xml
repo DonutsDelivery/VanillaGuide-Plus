@@ -1,0 +1,27 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<!-- RestedXP Survival Guide - Alliance 1-21 -->
+
+	<!-- Night Elf Starting Path -->
+	<Script file="01_06_1-6_Shadowglen.lua"/>
+	<Script file="06_11_6-11_Teldrassil.lua"/>
+	<Script file="11_13_11-13_Darkshore_Night_Elf.lua"/>
+	<Script file="13_13_13-13_Loch_Modan_Night_Elf.lua"/>
+
+	<!-- Human Starting Path -->
+	<Script file="01_06_1-6_Northshire.lua"/>
+	<Script file="06_11_6-11_Elwynn_Forest.lua"/>
+	<Script file="11_13_11-13_Loch_Modan.lua"/>
+
+	<!-- Dwarf/Gnome Starting Path -->
+	<Script file="01_06_1-6_Coldridge_Valley.lua"/>
+	<Script file="06_10_6-10_Dun_Morogh.lua"/>
+	<Script file="10_11_10-11_Elwynn_DwarfGnome.lua"/>
+	<Script file="11_13_11-13_Loch_Modan_DwarfGnome.lua"/>
+
+	<!-- Shared Alliance Paths (13+) -->
+	<Script file="13_15_13-15_Westfall.lua"/>
+	<Script file="15_18_15-18_Darkshore.lua"/>
+	<Script file="18_19_18-19_Loch_Modan.lua"/>
+	<Script file="19_20_19-20_Redridge.lua"/>
+	<Script file="20_21_20-21_DarkshoreAshenvale.lua"/>
+</Ui>

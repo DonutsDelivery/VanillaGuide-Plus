@@ -1400,6 +1400,11 @@ TurtleGuide.startingZones = {
 		{race = "NightElf", zone = "Teldrassil", guide = "Teldrassil (1-12)", levels = "1-12", rejoinLevel = 12},
 		{race = "Gnome", zone = "Dun Morogh", guide = "Dun Morogh (1-12)", levels = "1-12", rejoinLevel = 12},
 		{race = "HighElf", zone = "Thalassian Highlands", guide = "Thalassian Highlands (1-10)", levels = "1-10", rejoinLevel = 12},  -- Turtle WoW
+		-- RestedXP Survival Guides (Hardcore-safe routes)
+		{race = "Human", zone = "RXP Survival (Human)", guide = "RXP/1-6 Northshire", levels = "1-21", rejoinLevel = 21, isSurvival = true},
+		{race = "Dwarf", zone = "RXP Survival (Dwarf)", guide = "RXP/1-6 Coldridge Valley", levels = "1-21", rejoinLevel = 21, isSurvival = true},
+		{race = "Gnome", zone = "RXP Survival (Gnome)", guide = "RXP/1-6 Coldridge Valley", levels = "1-21", rejoinLevel = 21, isSurvival = true},
+		{race = "NightElf", zone = "RXP Survival (Night Elf)", guide = "RXP/1-6 Shadowglen", levels = "1-21", rejoinLevel = 21, isSurvival = true},
 	},
 	Horde = {
 		{race = "Orc", zone = "Durotar", guide = "Durotar (1-12)", levels = "1-12", rejoinLevel = 12},
@@ -1407,6 +1412,13 @@ TurtleGuide.startingZones = {
 		{race = "Tauren", zone = "Mulgore", guide = "Mulgore (1-12)", levels = "1-12", rejoinLevel = 12},
 		{race = "Undead", zone = "Tirisfal Glades", guide = "Tirisfal (1-12)", levels = "1-12", rejoinLevel = 12},
 		{race = "Goblin", zone = "Blackstone Island", guide = "Blackstone Island (1-10)", levels = "1-10", rejoinLevel = 10},  -- Turtle WoW
+		-- RestedXP Survival Guides (Hardcore-safe routes)
+		{race = "Orc", zone = "RXP Survival (Orc/Troll)", guide = "RXP/1-6 Orc/Troll", levels = "1-23", rejoinLevel = 23, isSurvival = true},
+		{race = "Troll", zone = "RXP Survival (Orc/Troll)", guide = "RXP/1-6 Orc/Troll", levels = "1-23", rejoinLevel = 23, isSurvival = true},
+		{race = "Tauren", zone = "RXP Survival (Tauren)", guide = "RXP/1-6 Tauren", levels = "1-23", rejoinLevel = 23, isSurvival = true},
+		{race = "Undead", zone = "RXP Survival (Undead)", guide = "RXP/1-6 Undead", levels = "1-23", rejoinLevel = 23, isSurvival = true},
+		-- RestedXP Speedrun Guides
+		{race = "Warrior", zone = "Kamisayo Speedrun", guide = "RXP/Kamisayo Speedrun 1-13", levels = "1-60", rejoinLevel = 60, class = "Warrior", isSpeedrun = true},
 	},
 }
 
@@ -1415,11 +1427,19 @@ function TurtleGuide:GetAvailableStartingZones()
 	local faction = self.myfaction
 	local zones = self.startingZones[faction] or {}
 	local available = {}
+	local _, playerClass = UnitClass("player")
 
-	-- Filter to only include zones with existing guides
+	-- Filter to only include zones with existing guides and matching class
 	for _, zoneInfo in ipairs(zones) do
 		if self.guides[zoneInfo.guide] then
-			table.insert(available, zoneInfo)
+			-- Check class filter if present
+			if zoneInfo.class then
+				if zoneInfo.class == playerClass then
+					table.insert(available, zoneInfo)
+				end
+			else
+				table.insert(available, zoneInfo)
+			end
 		end
 	end
 
@@ -1678,7 +1698,11 @@ function TurtleGuide:UpdateStartingZoneSelectorPanel()
 			local isNative = nativeZone and (zoneInfo.race == nativeZone.race)
 			local displayText = zoneInfo.zone .. " (" .. zoneInfo.levels .. ")"
 
-			if isNative then
+			if zoneInfo.isSpeedrun then
+				displayText = "|cffff8800[Speedrun]|r " .. displayText
+			elseif zoneInfo.isSurvival then
+				displayText = "|cff00ffcc[Survival]|r " .. displayText
+			elseif isNative then
 				displayText = displayText .. " |cff00ff00*|r"
 			end
 
