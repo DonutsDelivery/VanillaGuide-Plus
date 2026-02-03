@@ -23,6 +23,10 @@ A For Love Eternal |QID|963| |N|Cerellean Whiteclaw in Auberdine (35.76, 43.68)|
 A Buzzbox 827 |QID|983| |N|Wizbang Cranktoggle in Auberdine (36.98, 44.10)|
 A The Red Crystal |QID|4811| |N|Sentinel Glynda Nal'Shea in Auberdine (37.64, 43.36)|
 A Cave Mushrooms |QID|947| |N|Barithras Moonshade in Auberdine (37.32, 43.66)|
+A The Family and the Fishing Pole |QID|1141| |N|Gubber Blump in Auberdine (36.10, 44.96)| |O|
+B Fishing Pole |QID|1141| |N|Train Fishing and buy a Fishing Pole from Gubber Blump. Buy a Shiny Bauble if you can afford it (36.10, 44.96)| |L|6256| |O|
+C The Family and the Fishing Pole |QID|1141| |N|Catch 6 Darkshore Grouper. Equip the Fishing Pole, apply Shiny Bauble, cast near water and click the bobber when it moves (35.91, 44.98)| |O|
+T The Family and the Fishing Pole |QID|1141| |N|Gubber Blump in Auberdine (36.07, 44.94)| |O|
 h Auberdine |QID|963| |N|Set hearth at Innkeeper Shaussiy (37, 44.1)|
 
 A Bashal'Aran (Part 1) |QID|954| |N|Thundris Windweaver in Auberdine (37.41, 40.16)|
@@ -94,6 +98,15 @@ T Tools of the Highborne |QID|958| |N|Thundris Windweaver in Auberdine (37.41, 4
 T Thundris Windweaver |QID|4761| |N|Thundris Windweaver (37.41, 40.16)|
 A The Cliffspring River |QID|4762| |N|Thundris Windweaver (37.41, 40.16)|
 T Beached Sea Creature (Part 1) |QID|4723| |N|Gwennyth Bly'Leggonde in Auberdine (36.61, 45.59)|
+
+R Cenarion Enclave |QID|6121| |N|Travel to Cenarion Enclave in Darnassus (35.38, 8.28)| |C|Druid| |Z|Darnassus|
+A Lessons Anew |QID|6121| |N|Mathrengyl Bearwalker in Cenarion Enclave (35.38, 8.28)| |C|Druid| |Z|Darnassus|
+
+R Nighthaven |QID|6122| |N|Use Teleport: Moonglade to travel to Nighthaven (56.26, 30.64)| |C|Druid| |Z|Moonglade|
+T Lessons Anew |QID|6121| |N|Dendrite Starblaze in Nighthaven (56.26, 30.64)| |C|Druid| |Z|Moonglade|
+A The Principal Source |QID|6122| |N|Dendrite Starblaze in Nighthaven (56.26, 30.64)| |C|Druid| |Z|Moonglade|
+
+R Auberdine |QID|6122| |N|Return to Auberdine (37, 44)| |C|Druid|
 
 A WANTED: Murkdeep! |QID|4740| |N|Wanted poster in Auberdine - group quest, skip if solo (37.7, 44.2)| |O|
 

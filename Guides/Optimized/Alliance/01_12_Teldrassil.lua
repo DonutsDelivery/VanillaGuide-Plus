@@ -192,6 +192,18 @@ T Training the Beast |QID|6103| |N|Jocaste in Cenarion Enclave (40.39, 8.60)| |C
 T Heeding the Call |QID|5923| |N|Mathrengyl Bearwalker in Cenarion Enclave (35.38, 8.42)| |C|Druid| |Z|Darnassus|
 A Moonglade |QID|5921| |N|Mathrengyl Bearwalker in Cenarion Enclave (35.38, 8.42)| |C|Druid| |Z|Darnassus|
 
+N Teleport to Moonglade |QID|5921| |N|Use Teleport: Moonglade to travel to Nighthaven| |C|Druid|
+T Moonglade |QID|5921| |N|Dendrite Starblaze in Nighthaven (56.24, 30.64)| |C|Druid| |Z|Moonglade|
+A Great Bear Spirit |QID|5929| |N|Dendrite Starblaze in Nighthaven (56.24, 30.64)| |C|Druid| |Z|Moonglade|
+R Great Bear Spirit |QID|5929| |N|Travel west to find the Great Bear Spirit (39.09, 27.54)| |C|Druid| |Z|Moonglade|
+C Great Bear Spirit |QID|5929| |N|Speak with the Great Bear Spirit (39.09, 27.54)| |C|Druid| |Z|Moonglade|
+T Great Bear Spirit |QID|5929| |N|Dendrite Starblaze in Nighthaven (56.24, 30.64)| |C|Druid| |Z|Moonglade|
+A Back to Darnassus |QID|5931| |N|Dendrite Starblaze in Nighthaven (56.20, 30.64)| |C|Druid| |Z|Moonglade|
+F Rut'theran Village |QID|5931| |N|Fly to Rut'theran Village from Silva Fil'naveth (44.14, 45.22)| |C|Druid| |Z|Moonglade|
+R Darnassus |QID|5931| |N|Take the portal to Darnassus| |C|Druid|
+T Back to Darnassus |QID|5931| |N|Mathrengyl Bearwalker in Cenarion Enclave (34.90, 8.25)| |C|Druid| |Z|Darnassus|
+A Body and Heart |QID|6001| |N|Mathrengyl Bearwalker in Cenarion Enclave (34.90, 8.25)| |C|Druid| |Z|Darnassus|
+
 A Nessa Shadowsong |QID|6344| |N|Mydrannul in Warrior's Terrace (70.5, 43.8)| |R|Night Elf| |Z|Darnassus|
 
 A The Temple of the Moon |QID|2519| |N|Sister Aquinne in The Temple Gardens (29, 45.5)| |Z|Darnassus|
@@ -233,6 +245,10 @@ T Destiny Calls |QID|2242| |N|Syurna in Cenarion Enclave (36.88, 21.97)| |Z|Darn
 
 T Elanaria |QID|1684| |N|Elanaria in Darnassus (57.30, 34.57)| |C|Warrior| |Z|Darnassus|
 A Vorlus Vilehoof |QID|1683| |N|Elanaria in Darnassus (57.30, 34.57)| |C|Warrior| |Z|Darnassus|
+
+C Vorlus Vilehoof |QID|1683| |N|Kill Vorlus Vilehoof and collect Horn of Vorlus. He is at the moonwell near Ban'ethil Hollow (49.11, 61.80)| |C|Warrior|
+T Vorlus Vilehoof |QID|1683| |N|Elanaria in Darnassus (57.31, 34.62)| |C|Warrior| |Z|Darnassus|
+A The Shade of Elura |QID|1686| |N|Elanaria in Darnassus (57.31, 34.62)| |C|Warrior| |Z|Darnassus|
 
 T Teldrassil |QID|940| |N|Arch Druid Fandral Staghelm in Cenarion Enclave (34.86, 8.97)| |Z|Darnassus|
 A Grove of the Ancients |QID|952| |N|Arch Druid Fandral Staghelm in Cenarion Enclave (34.86, 8.97)| |Z|Darnassus|
@@ -276,6 +292,19 @@ A Flight to Auberdine |QID|6342| |N|Vesprystus in Rut'theran Village (58.39, 94.
 
 F Auberdine |QID|6342| |N|Speak to Vesprystus and fly to Auberdine (58.39, 94.00)|
 T Flight to Auberdine |QID|6342| |N|Laird in Auberdine (36.77, 44.32)| |Z|Darkshore|
+
+C Body and Heart |QID|6001| |N|Use the Cenarion Lunardust on the Moonkin Stone east of Auberdine to summon and defeat Lunaclaw (43.48, 45.95)| |C|Druid| |Z|Darkshore| |U|15208|
+R Darnassus |QID|6001| |N|Return to Darnassus via Rut'theran Village or use Teleport: Moonglade and fly back| |C|Druid|
+T Body and Heart |QID|6001| |N|Mathrengyl Bearwalker in Cenarion Enclave (34.90, 8.25). You now have Bear Form!| |C|Druid| |Z|Darnassus|
+
+R The Long Wash |QID|1686| |N|Travel southwest along the coast to The Long Wash (32.0, 46.34)| |C|Warrior| |Z|Darkshore|
+C The Shade of Elura |QID|1686| |N|Collect 8 Elunite Ore from crates underwater (32.0, 46.34). Kill Shade of Elura and collect Elura's Medallion (31.56, 44.87)| |C|Warrior| |Z|Darkshore|
+R Darnassus |QID|1686| |N|Return to Darnassus via Auberdine flight path| |C|Warrior|
+T The Shade of Elura |QID|1686| |N|Elanaria in Darnassus (57.31, 34.62)| |C|Warrior| |Z|Darnassus|
+A Smith Mathiel |QID|1692| |N|Elanaria in Darnassus (57.31, 34.62)| |C|Warrior| |Z|Darnassus|
+T Smith Mathiel |QID|1692| |N|Mathiel in Darnassus (59.44, 45.36)| |C|Warrior| |Z|Darnassus|
+A Weapons of Elunite |QID|1693| |N|Mathiel in Darnassus (59.44, 45.36)| |C|Warrior| |Z|Darnassus|
+T Weapons of Elunite |QID|1693| |N|Mathiel in Darnassus (59.44, 45.36). Choose your weapon reward!| |C|Warrior| |Z|Darnassus|
 
 N Guide Complete |N|Continue to Darkshore (12-14) for the next guide|
 

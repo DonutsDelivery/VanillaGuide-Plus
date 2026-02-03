@@ -162,6 +162,56 @@ A At War With The Scarlet Crusade (Part 3) |QID|371| |N|Executor Zygand in Brill
 
 N Level 10 |N|You should reach level 10. Do your class quest if available|
 
+; -- WARRIOR LEVEL 10 CLASS QUESTS --
+A Speak with Dillinger |QID|1818| |N|Austil de Mon in Gallows' End Tavern (61.85, 52.54)| |C|Warrior|
+T Speak with Dillinger |QID|1818| |N|Deathguard Dillinger in Brill (58.19, 51.48)| |C|Warrior|
+A Ulag the Cleaver |QID|1819| |N|Deathguard Dillinger in Brill (58.19, 51.48)| |C|Warrior|
+C Ulag the Cleaver |QID|1819| |N|Click the Mausoleum Trigger on the ground, then click the crypt door to find and kill Ulag the Cleaver (59.14, 48.52)| |C|Warrior|
+T Ulag the Cleaver |QID|1819| |N|Deathguard Dillinger in Brill (58.20, 51.45)| |C|Warrior|
+A Speak with Coleman |QID|1820| |N|Deathguard Dillinger in Brill (58.20, 51.45)| |C|Warrior|
+T Speak with Coleman |QID|1820| |N|Coleman Farthing in Gallows' End Tavern (61.71, 52.29)| |C|Warrior|
+A Agamand Heirlooms |QID|1821| |N|Coleman Farthing in Gallows' End Tavern (61.71, 52.29)| |C|Warrior|
+
+; -- MAGE LEVEL 10 CLASS QUESTS --
+A Speak with Anastasia |QID|1881| |N|Cain Firesong in Gallows' End Tavern (61.92, 52.31)| |C|Mage|
+R Undercity |QID|1881| |N|Travel to Undercity| |C|Mage|
+T Speak with Anastasia |QID|1881| |N|Anastasia Hartwell in Magic Quarter (85.09, 10.14)| |Z|Undercity| |C|Mage|
+A The Balnir Farmstead |QID|1882| |N|Anastasia Hartwell in Magic Quarter (85.09, 10.14)| |Z|Undercity| |C|Mage|
+R Balnir Farmstead |QID|1882| |N|Travel to Balnir Farmstead (77.52, 61.71)| |C|Mage|
+C The Balnir Farmstead |QID|1882| |N|Collect Balnir Snapdragons from the bush (77.52, 61.71)| |C|Mage|
+R Undercity |QID|1882| |N|Return to Undercity| |C|Mage|
+T The Balnir Farmstead |QID|1882| |N|Anastasia Hartwell in Magic Quarter (85.14, 10.16)| |Z|Undercity| |C|Mage|
+
+; -- ROGUE LEVEL 10 CLASS QUESTS --
+A Mennet Carkad |QID|1885| |N|Marion Call in Gallows' End Tavern (61.74, 52.00)| |C|Rogue|
+R Undercity |QID|1885| |N|Travel to Undercity| |C|Rogue|
+T Mennet Carkad |QID|1885| |N|Mennet Carkad in Rogues' Quarter (83.53, 69.06)| |Z|Undercity| |C|Rogue|
+A The Deathstalkers |QID|1886| |N|Mennet Carkad in Rogues' Quarter (83.53, 69.06)| |Z|Undercity| |C|Rogue|
+R Tirisfal Glades |QID|1886| |N|Exit Undercity via the Sewers| |C|Rogue|
+C The Deathstalkers |QID|1886| |N|Find and speak to Astor Hadren patrolling the road to Silverpine Forest. He becomes hostile - kill him for Astor's Letter of Introduction (58.99, 63.96)| |C|Rogue|
+R Undercity |QID|1886| |N|Return to Undercity| |C|Rogue|
+T The Deathstalkers |QID|1886| |N|Mennet Carkad in Rogues' Quarter (83.51, 69.06)| |Z|Undercity| |C|Rogue|
+A The Deathstalkers |QID|1898| |N|Mennet Carkad in Rogues' Quarter (83.51, 69.06)| |Z|Undercity| |C|Rogue|
+T The Deathstalkers |QID|1898| |N|Andron Gant in The Apothecarium (54.83, 76.31)| |Z|Undercity| |C|Rogue|
+A The Deathstalkers |QID|1899| |N|Andron Gant in The Apothecarium (55.87, 75.24)| |Z|Undercity| |C|Rogue|
+C The Deathstalkers |QID|1899| |N|Collect Andron's Ledger from the Bookshelf next to the quest giver (55.47, 76.73)| |Z|Undercity| |C|Rogue|
+T The Deathstalkers |QID|1899| |N|Mennet Carkad in Rogues' Quarter (83.56, 69.07)| |Z|Undercity| |C|Rogue|
+A The Deathstalkers |QID|1978| |N|Mennet Carkad in Rogues' Quarter (83.56, 69.07)| |Z|Undercity| |C|Rogue|
+T The Deathstalkers |QID|1978| |N|Varimathras in Royal Quarter (56.24, 92.16)| |Z|Undercity| |C|Rogue|
+
+; -- WARLOCK LEVEL 10 CLASS QUESTS --
+A Halgar's Summons |QID|1478| |N|Ageron Kargal in Gallows' End Tavern (61.62, 52.65)| |C|Warlock|
+R Undercity |QID|1478| |N|Travel to Undercity| |C|Warlock|
+T Halgar's Summons |QID|1478| |N|Carendin Halgar in Magic Quarter (85.02, 25.89)| |Z|Undercity| |C|Warlock|
+A Creature of the Void |QID|1473| |N|Carendin Halgar in Magic Quarter (85.02, 25.89)| |Z|Undercity| |C|Warlock|
+R Tirisfal Glades |QID|1473| |N|Exit Undercity via the Sewers| |C|Warlock|
+C Creature of the Void |QID|1473| |N|Collect Egalin's Grimoire from the lockbox inside the tower (51.10, 67.57)| |C|Warlock|
+R Undercity |QID|1473| |N|Return to Undercity| |C|Warlock|
+T Creature of the Void |QID|1473| |N|Carendin Halgar in Magic Quarter (85.09, 26.06)| |Z|Undercity| |C|Warlock|
+A The Binding |QID|1471| |N|Carendin Halgar in Magic Quarter (86.27, 26.68)| |Z|Undercity| |C|Warlock|
+C The Binding |QID|1471| |N|Use the Runes of Summoning on the purple summoning circle to summon and subdue a Voidwalker (86.64, 26.97)| |U|6284| |Z|Undercity| |C|Warlock|
+T The Binding |QID|1471| |N|Carendin Halgar in Magic Quarter (85.04, 25.93)| |Z|Undercity| |C|Warlock|
+
 R Agamand Mills |QID|362| |N|Travel to Agamand Mills (46.92, 41.02)|
 
 C The Mills Overrun |QID|426| |N|Kill scourge for 5 Notched Rib and 3 Blackened Skull from Darkeye Bonecaster (50.00, 36.98)|
@@ -255,6 +305,17 @@ T Proof of Demise |QID|374| |N|Deathguard Burgess in Brill (60.89, 52.12)|
 R Undercity |QID|411| |N|Travel to Undercity (66, 5)|
 
 T The Prodigal Lich Returns |QID|411| |N|Bethor Iceshard in Magic Quarter (85.02, 25.89)| |Z|Undercity|
+
+; -- WARRIOR AGAMAND HEIRLOOMS COMPLETION --
+R Agamand Family Crypt |QID|1821| |N|Travel to Agamand Family Crypt (47.64, 48.77)| |C|Warrior|
+N Agamand Family Mace |QID|1821| |N|Collect Agamand Family Mace from the weapon rack (51.90, 27.09)| |C|Warrior|
+N Agamand Family Dagger |QID|1821| |N|Collect Agamand Family Dagger from the weapon rack (51.90, 27.09)| |C|Warrior|
+N Agamand Family Axe |QID|1821| |N|Collect Agamand Family Axe from the weapon rack (52.64, 25.91)| |C|Warrior|
+N Agamand Family Sword |QID|1821| |N|Collect Agamand Family Sword from the weapon rack (52.64, 25.91)| |C|Warrior|
+R Brill |QID|1821| |N|Return to Brill| |C|Warrior|
+T Agamand Heirlooms |QID|1821| |N|Coleman Farthing in Gallows' End Tavern (61.73, 52.31)| |C|Warrior|
+A Heirloom Weapon |QID|1822| |N|Coleman Farthing in Gallows' End Tavern (61.73, 52.31)| |C|Warrior|
+T Heirloom Weapon |QID|1822| |N|Coleman Farthing in Gallows' End Tavern - choose your reward (61.73, 52.31)| |C|Warrior|
 
 N Level 12 Recommended |N|You should be level 12. Train new skills and weapon skills|
 

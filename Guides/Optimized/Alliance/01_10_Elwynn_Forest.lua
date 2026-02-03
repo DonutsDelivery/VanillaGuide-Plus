@@ -37,12 +37,16 @@ T Hallowed Letter |C|Priest| |QID|3103| |N|Priestess Anetta in Northshire Abbey 
 T Glyphic Letter |C|Mage| |QID|3104| |N|Khelden Bremen in Northshire Abbey (49.66, 39.38)|
 T Tainted Letter |C|Warlock| |QID|3105| |N|Drusilla La Salle in Northshire Abbey (49.9, 42.7)|
 
+A The Stolen Tome |C|Warlock| |QID|1598| |N|Drusilla La Salle in Northshire Valley (49.87, 42.65)|
+
 A Brotherhood of Thieves |QID|18| |N|Deputy Willem in Northshire Valley (48.18, 42.93)|
 
 C Investigate Echo Ridge |QID|15| |N|Kill 10 Kobold Worker in the cave at Echo Ridge Mine (47, 32)|
 
+C The Stolen Tome |C|Warlock| |QID|1598| |N|Collect Powers of the Void from the ground near the tent (56.70, 44.01)|
 C Brotherhood of Thieves |QID|18| |N|Kill Defias south-east of Abbey for 12 Red Burlap Bandana. Grind to level 4 (54, 40)|
 
+T The Stolen Tome |C|Warlock| |QID|1598| |N|Drusilla La Salle in Northshire Valley (49.87, 42.65)|
 T Brotherhood of Thieves |QID|18| |N|Deputy Willem in Northshire Valley (48.18, 42.93)|
 A Milly Osworth |QID|3903| |N|Deputy Willem in Northshire Valley (48.18, 42.93)|
 A Bounty on Garrick Padfoot |QID|6| |N|Deputy Willem in Northshire Valley (48.18, 42.93)|
@@ -168,7 +172,9 @@ T Collecting Kelp |QID|112| |N|William Pestle (43.43, 66.05)|
 A The Escape |QID|114| |N|William Pestle (43.43, 66.05)|
 T The Jasperlode Mine |QID|76| |N|Marshal Dughan (42.14, 65.90)|
 T Deliver Thomas' Report |QID|39| |N|Marshal Dughan (42.14, 65.90)|
+A Cloth and Leather Armor |QID|59| |N|Marshal Dughan (42.11, 65.97)|
 A Westbrook Garrison Needs Help! |QID|239| |N|Marshal Dughan (42.14, 65.90)|
+A Elmore's Task |QID|1097| |N|Smith Argus (42.01, 65.60)|
 
 T The Escape |QID|114| |N|Maybell Maclure at Maclure Vineyards (43.12, 89.55)|
 T Goldtooth |QID|87| |N|Auntie Bernice Stonefield (34.5, 84.3)|
@@ -182,6 +188,20 @@ C Riverpaw Gnoll Bounty |QID|11| |N|Kill gnolls south of garrison for 8 Painted 
 T Riverpaw Gnoll Bounty |QID|11| |N|Deputy Rainer (24.26, 74.54)|
 
 N Level 10 |N|You should be very close to 10 now. Grind on gnolls if needed|
+
+N The Collector |N|Gnolls may drop Gold Pickup Schedule - use it to start The Collector quest| |O|
+A The Collector |QID|123| |N|Use Gold Pickup Schedule item if you found it| |O|
+T The Collector |QID|123| |N|Marshal Dughan in Goldshire (42.12, 65.96)| |O|
+A Manhunt |QID|147| |N|Marshal Dughan in Goldshire (42.12, 65.96)| |O|
+C Manhunt |QID|147| |N|Kill Morgan the Collector at Brackwell Pumpkin Patch (71.01, 80.55). Pull guards first| |O|
+T Manhunt |QID|147| |N|Marshal Dughan in Goldshire (42.12, 65.96)| |O|
+
+N Class Quests |N|At level 10, pick up your class quest in Goldshire before leaving|
+
+A Speak with Jennea |C|Mage| |QID|1860| |N|Zaldimar Wefhellt in Goldshire (43.28, 66.22)|
+A A Warrior's Training |C|Warrior| |QID|1638| |N|Lyria Du Lac in Goldshire (41.1, 65.8)|
+A Seek out SI: 7 |C|Rogue| |QID|2205| |N|Keryn Sylvius in Goldshire (43.8, 65.9)|
+A Gakin's Summons |C|Warlock| |QID|1685| |N|Remen Marcot in Goldshire (44.5, 66.1)|
 
 N Guide Complete |N|Follow the road west into Westfall for the next guide|
 

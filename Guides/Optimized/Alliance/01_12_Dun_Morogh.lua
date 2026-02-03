@@ -216,29 +216,70 @@ T Stout to Kadrell |QID|414| |N|Mountaineer Kadrell in Thelsamar (34.94, 47.04)|
 A Rat Catching |QID|416| |N|Mountaineer Kadrell in Thelsamar (34.94, 47.04)| |Z|Loch Modan|
 A Mountaineer Stormpike's Task |QID|1339| |N|Mountaineer Kadrell in Thelsamar (35.10, 47.02)| |Z|Loch Modan|
 A Thelsamar Blood Sausages |QID|418| |N|Vidra Hearthstove in Stoutlager Inn (34.88, 49.18)| |Z|Loch Modan|
+A Honor Students |QID|6387| |N|Brock Stoneseeker in Thelsamar (37.07, 47.79)| |Z|Loch Modan|
 
 R Algaz Station |QID|1339| |N|Travel north to Algaz Station (24.79, 18.40)| |Z|Loch Modan|
 T Mountaineer Stormpike's Task |QID|1339| |N|Mountaineer Stormpike at Algaz Station (24.79, 18.40)| |Z|Loch Modan|
 A Stormpike's Order |QID|1338| |N|Mountaineer Stormpike at Algaz Station (24.79, 18.40)| |Z|Loch Modan|
 A Filthy Paws |QID|307| |N|Mountaineer Stormpike at Algaz Station (24.79, 18.40)| |Z|Loch Modan|
 
+R Thelsamar |QID|6387| |N|Return to Thelsamar (33.88, 50.95)| |Z|Loch Modan|
+T Honor Students |QID|6387| |N|Thorgrum Borrelson in Thelsamar (33.88, 50.95)| |Z|Loch Modan|
+A Ride to Ironforge |QID|6391| |N|Thorgrum Borrelson in Thelsamar (33.88, 50.95)| |Z|Loch Modan|
+F Ironforge |QID|6391| |N|Fly to Ironforge| |Z|Ironforge|
+T Ride to Ironforge |QID|6391| |N|Golnir Bouldertoe in The Great Forge (51.50, 26.30)| |Z|Ironforge|
+A Gryth Thurden |QID|6388| |N|Golnir Bouldertoe in The Great Forge (51.30, 27.89)| |Z|Ironforge|
+T Gryth Thurden |QID|6388| |N|Gryth Thurden in The Great Forge (55.48, 47.87)| |Z|Ironforge|
+A Return to Brock |QID|6392| |N|Gryth Thurden in The Great Forge (55.48, 47.87)| |Z|Ironforge|
+
 R Ironforge |QID|291| |N|Travel to Ironforge| |Z|Ironforge|
-f Ironforge |QID|291| |N|Get flight path from Gryth Thurden in The Great Forge (55.60, 47.94)| |Z|Ironforge|
+f Ironforge |QID|291| |N|Get flight path from Gryth Thurden in The Great Forge (55.60, 47.94)| |Z|Ironforge| |O|
 
 T The Reports |QID|291| |N|Senator Barin Redstone in Hall of Explorers (75.48, 19.45)| |Z|Ironforge|
 
 T Muren Stormpike |QID|1679| |N|Muren Stormpike in Hall of Arms (70.76, 90.48)| |Z|Ironforge| |C|Warrior|
 A Vejrek |QID|1678| |N|Muren Stormpike in Hall of Arms (70.76, 90.48)| |Z|Ironforge| |C|Warrior|
 
+R Frostmane Hold |QID|1678| |N|Travel to Frostmane Hold (24.78, 50.88)| |C|Warrior|
+C Vejrek |QID|1678| |N|Kill Vejrek and collect Vejrek's Head in Frostmane Hold (27.66, 57.78)| |C|Warrior|
+T Vejrek |QID|1678| |N|Muren Stormpike in Hall of Arms (70.76, 90.48)| |Z|Ironforge| |C|Warrior|
+A Tormus Deepforge |QID|1680| |N|Muren Stormpike in Hall of Arms (70.76, 90.48)| |Z|Ironforge| |C|Warrior|
+T Tormus Deepforge |QID|1680| |N|Tormus Deepforge in The Great Forge (48.74, 42.44)| |Z|Ironforge| |C|Warrior|
+A Ironband's Compound |QID|1681| |N|Tormus Deepforge in The Great Forge (48.74, 42.44)| |Z|Ironforge| |C|Warrior|
+R Ironband's Compound |QID|1681| |N|Travel to Ironband's Compound in Loch Modan (77.95, 62.21)| |Z|Loch Modan| |C|Warrior|
+C Ironband's Compound |QID|1681| |N|Collect Umbral Ore from the Ironband lockbox (77.95, 62.21)| |Z|Loch Modan| |C|Warrior|
+T Ironband's Compound |QID|1681| |N|Tormus Deepforge in The Great Forge (48.74, 42.44)| |Z|Ironforge| |C|Warrior|
+
 T Training the Beast |QID|6086| |N|Belia Thundergranite in Hall of Arms (70.93, 85.66)| |Z|Ironforge| |C|Hunter|
 
 T Road to Salvation |QID|2218| |N|Hulfdan Blackbeard in The Forlorn Cavern (51.88, 14.66)| |Z|Ironforge| |C|Rogue|
 A Simple Subterfugin' |QID|2238| |N|Hulfdan Blackbeard in The Forlorn Cavern (51.88, 14.66)| |Z|Ironforge| |C|Rogue|
+R Gnomeregan |QID|2238| |N|Travel to Gnomeregan (25.18, 44.44)| |C|Rogue|
+T Simple Subterfugin' |QID|2238| |N|Onin MacHammar in Gnomeregan (25.18, 44.44)| |C|Rogue|
+A Onin's Report |QID|2239| |N|Onin MacHammar in Gnomeregan (25.18, 44.44)| |C|Rogue|
+R Ironforge |QID|2239| |N|Return to Ironforge| |Z|Ironforge| |C|Rogue|
+T Onin's Report |QID|2239| |N|Hulfdan Blackbeard in The Forlorn Cavern (51.89, 14.85)| |Z|Ironforge| |C|Rogue|
 
 T Speak with Bink |QID|1879| |N|Bink in Hall of Mysteries (27.23, 8.33)| |Z|Ironforge| |C|Mage|
 A Mage-tastic Gizmonitor |QID|1880| |N|Bink in Hall of Mysteries (27.23, 8.33)| |Z|Ironforge| |C|Mage|
 
 A The Slaughtered Lamb |QID|1715| |N|Lago Blackwrench in The Forlorn Cavern (47.64, 9.76)| |Z|Ironforge| |C|Warlock|
+A Deeprun Rat Roundup |QID|6661| |N|Monty in Deeprun Tram, Ironforge Side (76.31, 51.13)| |Z|Ironforge| |C|Warlock|
+C Deeprun Rat Roundup |QID|6661| |N|Capture 5 Deeprun Rat using the Rat Catcher's Flute. Lead the rats back to Monty| |C|Warlock| |U|17117|
+T Deeprun Rat Roundup |QID|6661| |N|Monty in Deeprun Tram, Ironforge Side| |Z|Ironforge| |C|Warlock|
+R Stormwind City |QID|1715| |N|Take the tram to Stormwind City| |Z|Stormwind City| |C|Warlock|
+T The Slaughtered Lamb |QID|1715| |N|Gakin the Darkbinder in The Slaughtered Lamb (39.2, 85.2)| |Z|Stormwind City| |C|Warlock|
+A Surena Caledon |QID|1688| |N|Gakin the Darkbinder in The Slaughtered Lamb (39.2, 85.2)| |Z|Stormwind City| |C|Warlock|
+R Brackwell Pumpkin Patch |QID|1688| |N|Travel to Brackwell Pumpkin Patch (71.02, 80.76)| |Z|Elwynn Forest| |C|Warlock|
+C Surena Caledon |QID|1688| |N|Kill Surena Caledon and collect Surena's Choker. She is guarded by 2 enemies, pull them away (71.02, 80.76)| |Z|Elwynn Forest| |C|Warlock|
+R The Slaughtered Lamb |QID|1688| |N|Return to The Slaughtered Lamb (39.2, 85.2)| |Z|Stormwind City| |C|Warlock|
+T Surena Caledon |QID|1688| |N|Gakin the Darkbinder in The Slaughtered Lamb (39.2, 85.2)| |Z|Stormwind City| |C|Warlock|
+A The Binding |QID|1689| |N|Gakin the Darkbinder in The Slaughtered Lamb (39.2, 85.2)| |Z|Stormwind City| |C|Warlock|
+C The Binding |QID|1689| |N|Go down the stairs to the summoning circle, use Bloodstone Choker to summon and kill a Summoned Voidwalker (38.3, 84.9)| |Z|Stormwind City| |C|Warlock|
+T The Binding |QID|1689| |N|Gakin the Darkbinder in The Slaughtered Lamb (39.2, 85.2)| |Z|Stormwind City| |C|Warlock|
+
+F Thelsamar |QID|6392| |N|Fly to Thelsamar to complete Honor Students chain| |Z|Loch Modan| |O|
+T Return to Brock |QID|6392| |N|Brock Stoneseeker in Thelsamar (37.07, 47.79)| |Z|Loch Modan|
 
 N Level 12 |N|You should be around level 12 now. Continue to Darkshore or Loch Modan for the next guide|
 

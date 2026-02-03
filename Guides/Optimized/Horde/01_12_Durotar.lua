@@ -62,6 +62,9 @@ T Vile Familiars |QID|792| |N|Zureetha Fargaze in Valley of Trials (42.83, 69.07
 A Burning Blade Medallion |QID|794| |N|Zureetha Fargaze in Valley of Trials (42.83, 69.10)|
 A Lazy Peons |QID|5441| |N|Foreman Thazz'ril in Valley of Trials (44.56, 68.65)|
 
+N Shaman Level 4 |N|Grind to level 4 for the Call of Earth quest| |C|Shaman|
+A Call of Earth |QID|1516| |N|Canaga Earthcaller in Valley of Trials (42.42, 69.16)| |C|Shaman|
+
 C Lazy Peons |QID|5441| |N|Use Foreman's Blackjack to wake 5 Lazy Peon in the Valley of Trials (41.29, 72.70) (42.35, 73.20) (44.71, 72.75) (45.09, 69.07) (47.52, 69.34)| |U|16114|
 
 T Lazy Peons |QID|5441| |N|Foreman Thazz'ril in Valley of Trials (44.56, 68.65)|
@@ -70,12 +73,24 @@ A Thazz'ril's Pick |QID|6394| |N|Foreman Thazz'ril in Valley of Trials (44.56, 6
 R Burning Blade Coven |QID|794| |N|Travel to Burning Blade Coven (44.46, 60.40)|
 C Burning Blade Medallion |QID|794| |N|Kill Yarrog Baneshadow and collect Burning Blade Medallion in the cave (42.76, 52.70)|
 C Thazz'ril's Pick |QID|6394| |N|Collect Thazz'ril's Pick in Burning Blade Coven (43.7, 53.7)|
+C Call of Earth |QID|1516| |N|Kill Felstalker and collect 2 Felstalker Hoof in Burning Blade Coven (44.47, 54.99)| |C|Shaman|
 
 H Valley of Trials |QID|794| |N|Hearth to Valley of Trials|
+
+T Call of Earth |QID|1516| |N|Canaga Earthcaller in Valley of Trials (42.38, 69.12)| |C|Shaman|
+A Call of Earth |QID|1517| |N|Canaga Earthcaller in Valley of Trials (42.38, 69.12)| |C|Shaman|
 
 T Burning Blade Medallion |QID|794| |N|Zureetha Fargaze in Valley of Trials (42.83, 69.10)|
 A Report to Sen'jin Village |QID|805| |N|Zureetha Fargaze in Valley of Trials (42.83, 69.10)|
 T Thazz'ril's Pick |QID|6394| |N|Foreman Thazz'ril in Valley of Trials (44.56, 68.65)|
+
+N Earth Sapta |N|Get Earth Sapta from Canaga Earthcaller (42.38, 69.12)| |C|Shaman|
+R Spirit Rock |QID|1517| |N|Travel south to Spirit Rock (41.56, 73.26)| |C|Shaman|
+N Use Earth Sapta |N|Use Earth Sapta to gain the Spirit Vision buff to see the Minor Manifestation of Earth| |C|Shaman|
+T Call of Earth |QID|1517| |N|Minor Manifestation of Earth in Spirit Rock (44.0, 76.14) - use Earth Sapta to see him| |C|Shaman|
+A Call of Earth |QID|1518| |N|Minor Manifestation of Earth in Spirit Rock (44.01, 76.08)| |C|Shaman|
+R Valley of Trials |QID|1518| |N|Return to Valley of Trials (42.6, 75.26)| |C|Shaman|
+T Call of Earth |QID|1518| |N|Canaga Earthcaller in Valley of Trials (42.42, 69.17)| |C|Shaman|
 
 N Level 5 |N|You should be close to level 5. Grind if needed before leaving the Valley|
 
@@ -181,6 +196,7 @@ T Taming the Beast (Part 3) |QID|6082| |N|Thotar in Razor Hill (51.87, 43.49)| |
 A Training the Beast |QID|6081| |N|Thotar in Razor Hill (52.01, 43.48)| |C|Hunter|
 
 A Gan'rul's Summons |QID|1506| |N|Ophek in Razor Hill (54.21, 41.04)| |C|Warlock|
+A Call of Fire |QID|2983| |N|Swart in Razor Hill Barracks (54.41, 42.58)| |C|Shaman|
 
 R Orgrimmar |QID|831| |N|Travel to Orgrimmar (33, 37)| |Z|Orgrimmar|
 
@@ -190,6 +206,7 @@ T The Admiral's Orders (Part 2) |QID|831| |N|Nazgrel in Grommash Hold (32.40, 36
 A Hidden Enemies (Part 1) |QID|5726| |N|Thrall in Grommash Hold (32.00, 37.86)| |Z|Orgrimmar|
 
 A Finding the Antidote |QID|813| |N|Kor'ghan in Cleft of Shadow (47.00, 53.56)| |Z|Orgrimmar|
+A Speak with Un'thuwa |QID|1883| |N|Uthel'nay in Valley of Spirits (38.86, 86.28)| |C|Mage| |Z|Orgrimmar|
 
 T Gan'rul's Summons |QID|1506| |N|Gan'rul Bloodeye in Cleft of Shadow (48.26, 45.41)| |C|Warlock| |Z|Orgrimmar|
 A Creature of the Void |QID|1501| |N|Gan'rul Bloodeye in Cleft of Shadow (48.26, 45.41)| |C|Warlock| |Z|Orgrimmar|
@@ -245,6 +262,13 @@ C Hidden Enemies (Part 2) |QID|5727| |N|Talk to Neeru Fireblade in Cleft of Shad
 T Hidden Enemies (Part 2) |QID|5727| |N|Thrall in Grommash Hold (31.98, 37.83)| |Z|Orgrimmar|
 
 T Need for a Cure |QID|812| |N|Rhinag in Durotar (41.57, 18.64)|
+
+R Sen'jin Village |QID|1883| |N|Travel to Sen'jin Village (56.23, 75.10)| |C|Mage|
+T Speak with Un'thuwa |QID|1883| |N|Un'Thuwa in Sen'jin Village (56.23, 75.10)| |C|Mage|
+A Ju-Ju Heaps |QID|1884| |N|Un'Thuwa in Sen'jin Village (56.23, 75.10)| |C|Mage|
+R Echo Isles |QID|1884| |N|Travel to Echo Isles (59.47, 82.08)| |C|Mage|
+C Ju-Ju Heaps |QID|1884| |N|Destroy 4 Ju-Ju Heaps in Echo Isles (59.47, 82.08) (63.60, 84.16) (67.09, 87.76) (67.12, 86.49)| |C|Mage|
+T Ju-Ju Heaps |QID|1884| |N|Un'Thuwa in Sen'jin Village (56.25, 75.15)| |C|Mage|
 
 H Razor Hill |N|Hearth to Razor Hill|
 
