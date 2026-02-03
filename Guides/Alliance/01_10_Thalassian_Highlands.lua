@@ -6,12 +6,12 @@ N Welcome to Thalassian Highlands |N|This is the High Elf starting zone. You wil
 A Refugees no More |QID|41187| |N|Aerthand Skyshield in Brinthilien (48.3, 84.3)| |Z|Thalassian Highlands|
 T Refugees no More |QID|41187| |N|Commander Anarileth in Brinthilien (48.6, 83.6)| |Z|Thalassian Highlands|
 A Provisions for Refugees |QID|41188| |N|Commander Anarileth in Brinthilien (48.6, 83.6)| |Z|Thalassian Highlands|
-A Thalassian Goulash |QID|41190| |N|Dalicia Sweetsilver in Brinthilien (47.3, 84.2)| |Z|Thalassian Highlands|
-A A Crown of Flowers |QID|41191| |N|Avenant in Brinthilien (47.2, 79.1)| |Z|Thalassian Highlands|
 
 C Provisions for Refugees |QID|41188| |N|Kill Young Thalassian Boars and collect 10 Young Thalassian Boar Flanks (46, 82) (50, 78)| |Z|Thalassian Highlands|
 T Provisions for Refugees |QID|41188| |N|Commander Anarileth in Brinthilien (48.6, 83.6)| |Z|Thalassian Highlands|
 A Safety for Refugees |QID|41189| |N|Commander Anarileth in Brinthilien (48.6, 83.6)| |Z|Thalassian Highlands|
+A Thalassian Goulash |QID|41190| |N|Dalicia Sweetsilver in Brinthilien (47.3, 84.2)| |Z|Thalassian Highlands|
+A A Crown of Flowers |QID|41191| |N|Avenant in Brinthilien (47.2, 79.1)| |Z|Thalassian Highlands|
 
 A Plain Letter |QID|41230| |N|Commander Anarileth in Brinthilien (48.6, 83.6)| |C|Warrior| |Z|Thalassian Highlands|
 A Feathered Letter |QID|41231| |N|Commander Anarileth in Brinthilien (48.6, 83.6)| |C|Hunter| |Z|Thalassian Highlands|
