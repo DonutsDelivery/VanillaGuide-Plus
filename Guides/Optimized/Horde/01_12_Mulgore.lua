@@ -148,6 +148,8 @@ T Thunderhorn Totem |QID|756| |N|Mull Thunderhorn in Bloodhoof Village (48.50, 6
 T Dwarven Digging |QID|746| |N|Baine Bloodhoof in Bloodhoof Village (47.47, 60.26)|
 A Thunderhorn Cleansing |QID|758| |N|Mull Thunderhorn in Bloodhoof Village (48.50, 60.46)|
 
+A Call of Fire |QID|2984| |N|Narm Skychaser in Bloodhoof Village (48.39, 59.15)| |C|Shaman|
+
 A Taming the Beast |QID|6061| |N|Yaw Sharpmane in Bloodhoof Village (47.76, 55.64)| |C|Hunter|
 C Taming the Beast |QID|6061| |N|Use the Taming Rod to tame an Adult Plainstrider (45.95, 44.31)| |C|Hunter|
 T Taming the Beast |QID|6061| |N|Yaw Sharpmane in Bloodhoof Village (47.72, 55.64)| |C|Hunter|
@@ -172,12 +174,25 @@ A Rites of the Earthmother (Part 3) |QID|776| |N|Cairne Bloodhoof in Thunder Blu
 T Heeding the Call |QID|5927| |N|Turak Runetotem in Elder Rise (76.6, 27.6)| |Z|Thunder Bluff| |C|Druid|
 A Moonglade |QID|5922| |N|Turak Runetotem in Elder Rise (76.6, 27.6)| |Z|Thunder Bluff| |C|Druid|
 
+N Druid: Teleport to Moonglade |QID|5922| |N|Use Teleport: Moonglade to travel to Nighthaven| |Z|Moonglade| |C|Druid|
+T Moonglade |QID|5922| |N|Dendrite Starblaze in Nighthaven (56.23, 30.60)| |Z|Moonglade| |C|Druid|
+A Great Bear Spirit |QID|5930| |N|Dendrite Starblaze in Nighthaven (56.23, 30.60)| |Z|Moonglade| |C|Druid|
+C Great Bear Spirit |QID|5930| |N|Speak to Great Bear Spirit in Moonglade (39.09, 27.54)| |Z|Moonglade| |C|Druid|
+T Great Bear Spirit |QID|5930| |N|Dendrite Starblaze in Nighthaven (56.23, 30.60)| |Z|Moonglade| |C|Druid|
+A Back to Thunder Bluff |QID|5932| |N|Dendrite Starblaze in Nighthaven (56.23, 30.61)| |Z|Moonglade| |C|Druid|
+F Thunder Bluff |QID|5932| |N|Fly to Thunder Bluff from Bunthen Plainswind (44.34, 45.78)| |Z|Moonglade| |C|Druid|
+T Back to Thunder Bluff |QID|5932| |N|Turak Runetotem in Elder Rise (76.6, 27.6)| |Z|Thunder Bluff| |C|Druid|
+A Body and Heart |QID|6002| |N|Turak Runetotem in Elder Rise (76.6, 27.6)| |Z|Thunder Bluff| |C|Druid|
+
 C The Hunter's Way |QID|861| |N|Kill Flatland Prowlers for 4 Flatland Prowler Claws in The Golden Plains (54.11, 33.75)|
 
 R The Venture Co. Mine |QID|765| |N|Travel to The Venture Co. Mine (61.43, 47.28)|
 C Supervisor Fizsprocket |QID|765| |N|Kill Supervisor Fizsprocket inside the mine (64.37, 44.23)|
 C The Venture Co. |QID|764| |N|Kill 14 Venture Co. Worker and 6 Venture Co. Supervisor around the mine (60, 45)|
-C Rites of the Earthmother (Part 3) |QID|776| |N|Find and kill Arra'chea the kodo east of Thunder Bluff (52, 10)|
+C Rites of the Earthmother (Part 3) |QID|776| |N|Find and kill Arra'chea the kodo east of Thunder Bluff (49, 19) or (52, 10) or (54, 35)|
+
+R Body and Heart |QID|6002| |N|Travel to the Moonkin Stone between Mulgore and the Barrens (42.00, 60.84)| |Z|Barrens| |C|Druid|
+C Body and Heart |QID|6002| |N|Use Cenarion Lunardust on the Moonkin Stone to summon Lunaclaw, defeat it (42.00, 60.84)| |Z|Barrens| |C|Druid|
 
 R Bloodhoof Village |QID|759| |N|Return to Bloodhoof Village (48.50, 60.46)|
 T Thunderhorn Cleansing |QID|758| |N|Mull Thunderhorn in Bloodhoof Village (48.50, 60.46)|
@@ -189,7 +204,11 @@ R Windfury Ridge |QID|759| |N|Travel to Windfury Ridge in northern Mulgore (51.7
 C Wildmane Totem |QID|759| |N|Kill Prairie Wolf Alpha for 8 Prairie Alpha Teeth (50.55, 9.43)|
 C Preparation for Ceremony |QID|744| |N|Kill Windfury Sorceress for 6 Azure Feathers and Windfury Matriarch for 6 Bronze Feathers (37.66, 9.93)|
 
+N Ghost Howl |QID|770| |N|OPTIONAL: Look for Ghost Howl (rare spawn) who drops Demon Scarred Cloak for quest. Spawns around (49, 16) or (52, 15)| |O|
+A The Demon Scarred Cloak |QID|770| |N|OPTIONAL: Use Demon Scarred Cloak if you found Ghost Howl| |O|
+
 R Thunder Bluff |QID|886| |N|Return to Thunder Bluff (78.44, 28.91)| |Z|Thunder Bluff|
+T Body and Heart |QID|6002| |N|Turak Runetotem in Elder Rise (76.6, 27.6)| |Z|Thunder Bluff| |C|Druid|
 A The Barrens Oases |QID|886| |N|Arch Druid Hamuul Runetotem in Elder Rise (78.44, 28.91)| |Z|Thunder Bluff|
 T Rites of the Earthmother (Part 3) |QID|776| |N|Cairne Bloodhoof in Thunder Bluff (59.91, 51.78)| |Z|Thunder Bluff|
 T The Hunter's Way |QID|861| |N|Melor Stonehoof in Hunter Rise (61.33, 80.49)| |Z|Thunder Bluff|
