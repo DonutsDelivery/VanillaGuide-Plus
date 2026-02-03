@@ -41,6 +41,11 @@ local metamapnotes = {}
 local function GetPlayerZoneData()
 	-- Save current map state
 	local wasShown = WorldMapFrame:IsShown()
+	local oldContinent, oldZone
+	if wasShown then
+		oldContinent = GetCurrentMapContinent()
+		oldZone = GetCurrentMapZone()
+	end
 
 	-- Briefly set map to player's zone to get valid data
 	SetMapToCurrentZone()
@@ -48,7 +53,9 @@ local function GetPlayerZoneData()
 	local z = GetCurrentMapZone()
 
 	-- Restore map state
-	if not wasShown and WorldMapFrame:IsShown() then
+	if wasShown and oldContinent and oldZone then
+		SetMapZoom(oldContinent, oldZone)
+	elseif not wasShown and WorldMapFrame:IsShown() then
 		HideUIPanel(WorldMapFrame)
 	end
 
