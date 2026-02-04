@@ -253,7 +253,7 @@ N Trak'gen - Talk to Trak'gen. Buy  [Sharp Throwing Axe] from him - Vendor your 
 N Equip the [Sharp Throwing Axe] when you are level 11 |U|3135| |O| |C|Hunter|
 A Return to the Crossroads |QID|6386| |N|Doras - Talk to Doras - (45.1, 63.9)| |C|Hunter|
 t your class spells |QID|5654| |N|Ur'kyo - Talk to Ur'kyo - (35.6, 87.8)| |C|Hunter|
-t your class spells |QID|5652| |N|Ur'kyo - Talk to Ur'kyo - (35.6, 87.8)| |C|Hunter|
+t your class spells |QID|5652| |N|Ur'kyo - Talk to Ur'kyo - (35.6, 87.8)| |C|Hunter| |R|Troll|
 t your class spells |N|Pephredo - Talk to Pephredo - (38.3, 85.5)| |C|Hunter|
 T The Admiral's Orders |QID|831| |N|Nazgrel - Talk to Nazgrel - (32.3, 35.8)| |C|Hunter|
 t your class spells |QID|1963| |N|Therzok - Talk to Therzok - (42.8, 53.5)| |C|Hunter| |R|Orc|
@@ -385,8 +385,8 @@ A The Balnir Farmstead |QID|1882| |N|Anastasia Hartwell - Talk to Anastasia in t
 R Enter Undercity |N|(61.8, 65.1)| |O| |C|Warlock|
 N (66.1, 20.1) |O| |C|Warlock|
 N Auctioneer Rhyker - Talk to Auctioneer Rhyker - Buy Six [Discolored Worg Hearts] from the Auction House - Skip this if you want, it's only a small time saver - (64.2, 49.6) |C|Warlock|
-T Touch of Weakness |QID|5660| |N|Aelthalyste - Talk to Aelthalyste - (49.0, 18.3)| |C|Warlock|
-T Touch of Weakness |QID|5658| |N|Aelthalyste - Talk to Aelthalyste - (49.0, 18.3)| |C|Warlock|
+T Touch of Weakness |QID|5660| |N|Aelthalyste - Talk to Aelthalyste - (49.0, 18.3)| |C|Warlock| |R|Undead|
+T Touch of Weakness |QID|5658| |N|Aelthalyste - Talk to Aelthalyste - (49.0, 18.3)| |C|Warlock| |R|Undead|
 R Enter Undercity |N|(61.8, 65.1)| |O| |C|Warlock|
 N (66.1, 20.1) |O| |C|Warlock|
 f Undercity >> Get the Undercity flight path |N|Michael Garrett - (63.2, 48.6)| |C|Warlock|

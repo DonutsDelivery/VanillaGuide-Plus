@@ -133,7 +133,7 @@ T Dwarven Digging |QID|746| |N|Baine Bloodhoof in Bloodhoof Village (47.47, 60.2
 A Thunderhorn Cleansing |QID|758| |N|Mull Thunderhorn in Bloodhoof Village (48.50, 60.46)|
 A Call of Fire (Part 1) |QID|2984| |N|Narm Skychaser in Bloodhoof Village (48.39, 59.15)| |C|Shaman| |Z|Mulgore|
 
-A Taming the Beast |QID|6061| |N|Yaw Sharpmane in Bloodhoof Village (47.76, 55.64)| |C|Hunter|
+A Taming the Beast |QID|6061| |N|Yaw Sharpmane in Bloodhoof Village (47.76, 55.64)| |C|Hunter| |LV|10|
 C Taming the Beast |QID|6061| |N|Use the Taming Rod to tame an Adult Plainstrider in Thunderhorn Water Well (45.95, 44.31)| |C|Hunter|
 T Taming the Beast |QID|6061| |N|Yaw Sharpmane in Bloodhoof Village (47.72, 55.64)| |C|Hunter|
 A Taming the Beast |QID|6087| |N|Yaw Sharpmane in Bloodhoof Village (47.72, 55.64)| |C|Hunter|
@@ -144,7 +144,7 @@ C Taming the Beast |QID|6088| |N|Use the Taming Rod to tame an Swoop in Mulgore 
 T Taming the Beast |QID|6088| |N|Yaw Sharpmane in Bloodhoof Village (47.82, 55.64)| |C|Hunter|
 A Training the Beast |QID|6089| |N|Yaw Sharpmane in Bloodhoof Village (47.82, 55.64)| |C|Hunter|
 
-A Heeding the Call |QID|5927| |N|Gennia Runetotem in Bloodhoof Village (48.4, 59.6)| |C|Druid| |Z|Mulgore|
+A Heeding the Call |QID|5927| |N|Gennia Runetotem in Bloodhoof Village (48.4, 59.6)| |C|Druid| |Z|Mulgore| |LV|10|
 
 R Thunderhorn Water Well |QID|758| |N|Travel to Thunderhorn Water Well (44.46, 45.59)|
 C Thunderhorn Cleansing |QID|758| |N|Use the Thunderhorn Cleansing Totem at the Thunderhorn Water Well (44.46, 45.59)| |U|5415|

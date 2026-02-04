@@ -234,36 +234,36 @@ A Power over Poison |QID|6125| |N|Dendrite Starblaze in Nighthaven (56.25, 30.59
 
 R Cenarion Enclave |TID|6125|  |N|Travel to Cenarion Enclave (35.36, 8.31)| |C|Druid| |Z|Darnassus|
 T Power over Poison |QID|6125| |N|Dendrite Starblaze in Cenarion Enclave (35.36, 8.31)| |C|Druid| |Z|Darnassus|
-A A Lesson to Learn |QID|26| |N|Mathrengyl Bearwalker in Cenarion Enclave, Level 16 required (35.36, 8.31)| |C|Druid| |Z|Darnassus|
+A A Lesson to Learn |QID|26| |N|Mathrengyl Bearwalker in Cenarion Enclave, Level 16 required (35.36, 8.31)| |C|Druid| |R|Night Elf| |Z|Darnassus|
 
-R Cenarion Enclave |OID|26|  |N|Travel to Cenarion Enclave (35.36, 8.31)| |C|Druid| |Z|Darnassus|
-A A Lesson to Learn |QID|26| |N|Mathrengyl Bearwalker in Cenarion Enclave (35.36, 8.31)| |C|Druid| |Z|Darnassus|
+R Cenarion Enclave |OID|26|  |N|Travel to Cenarion Enclave (35.36, 8.31)| |C|Druid| |R|Night Elf| |Z|Darnassus|
+A A Lesson to Learn |QID|26| |N|Mathrengyl Bearwalker in Cenarion Enclave (35.36, 8.31)| |C|Druid| |R|Night Elf| |Z|Darnassus|
 
-R Nighthaven |OID|29| |N|Travel to Nighthaven (56.26, 30.64)| |C|Druid| |Z|Moonglade|
-T A Lesson to Learn |QID|26| |N|Dendrite Starblaze in Nighthaven (56.21, 30.60)| |C|Druid| |Z|Moonglade|
-A Trial of the Lake |QID|29| |N|Dendrite Starblaze in Nighthaven (55.91, 31.32)| |C|Druid| |Z|Moonglade|
-N Shrine Bauble |QID|29| |N|Find the Bauble Container and collect Shrine Bauble in Lake Elune'ara (54.29, 55.75)| |C|Druid| |Z|Moonglade| |L|15877| |OBJ|4871|
+R Nighthaven |OID|29| |N|Travel to Nighthaven (56.26, 30.64)| |C|Druid| |R|Night Elf| |Z|Moonglade|
+T A Lesson to Learn |QID|26| |N|Dendrite Starblaze in Nighthaven (56.21, 30.60)| |C|Druid| |R|Night Elf| |Z|Moonglade|
+A Trial of the Lake |QID|29| |N|Dendrite Starblaze in Nighthaven (55.91, 31.32)| |C|Druid| |R|Night Elf| |Z|Moonglade|
+N Shrine Bauble |QID|29| |N|Find the Bauble Container and collect Shrine Bauble in Lake Elune'ara (54.29, 55.75)| |C|Druid| |R|Night Elf| |Z|Moonglade| |L|15877| |OBJ|4871|
 
-R Shrine of Remulos |QID|29| |N|Travel to Shrine of Remulos (36.22, 41.35)| |C|Druid| |Z|Moonglade|
-C Trial of the Lake |QID|29| |N|Use Shrine Bauble in Shrine of Remulos (36.22, 41.35)| |C|Druid| |Z|Moonglade| |U|15877|
-T Trial of the Lake |QID|29| |N|Tajarri in Shrine of Remulos (36.50, 40.18)| |C|Druid| |Z|Moonglade|
-A Trial of the Sea Lion |QID|272| |N|Tajarri in Shrine of Remulos (36.50, 40.18)| |C|Druid| |Z|Moonglade|
+R Shrine of Remulos |QID|29| |N|Travel to Shrine of Remulos (36.22, 41.35)| |C|Druid| |R|Night Elf| |Z|Moonglade|
+C Trial of the Lake |QID|29| |N|Use Shrine Bauble in Shrine of Remulos (36.22, 41.35)| |C|Druid| |R|Night Elf| |Z|Moonglade| |U|15877|
+T Trial of the Lake |QID|29| |N|Tajarri in Shrine of Remulos (36.50, 40.18)| |C|Druid| |R|Night Elf| |Z|Moonglade|
+A Trial of the Sea Lion |QID|272| |N|Tajarri in Shrine of Remulos (36.50, 40.18)| |C|Druid| |R|Night Elf| |Z|Moonglade|
 
-R Darkshore |QID|272| |N|Travel to Darkshore (48.86, 11.28)| |C|Druid| |Z|Darkshore| |L|15882|
-N Half Pendant of Aquatic Endurance |QID|272| |N|Find the Strange Lockbox and collect Half Pendant of Aquatic Endurance in Mist's Edge, Darkshore (48.86, 11.28)| |C|Druid| |Z|Darkshore| |L|15882|
+R Darkshore |QID|272| |N|Travel to Darkshore (48.86, 11.28)| |C|Druid| |R|Night Elf| |Z|Darkshore| |L|15882|
+N Half Pendant of Aquatic Endurance |QID|272| |N|Find the Strange Lockbox and collect Half Pendant of Aquatic Endurance in Mist's Edge, Darkshore (48.86, 11.28)| |C|Druid| |R|Night Elf| |Z|Darkshore| |L|15882|
 
-R Westfall |QID|272| |N|Travel to Westfall (17.86, 33.16)| |C|Druid| |Z|Westfall| |L|15883|
-N Half Pendant of Aquatic Agility |QID|272| |N|Find the Strange Lockbox and collect Half Pendant of Aquatic Agility in Longshore, Westfall (17.86, 33.16)| |C|Druid| |Z|Westfall| |L|15883|
+R Westfall |QID|272| |N|Travel to Westfall (17.86, 33.16)| |C|Druid| |R|Night Elf| |Z|Westfall| |L|15883|
+N Half Pendant of Aquatic Agility |QID|272| |N|Find the Strange Lockbox and collect Half Pendant of Aquatic Agility in Longshore, Westfall (17.86, 33.16)| |C|Druid| |R|Night Elf| |Z|Westfall| |L|15883|
 
-R Shrine of Remulos |QID|272| |N|Travel to Shrine of Remulos (36.25, 41.24)| |C|Druid| |Z|Moonglade|
-C Trial of the Sea Lion |QID|272| |N|Use Half Pendant of Aquatic Agility to combine into Pendant of the Sea Lion in Shrine of Remulos (36.25, 41.24)| |C|Druid| |Z|Moonglade| |U|15883|
+R Shrine of Remulos |QID|272| |N|Travel to Shrine of Remulos (36.25, 41.24)| |C|Druid| |R|Night Elf| |Z|Moonglade|
+C Trial of the Sea Lion |QID|272| |N|Use Half Pendant of Aquatic Agility to combine into Pendant of the Sea Lion in Shrine of Remulos (36.25, 41.24)| |C|Druid| |R|Night Elf| |Z|Moonglade| |U|15883|
 
-R Nighthaven |QID|5061| |N|Travel to Nighthaven (56.20, 30.63)| |C|Druid| |Z|Moonglade|
-T Trial of the Sea Lion |QID|272| |N|Dendrite Starblaze in Nighthaven (56.20, 30.63)| |C|Druid| |Z|Moonglade|
-A Aquatic Form |QID|5061| |N|Dendrite Starblaze in Nighthaven (56.20, 30.63)| |C|Druid| |Z|Moonglade|
+R Nighthaven |QID|5061| |N|Travel to Nighthaven (56.20, 30.63)| |C|Druid| |R|Night Elf| |Z|Moonglade|
+T Trial of the Sea Lion |QID|272| |N|Dendrite Starblaze in Nighthaven (56.20, 30.63)| |C|Druid| |R|Night Elf| |Z|Moonglade|
+A Aquatic Form |QID|5061| |N|Dendrite Starblaze in Nighthaven (56.20, 30.63)| |C|Druid| |R|Night Elf| |Z|Moonglade|
 
 R Cenarion Enclave |TID|5061| |N|Travel to Cenarion Enclave (35.34, 8.36)| |C|Druid| |Z|Darnassus|
-T Aquatic Form |QID|5061| |N|Mathrengyl Bearwalker in Cenarion Enclave (35.34, 8.36)| |C|Druid| |Z|Darnassus|
+T Aquatic Form |QID|5061| |N|Mathrengyl Bearwalker in Cenarion Enclave (35.34, 8.36)| |C|Druid| |R|Night Elf| |Z|Darnassus|
 
 R Auberdine |N|Travel to Auberdine and take the boat to Menethil Harbor (36.4, 45.5)| |Z|Darkshore|
 R Menethil Harbor |N|Take the boat from Auberdine to Menethil Harbor in the Wetlands (4.5, 57.3)| |Z|Wetlands|

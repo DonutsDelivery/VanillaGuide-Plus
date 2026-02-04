@@ -161,14 +161,14 @@ A At War With The Scarlet Crusade (Part 4) |QID|372| |N|Executor Zygand in Brill
 T A New Plague (Part 3) |QID|369| |N|Apothecary Johaan in Brill (59.46, 52.34)|
 A A New Plague (Part 4) |QID|492| |N|Apothecary Johaan in Brill (59.46, 52.34)|
 A Delivery to Silverpine Forest |QID|445| |N|Apothecary Johaan in Brill (59.49, 52.32)|
-A Speak with Dillinger |QID|1818| |N|Austil de Mon in Gallows' End Tavern (61.85, 52.54)| |C|Warrior|
-T Speak with Dillinger |QID|1818| |N|Deathguard Dillinger in Brill (58.19, 51.48)| |C|Warrior|
-A Ulag the Cleaver |QID|1819| |N|Deathguard Dillinger in Brill (58.19, 51.48)| |C|Warrior|
-C Ulag the Cleaver |QID|1819| |N|Click on the Mausoleum Trigger on the ground then click on the crypt door to find and kill Ulag the Cleaver in Brill (59.14, 48.52)| |C|Warrior|
-T Ulag the Cleaver |QID|1819| |N|Deathguard Dillinger in Brill (58.20, 51.45)| |C|Warrior|
-A Speak with Coleman |QID|1820| |N|Deathguard Dillinger in Brill (58.20, 51.45)| |C|Warrior|
-T Speak with Coleman |QID|1820| |N|Coleman Farthing in Gallows' End Tavern (61.71, 52.29)| |C|Warrior|
-A Agamand Heirlooms |QID|1821| |N|Coleman Farthing in Gallows' End Tavern (61.71, 52.29)| |C|Warrior|
+A Speak with Dillinger |QID|1818| |N|Austil de Mon in Gallows' End Tavern (61.85, 52.54)| |C|Warrior| |LV|10|
+T Speak with Dillinger |QID|1818| |N|Deathguard Dillinger in Brill (58.19, 51.48)| |C|Warrior| |LV|10|
+A Ulag the Cleaver |QID|1819| |N|Deathguard Dillinger in Brill (58.19, 51.48)| |C|Warrior| |LV|10|
+C Ulag the Cleaver |QID|1819| |N|Click on the Mausoleum Trigger on the ground then click on the crypt door to find and kill Ulag the Cleaver in Brill (59.14, 48.52)| |C|Warrior| |LV|10|
+T Ulag the Cleaver |QID|1819| |N|Deathguard Dillinger in Brill (58.20, 51.45)| |C|Warrior| |LV|10|
+A Speak with Coleman |QID|1820| |N|Deathguard Dillinger in Brill (58.20, 51.45)| |C|Warrior| |LV|10|
+T Speak with Coleman |QID|1820| |N|Coleman Farthing in Gallows' End Tavern (61.71, 52.29)| |C|Warrior| |LV|10|
+A Agamand Heirlooms |QID|1821| |N|Coleman Farthing in Gallows' End Tavern (61.71, 52.29)| |C|Warrior| |LV|10|
 T A New Plague (Part 4) |QID|492| |N|Captured Mountaineer in Gallows' End Tavern in the Basement (61.89, 51.37)|
 T Return to the Magistrate |QID|360| |N|Magistrate Sevren in Brill Town Hall (61.27, 50.77)|
 T Rear Guard Patrol |QID|356| |N|Deathguard Linnea in Tirisfal Glades (65.53, 60.19)|
@@ -181,53 +181,53 @@ C Proof of Demise |QID|374| |N|Collect 10 Scarlet Insignia Ring dropped by the S
 R Brill |TID|372| |N|Travel to Brill (60.60, 51.88)|
 T At War With The Scarlet Crusade (Part 4) |QID|372| |N|Executor Zygand in Brill (60.60, 51.88)|
 T Proof of Demise |QID|374| |N|Deathguard Burgess in Brill (60.89, 52.12)|
-A Mennet Carkad |QID|1885| |N|Marion Call in Gallows' End Tavern (61.74, 52.00)| |C|Rogue|
-A Speak with Anastasia |QID|1881| |N|Cain Firesong in Gallows' End Tavern (61.92, 52.31)| |C|Mage|
-A Halgar's Summons |QID|1478| |N|Ageron Kargal in Gallows' End Tavern (61.62, 52.65)| |C|Warlock|
+A Mennet Carkad |QID|1885| |N|Marion Call in Gallows' End Tavern (61.74, 52.00)| |C|Rogue| |LV|10|
+A Speak with Anastasia |QID|1881| |N|Cain Firesong in Gallows' End Tavern (61.92, 52.31)| |C|Mage| |LV|10|
+A Halgar's Summons |QID|1478| |N|Ageron Kargal in Gallows' End Tavern (61.62, 52.65)| |C|Warlock| |LV|10|
 
-R Magic Quarter |QID|1473| |N|Travel to Magic Quarter in Undercity (85.02, 25.89)| |C|Warlock| |Z|Undercity|
-T Halgar's Summons |QID|1478| |N|Carendin Halgar in Magic Quarter (85.02, 25.89)| |C|Warlock| |Z|Undercity|
-A Creature of the Void |QID|1473| |N|Carendin Halgar in Magic Quarter (85.02, 25.89)| |C|Warlock| |Z|Undercity|
+R Magic Quarter |QID|1473| |N|Travel to Magic Quarter in Undercity (85.02, 25.89)| |C|Warlock| |Z|Undercity| |LV|10|
+T Halgar's Summons |QID|1478| |N|Carendin Halgar in Magic Quarter (85.02, 25.89)| |C|Warlock| |Z|Undercity| |LV|10|
+A Creature of the Void |QID|1473| |N|Carendin Halgar in Magic Quarter (85.02, 25.89)| |C|Warlock| |Z|Undercity| |LV|10|
 
-R Sewers |QID|1473| |N|Exit from the Sewers (45.33, 43.64)| |C|Warlock| |Z|Undercity|
-R Tirisfal Glades |QID|1473| |N|Exit from the Sewers (39.76, 24.05)| |C|Warlock| |Z|Undercity| |REACH|
-C Creature of the Void |QID|1473| |N|Collect Egalin's Grimoire from the lockbox inside the tower (51.10, 67.57)| |C|Warlock|
+R Sewers |QID|1473| |N|Exit from the Sewers (45.33, 43.64)| |C|Warlock| |Z|Undercity| |LV|10|
+R Tirisfal Glades |QID|1473| |N|Exit from the Sewers (39.76, 24.05)| |C|Warlock| |Z|Undercity| |REACH| |LV|10|
+C Creature of the Void |QID|1473| |N|Collect Egalin's Grimoire from the lockbox inside the tower (51.10, 67.57)| |C|Warlock| |LV|10|
 
-R Sewers |QID|1471| |N|Enter through the Sewers (14.71, 34.26)| |C|Warlock| |Z|Undercity|
-R Magic Quarter |QID|1471| |N|Travel to Magic Quarter (34.67, 33.21) (85.09, 26.06)| |C|Warlock| |Z|Undercity|
-T Creature of the Void |QID|1473| |N|Carendin Halgar in Magic Quarter (85.09, 26.06)| |C|Warlock| |Z|Undercity|
-A The Binding |QID|1471| |N|Carendin Halgar in Magic Quarter (86.27, 26.68)| |C|Warlock| |Z|Undercity|
-C The Binding |QID|1471| |N|Using the Runes of Summoning on the purple summoning circle to summon and subdue a Summoned Voidwalker in Magic Quarter (86.64, 26.97)| |C|Warlock| |Z|Undercity| |U|6284|
-T The Binding |QID|1471| |N|Carendin Halgar in Magic Quarter (85.04, 25.93)| |C|Warlock| |Z|Undercity|
+R Sewers |QID|1471| |N|Enter through the Sewers (14.71, 34.26)| |C|Warlock| |Z|Undercity| |LV|10|
+R Magic Quarter |QID|1471| |N|Travel to Magic Quarter (34.67, 33.21) (85.09, 26.06)| |C|Warlock| |Z|Undercity| |LV|10|
+T Creature of the Void |QID|1473| |N|Carendin Halgar in Magic Quarter (85.09, 26.06)| |C|Warlock| |Z|Undercity| |LV|10|
+A The Binding |QID|1471| |N|Carendin Halgar in Magic Quarter (86.27, 26.68)| |C|Warlock| |Z|Undercity| |LV|10|
+C The Binding |QID|1471| |N|Using the Runes of Summoning on the purple summoning circle to summon and subdue a Summoned Voidwalker in Magic Quarter (86.64, 26.97)| |C|Warlock| |Z|Undercity| |U|6284| |LV|10|
+T The Binding |QID|1471| |N|Carendin Halgar in Magic Quarter (85.04, 25.93)| |C|Warlock| |Z|Undercity| |LV|10|
 
-R Magic Quarter |QID|1882| |N|Travel to Magic Quarter (85.09, 10.14)| |C|Mage| |Z|Undercity|
-T Speak with Anastasia |QID|1881| |N|Anastasia Hartwell in Magic Quarter (85.09, 10.14)| |C|Mage| |Z|Undercity|
-A The Balnir Farmstead |QID|1882| |N|Anastasia Hartwell in Magic Quarter (85.09, 10.14)| |C|Mage| |Z|Undercity|
+R Magic Quarter |QID|1882| |N|Travel to Magic Quarter (85.09, 10.14)| |C|Mage| |Z|Undercity| |LV|10|
+T Speak with Anastasia |QID|1881| |N|Anastasia Hartwell in Magic Quarter (85.09, 10.14)| |C|Mage| |Z|Undercity| |LV|10|
+A The Balnir Farmstead |QID|1882| |N|Anastasia Hartwell in Magic Quarter (85.09, 10.14)| |C|Mage| |Z|Undercity| |LV|10|
 
-R Balnir Farmstead |QID|1882| |N|Travel to Balnir Farmstead (77.52, 61.71)| |C|Mage|
-C The Balnir Farmstead |QID|1882| |N|Collect Balnir Snapdragons from the bush in Balnir Farmstead (77.52, 61.71)| |C|Mage|
-T The Balnir Farmstead |QID|1882| |N|Anastasia Hartwell in Magic Quarter (85.14, 10.16)| |C|Mage| |Z|Undercity|
+R Balnir Farmstead |QID|1882| |N|Travel to Balnir Farmstead (77.52, 61.71)| |C|Mage| |LV|10|
+C The Balnir Farmstead |QID|1882| |N|Collect Balnir Snapdragons from the bush in Balnir Farmstead (77.52, 61.71)| |C|Mage| |LV|10|
+T The Balnir Farmstead |QID|1882| |N|Anastasia Hartwell in Magic Quarter (85.14, 10.16)| |C|Mage| |Z|Undercity| |LV|10|
 
-R Rogues' Quarter |QID|1886| |N|Travel to Rogues' Quarter (83.53, 69.06)| |C|Rogue| |Z|Undercity|
-T Mennet Carkad |QID|1885| |N|Mennet Carkad in Rogues' Quarter (83.53, 69.06)| |C|Rogue| |Z|Undercity|
-A The Deathstalkers |QID|1886| |N|Mennet Carkad in Rogues' Quarter (83.53, 69.06)| |C|Rogue| |Z|Undercity|
+R Rogues' Quarter |QID|1886| |N|Travel to Rogues' Quarter (83.53, 69.06)| |C|Rogue| |Z|Undercity| |LV|10|
+T Mennet Carkad |QID|1885| |N|Mennet Carkad in Rogues' Quarter (83.53, 69.06)| |C|Rogue| |Z|Undercity| |LV|10|
+A The Deathstalkers |QID|1886| |N|Mennet Carkad in Rogues' Quarter (83.53, 69.06)| |C|Rogue| |Z|Undercity| |LV|10|
 
-R Sewers |QID|1886| |N|Exit from the Sewers (45.33, 43.64)| |C|Rogue| |Z|Undercity|
-R Tirisfal Glades |QID|1886| |N|Exit from the Sewers (39.76, 24.05)| |C|Rogue| |Z|Undercity| |REACH|
-C The Deathstalkers |QID|1886| |N|Find and speak to Astor Hadren, you can find him patroling the road to Silverpine Forest. He will become hostile after you speak to him and you will need to kill him to collect Astor's Letter of Introduction (58.99, 63.96) (54.81, 72.88) (54.75, 73.35)| |C|Rogue|
+R Sewers |QID|1886| |N|Exit from the Sewers (45.33, 43.64)| |C|Rogue| |Z|Undercity| |LV|10|
+R Tirisfal Glades |QID|1886| |N|Exit from the Sewers (39.76, 24.05)| |C|Rogue| |Z|Undercity| |REACH| |LV|10|
+C The Deathstalkers |QID|1886| |N|Find and speak to Astor Hadren, you can find him patroling the road to Silverpine Forest. He will become hostile after you speak to him and you will need to kill him to collect Astor's Letter of Introduction (58.99, 63.96) (54.81, 72.88) (54.75, 73.35)| |C|Rogue| |LV|10|
 
-R Sewers |QID|1898| |N|Enter through the Sewers (14.71, 34.26)| |C|Rogue| |Z|Undercity|
-R Rogues' Quarter |QID|1898| |N|Travel to Rogues' Quarter (34.67, 33.21) (83.51, 69.06)| |C|Rogue| |Z|Undercity|
-T The Deathstalkers |QID|1886| |N|Mennet Carkad in Rogues' Quarter (83.51, 69.06)| |C|Rogue| |Z|Undercity|
-A The Deathstalkers |QID|1898| |N|Mennet Carkad in Rogues' Quarter (83.51, 69.06)| |C|Rogue| |Z|Undercity|
-T The Deathstalkers |QID|1898| |N|Andron Gant in The Apothecarium (54.83, 76.31)| |C|Rogue| |Z|Undercity|
-A The Deathstalkers |QID|1899| |N|Andron Gant in The Apothecarium (55.87, 75.24)| |C|Rogue| |Z|Undercity|
-C The Deathstalkers |QID|1899| |N|Collect Andron's Ledger from the Bookshelf next to the quest giver in The Apothecarium (55.47, 76.73)| |C|Rogue| |Z|Undercity|
-T The Deathstalkers |QID|1899| |N|Mennet Carkad in Rogues' Quarter (83.56, 69.07)| |C|Rogue| |Z|Undercity|
-A The Deathstalkers |QID|1978| |N|Mennet Carkad in Rogues' Quarter (83.56, 69.07)| |C|Rogue| |Z|Undercity|
+R Sewers |QID|1898| |N|Enter through the Sewers (14.71, 34.26)| |C|Rogue| |Z|Undercity| |LV|10|
+R Rogues' Quarter |QID|1898| |N|Travel to Rogues' Quarter (34.67, 33.21) (83.51, 69.06)| |C|Rogue| |Z|Undercity| |LV|10|
+T The Deathstalkers |QID|1886| |N|Mennet Carkad in Rogues' Quarter (83.51, 69.06)| |C|Rogue| |Z|Undercity| |LV|10|
+A The Deathstalkers |QID|1898| |N|Mennet Carkad in Rogues' Quarter (83.51, 69.06)| |C|Rogue| |Z|Undercity| |LV|10|
+T The Deathstalkers |QID|1898| |N|Andron Gant in The Apothecarium (54.83, 76.31)| |C|Rogue| |Z|Undercity| |LV|10|
+A The Deathstalkers |QID|1899| |N|Andron Gant in The Apothecarium (55.87, 75.24)| |C|Rogue| |Z|Undercity| |LV|10|
+C The Deathstalkers |QID|1899| |N|Collect Andron's Ledger from the Bookshelf next to the quest giver in The Apothecarium (55.47, 76.73)| |C|Rogue| |Z|Undercity| |LV|10|
+T The Deathstalkers |QID|1899| |N|Mennet Carkad in Rogues' Quarter (83.56, 69.07)| |C|Rogue| |Z|Undercity| |LV|10|
+A The Deathstalkers |QID|1978| |N|Mennet Carkad in Rogues' Quarter (83.56, 69.07)| |C|Rogue| |Z|Undercity| |LV|10|
 
-R Royal Quarter |TID|1978| |N|Travel to Royal Quarter (52.24, 64.11) (50.14, 67.10)| |C|Rogue| |Z|Undercity|
-T The Deathstalkers |QID|1978| |N|Varimathras in Royal Quarter (56.24, 92.16)| |C|Rogue| |Z|Undercity|
+R Royal Quarter |TID|1978| |N|Travel to Royal Quarter (52.24, 64.11) (50.14, 67.10)| |C|Rogue| |Z|Undercity| |LV|10|
+T The Deathstalkers |QID|1978| |N|Varimathras in Royal Quarter (56.24, 92.16)| |C|Rogue| |Z|Undercity| |LV|10|
 
 A A Letter Undelivered |QID|361| |N|Use A Letter to Yvette to accept quest (46, 34)| |U|2839| |O|
 T A Letter Undelivered |QID|361| |N|Yvette Farthing in Brill (61.6, 52.6)| |O|

@@ -12,6 +12,7 @@ T Pit-Iful Work |QID|41154| |N|Overseer Kizzcrack (35.6, 63)| |Z|Blackstone Isla
 A The Robotics Expert |QID|41155| |N|Overseer Kizzcrack (35.6, 63)| |Z|Blackstone Island|
 A Foreman's Blues |QID|41156| |N|Overseer Kizzcrack (35.6, 63)| |Z|Blackstone Island|
 A Delayed Shipments |QID|41157| |N|Overseer Kizzcrack (35.6, 63)| |Z|Blackstone Island|
+A Garbage Man |QID|80120| |N|Kazznik at Black Ash Coalpits (36.5, 62.9)| |Z|Blackstone Island|
 
 T The Robotics Expert |QID|41155| |N|Balnack Copperlight outside the coalpits (37.5, 62.8)| |Z|Blackstone Island|
 A Defunct Mainframes |QID|41150| |N|Balnack Copperlight (37.5, 62.8)| |Z|Blackstone Island|
@@ -32,10 +33,12 @@ N As you go... |AYG|41150| |QID|41151| |N|Kill Whirling Whizzbots for Defunct Ma
 C Foreman Pipelatch |QID|41153| |N|Slay 10 Ashfeather Scavengers around the coalpits (38, 65) (36, 68)| |Z|Blackstone Island|
 C Defunct Mainframes |QID|41150| |N|Recover 6 Defunct Mainframes from Whirling Whizzbots (37, 64) (39, 66)| |Z|Blackstone Island|
 C Haywire Havoc |QID|41151| |N|Slay 8 Haywire Battlechickens (38, 62) (35, 67)| |Z|Blackstone Island|
+C Garbage Man |QID|80120| |N|Collect 8 pieces of Trash around the worksite (36, 63) (38, 65)| |Z|Blackstone Island|
 
 T Foreman Pipelatch |QID|41153| |N|Foreman Pipelatch (37.5, 67.9)| |Z|Blackstone Island|
 T Defunct Mainframes |QID|41150| |N|Balnack Copperlight (37.5, 62.8)| |Z|Blackstone Island|
 T Haywire Havoc |QID|41151| |N|Balnack Copperlight (37.5, 62.8)| |Z|Blackstone Island|
+T Garbage Man |QID|80120| |N|Kazznik (36.5, 62.9)| |Z|Blackstone Island|
 A DV-500 |QID|41152| |N|Balnack Copperlight (37.5, 62.8)| |Z|Blackstone Island|
 
 -- SHIPWRECK AREA - South Coast (Level 1-4)
@@ -64,7 +67,6 @@ T DV-500 |QID|41152| |N|Return to Balnack Copperlight at the Black Ash Coalpits 
 R Rustgate Ridge |N|Travel east to the main town of Rustgate Ridge (48, 67)| |Z|Blackstone Island|
 
 T Ashcovered Letter |QID|41203| |N|Grizzie the Enforcer at Rustgate Ridge (48.1, 64.5)| |C|Warrior| |Z|Blackstone Island|
-A A Lesson In Bruisin' |QID|41202| |N|Grizzie the Enforcer (48.1, 64.5)| |C|Warrior| |Z|Blackstone Island|
 T Mudcovered Letter |QID|41205| |N|Mayten Boomrifle at Rustgate Ridge (49.3, 63.1)| |C|Hunter| |Z|Blackstone Island|
 T Black Letter |QID|41206| |N|Leyti Quicktongue at Rustgate Ridge (48.5, 68.7)| |C|Rogue| |Z|Blackstone Island|
 T Glyphcovered Letter |QID|41204| |N|Wizette Icewhistle at Rustgate Ridge (47.3, 68.7)| |C|Mage| |Z|Blackstone Island|
@@ -106,13 +108,11 @@ T Disruption at Rustgate Lumber Yard |QID|41265| |N|Supervisor Ozzick at Rustgat
 R Eastern Beach |QID|41167| |N|Travel to the eastern beaches (62, 80)| |Z|Blackstone Island|
 C The Murloc Threat |QID|41167| |N|Hunt murlocs on the shores and collect 20 scales (62, 83) (64, 78)| |Z|Blackstone Island|
 C A Lesson To Take To Heart |QID|41208| |N|Collect 6 Beating Makrura Hearts from the coast (65, 75) (60, 85)| |C|Warlock| |Z|Blackstone Island|
-C A Lesson In Bruisin' |QID|41202| |N|Gather 6 Mudpaw Hammers from Mudpaw Brutes to the northeast (55, 42)| |C|Warrior| |Z|Blackstone Island|
 
 C Maritime Gumbo |QID|41168| |N|Gather the needed ingredients - 8 Crawler Meat and 4 Firebloom from the coast and hills (62, 78) (58, 65)| |Z|Blackstone Island|
 
 T The Murloc Threat |QID|41167| |N|Bruiser Rakklan at Rustgate Ridge (62, 83.5)| |Z|Blackstone Island|
 T Maritime Gumbo |QID|41168| |N|Shazzlan at Rustgate Ridge (48.5, 69.2)| |Z|Blackstone Island|
-T A Lesson In Bruisin' |QID|41202| |N|Grizzie the Enforcer (48.1, 64.5)| |C|Warrior| |Z|Blackstone Island|
 T A Lesson To Take To Heart |QID|41208| |N|Amri Demondeal (49.4, 65.5)| |C|Warlock| |Z|Blackstone Island|
 
 -- GAZZIK'S WORKSHOP - Southeast (Level 3-6)
@@ -170,6 +170,9 @@ T Destroying Venture Co. Leadership |QID|41173| |N|Taxxlo Rustgate (48.2, 67.6)|
 -- LEVEL 10 CLASS QUESTS
 A The Hunter's Path |QID|80330| |N|Seek out a Hunter trainer in Orgrimmar, Thunder Bluff, or Undercity to learn about taming pets| |C|Hunter| |LV|10|
 A Dabbling In Darkness |QID|41201| |N|Amri Demondeal at Rustgate Ridge (49.4, 65.5) - go to Gan'rul Bloodeye in Orgrimmar| |C|Warlock| |LV|10|
+A A Lesson In Bruisin' |QID|41202| |N|Grizzie the Enforcer at Rustgate Ridge (48.1, 64.5)| |C|Warrior| |LV|10| |Z|Blackstone Island|
+C A Lesson In Bruisin' |QID|41202| |N|Gather 6 Mudpaw Hammers from Mudpaw Brutes to the northeast (55, 42)| |C|Warrior| |LV|10| |Z|Blackstone Island|
+T A Lesson In Bruisin' |QID|41202| |N|Grizzie the Enforcer (48.1, 64.5)| |C|Warrior| |LV|10| |Z|Blackstone Island|
 
 N Train Skills |N|Make sure to train your class skills at the trainers in Rustgate Ridge before leaving|
 

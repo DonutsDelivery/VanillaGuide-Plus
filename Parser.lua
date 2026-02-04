@@ -126,7 +126,14 @@ function TurtleGuide:LoadGuide(name, complete)
 	-- Extract zone name from guide name, stripping any path prefix (e.g., "Optimized/")
 	local _, _, zonename = string.find(name, "([^/]+) %(.*%)$")
 	self.zonename = zonename
-	self.actions, self.quests, self.tags = StepParse(self.guides[self.db.char.currentguide]())
+	local guideContent = self.guides[self.db.char.currentguide]()
+	if type(guideContent) == "table" and guideContent.steps then
+		-- QuestShell+ format (Lua table with steps array)
+		self.actions, self.quests, self.tags = self:ParseQuestShellPlus(guideContent)
+	else
+		-- Traditional TurtleGuide format (string)
+		self.actions, self.quests, self.tags = StepParse(guideContent)
+	end
 
 	if not self.db.char.turnins[name] then self.db.char.turnins[name] = {} end
 	self.turnedin = self.db.char.turnins[name]
@@ -367,8 +374,13 @@ function TurtleGuide:SmartSkipToStep()
 			elseif completedQuests[cleanQuest] then
 				self.turnedin[quest] = true
 			end
+		elseif action == "RUN" then
+			-- Run/Travel steps with QID: auto-complete if linked quest is done
+			local qid = self:GetObjectiveTag("QID", i)
+			if qid and self.db.char.completedquestsbyid[tonumber(qid)] then
+				self.turnedin[quest] = true
+			end
 		end
-		-- Note: Don't reset turnedin for other actions - preserve manual skips
 
 		-- Track last incomplete step
 		if not self.turnedin[quest] then

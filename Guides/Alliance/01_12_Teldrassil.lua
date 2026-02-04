@@ -152,19 +152,19 @@ N Level 10 Required |N|Grind to level 10 so you can pick up class quests before 
 A The Apple Falls |QID|2241| |N|Jannok Breezesong in Dolanaar; Level 10 required (56.36, 60.17)| |C|Rogue|
 A Heeding the Call |QID|5923| |N|Kal in Dolanaar (55.95, 61.56)| |C|Druid|
 A Elanaria |QID|1684| |N|Kyra Windblade in Dolanaar (56.2, 59.2)| |C|Warrior|
-A Taming the Beast (Part 1) |QID|6063| |N|Dazalar in Dolanaar (56.68, 59.50)| |C|Hunter|
-C Taming the Beast (Part 1) |QID|6063| |N|Use the Taming Rod to tame a Webwood Lurker (59.63, 60.23)|  |C|Hunter| |U|15921|
-T Taming the Beast (Part 1) |QID|6063| |N|Dazalar in Dolanaar (56.69, 59.50)| |C|Hunter|
-A Taming the Beast (Part 2) |QID|6101| |N|Dazalar in Dolanaar (56.80, 59.86)| |C|Hunter|
+A Taming the Beast (Part 1) |QID|6063| |N|Dazalar in Dolanaar (56.68, 59.50)| |C|Hunter| |LV|10|
+C Taming the Beast (Part 1) |QID|6063| |N|Use the Taming Rod to tame a Webwood Lurker (59.63, 60.23)| |C|Hunter| |U|15921| |LV|10|
+T Taming the Beast (Part 1) |QID|6063| |N|Dazalar in Dolanaar (56.69, 59.50)| |C|Hunter| |LV|10|
+A Taming the Beast (Part 2) |QID|6101| |N|Dazalar in Dolanaar (56.80, 59.86)| |C|Hunter| |LV|10|
 
 T The Road to Darnassus |QID|487| |N|Moon Priestess Amara; She patrols (50, 54) (55, 58)|
 
-C Taming the Beast (Part 2) |QID|6101| |N|Use the Taming Rod to tame a Nightsaber Stalker (40.14, 55.88)|  |C|Hunter| |U|15922|
-T Taming the Beast (Part 2) |QID|6101| |N|Dazalar in Dolanaar (56.67, 59.48)| |C|Hunter|
-A Taming the Beast (Part 3) |QID|6102| |N|Dazalar in Dolanaar (56.67, 59.48)| |C|Hunter|
-C Taming the Beast (Part 3) |QID|6102| |N|Use the Taming Rod to tame a Strigid Screecher (42.57, 52.31)|  |C|Hunter| |U|15923|
-T Taming the Beast (Part 3) |QID|6102| |N|Dazalar in Dolanaar (56.68, 59.50)| |C|Hunter|
-A Training the Beast |QID|6103| |N|Dazalar in Dolanaar (56.41, 58.57)| |C|Hunter|
+C Taming the Beast (Part 2) |QID|6101| |N|Use the Taming Rod to tame a Nightsaber Stalker (40.14, 55.88)| |C|Hunter| |U|15922| |LV|10|
+T Taming the Beast (Part 2) |QID|6101| |N|Dazalar in Dolanaar (56.67, 59.48)| |C|Hunter| |LV|10|
+A Taming the Beast (Part 3) |QID|6102| |N|Dazalar in Dolanaar (56.67, 59.48)| |C|Hunter| |LV|10|
+C Taming the Beast (Part 3) |QID|6102| |N|Use the Taming Rod to tame a Strigid Screecher (42.57, 52.31)| |C|Hunter| |U|15923| |LV|10|
+T Taming the Beast (Part 3) |QID|6102| |N|Dazalar in Dolanaar (56.68, 59.50)| |C|Hunter| |LV|10|
+A Training the Beast |QID|6103| |N|Dazalar in Dolanaar (56.41, 58.57)| |C|Hunter| |LV|10|
 
 A A Meeting With Adaena  |QID|40204| |N|Sentinel Danala (36.7, 54.1)| |R|Night Elf|
 T A Meeting With Adaena  |QID|40204| |N|Adaena Oakleaf is above the gate to the left or right (87.0, 35.7)| |R|Night Elf| |Z|Darnassus|
@@ -180,7 +180,7 @@ A Tumors |QID|923| |N|Rellian Greenspyre in Cenarion Enclave (38.26, 21.27)| |Z|
 T The Apple Falls |QID|2241| |N|Syurna is down in the tunnel in Cenarion Enclave (32.63, 16.16) (36.86, 21.88)| |C|Rogue| |Z|Darnassus|
 A Destiny Calls |QID|2242| |N|Syurna is down in the tunnel in Cenarion Enclave (36.86, 21.88)| |C|Rogue| |Z|Darnassus|
 
-T Training the Beast |QID|6103| |N|Jocaste in Cenarion Enclave (40.39, 8.60)| |C|Hunter| |Z|Darnassus|
+T Training the Beast |QID|6103| |N|Jocaste in Cenarion Enclave (40.39, 8.60)| |C|Hunter| |Z|Darnassus| |LV|10|
 
 T Heeding the Call |QID|5923| |N|Mathrengyl Bearwalker in Cenarion Enclave (35.38, 8.42)| |C|Druid| |Z|Darnassus|
 A Moonglade |QID|5921| |N|Mathrengyl Bearwalker in Cenarion Enclave (35.38, 8.42)| |C|Druid| |Z|Darnassus|

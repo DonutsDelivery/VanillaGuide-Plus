@@ -152,16 +152,16 @@ T Those Blasted Troggs! |QID|432| |N|Foreman Stonebrow in Gol'Bolar Quarry (69.1
 R Thunderbrew Distillery |QID|1679| |N|Travel to Thunderbrew Distillery<br/><b>Level 10 required<br/><b>You can die on purpose and resurrect to get there quicker (47.35, 52.64)|
 A Speak with Bink |QID|1879| |N|Magis Sparkmantle in Thunderbrew Distillery (47.36, 51.92)| |Z|Dun Morogh| |C|Mage|
 A Road to Salvation |QID|2218| |N|Hogral Bakkan in Thunderbrew Distillery (47.59, 52.46)| |C|Rogue|
-A Taming the Beast (Part 1) |QID|6064| |N|Grif Wildheart in Kharanos (45.82, 53.03)| |C|Hunter|
+A Taming the Beast (Part 1) |QID|6064| |N|Grif Wildheart in Kharanos (45.82, 53.03)| |C|Hunter| |LV|10|
 C Taming the Beast (Part 1) |QID|6064| |N|Use Taming Rod to tame a Large Crag Boar in Steelgrill's Depot (47.92, 47.13)|  |C|Hunter| |U|15911|
 T Taming the Beast (Part 1) |QID|6064| |N|Grif Wildheart in Kharanos (45.81, 53.02)| |C|Hunter|
-A Taming the Beast (Part 2) |QID|6084| |N|Grif Wildheart in Kharanos (45.81, 53.02)| |C|Hunter|
+A Taming the Beast (Part 2) |QID|6084| |N|Grif Wildheart in Kharanos (45.81, 53.02)| |C|Hunter| |LV|10|
 C Taming the Beast (Part 2) |QID|6084| |N|Use Taming Rod to tame a Snow Leopard Iceflow Lake (34.60, 47.08)|  |C|Hunter| |U|15913|
 T Taming the Beast (Part 2) |QID|6084| |N|Grif Wildheart in Kharanos (45.81, 53.05)| |C|Hunter|
-A Taming the Beast (Part 3) |QID|6085| |N|Grif Wildheart in Kharanos (45.81, 53.05)| |C|Hunter|
+A Taming the Beast (Part 3) |QID|6085| |N|Grif Wildheart in Kharanos (45.81, 53.05)| |C|Hunter| |LV|10|
 C Taming the Beast (Part 3) |QID|6085| |N|Use Taming Rod to tame a Ice Claw Bear in Iceflow Lake (31.70, 38.78)|  |C|Hunter| |U|15908|
 T Taming the Beast (Part 3) |QID|6085| |N|Grif Wildheart in Kharanos (45.80, 53.04)| |C|Hunter|
-A Training the Beast |QID|6086| |N|Grif Wildheart in Kharanos (46.13, 52.29)| |C|Hunter|
+A Training the Beast |QID|6086| |N|Grif Wildheart in Kharanos (46.13, 52.29)| |C|Hunter| |LV|10|
 A Muren Stormpike |QID|1679| |N|Granis Swiftaxe in Thunderbrew Distillery, level 10 required (47.35, 52.64)| |C|Warrior|
 T Muren Stormpike |QID|1679| |N|Muren Stormpike in Hall of Arms (70.76, 90.48)| |Z|Ironforge| |C|Warrior|
 A Vejrek |QID|1678| |N|Muren Stormpike in Hall of Arms (70.76, 90.48)| |Z|Ironforge| |C|Warrior|

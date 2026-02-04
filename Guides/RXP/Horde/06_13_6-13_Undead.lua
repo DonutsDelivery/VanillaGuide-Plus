@@ -210,7 +210,7 @@ N (49.0, 92.8) |O| |C|Rogue|
 N Trak'gen - Talk to Trak'gen. Buy  [Sharp Throwing Axe] from him - (48.1, 80.5) |C|Rogue|
 N Equip the [Sharp Throwing Axe] when you are level 11 |U|3135| |O| |C|Rogue|
 t your class spells |QID|5654| |N|Ur'kyo - Talk to Ur'kyo - (35.6, 87.8)| |C|Rogue|
-t your class spells |QID|5652| |N|Ur'kyo - Talk to Ur'kyo - (35.6, 87.8)| |C|Rogue|
+t your class spells |QID|5652| |N|Ur'kyo - Talk to Ur'kyo - (35.6, 87.8)| |C|Rogue| |R|Troll|
 t your class spells |N|Pephredo - Talk to Pephredo - (38.3, 85.5)| |C|Rogue|
 f Orgrimmar >> Get the Orgrimmar flight path |N|Doras - Talk to Doras - (45.1, 63.9)| |C|Rogue|
 T The Admiral's Orders |QID|831| |N|Nazgrel - Talk to Nazgrel - (32.3, 35.8)| |C|Rogue|

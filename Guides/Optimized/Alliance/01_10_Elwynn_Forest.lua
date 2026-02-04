@@ -198,10 +198,10 @@ T Manhunt |QID|147| |N|Marshal Dughan in Goldshire (42.12, 65.96)| |O|
 
 N Class Quests |N|At level 10, pick up your class quest in Goldshire before leaving|
 
-A Speak with Jennea |C|Mage| |QID|1860| |N|Zaldimar Wefhellt in Goldshire (43.28, 66.22)|
-A A Warrior's Training |C|Warrior| |QID|1638| |N|Lyria Du Lac in Goldshire (41.1, 65.8)|
-A Seek out SI: 7 |C|Rogue| |QID|2205| |N|Keryn Sylvius in Goldshire (43.8, 65.9)|
-A Gakin's Summons |C|Warlock| |QID|1685| |N|Remen Marcot in Goldshire (44.5, 66.1)|
+A Speak with Jennea |C|Mage| |QID|1860| |N|Zaldimar Wefhellt in Goldshire (43.28, 66.22)| |LV|10|
+A A Warrior's Training |C|Warrior| |QID|1638| |N|Lyria Du Lac in Goldshire (41.1, 65.8)| |LV|10|
+A Seek out SI: 7 |C|Rogue| |QID|2205| |N|Keryn Sylvius in Goldshire (43.8, 65.9)| |LV|10|
+A Gakin's Summons |C|Warlock| |QID|1685| |N|Remen Marcot in Goldshire (44.5, 66.1)| |LV|10|
 
 N Guide Complete |N|Follow the road west into Westfall for the next guide|
 

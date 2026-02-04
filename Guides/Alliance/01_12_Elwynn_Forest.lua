@@ -186,10 +186,10 @@ T Princess Must Die! |QID|88| |N|Ma Stonefield in The Stonefield Farm (34.61, 84
 
 N Level 10 Required |N|You need to be at least level 10 to continue; Keep grinding nearby mobs until you reach level 10| 
 R Goldshire |QID|1860| |N|Travel or Hearthstone to Goldshire (43.28, 66.22)|
-A Speak with Jennea |QID|1860| |N|Zaldimar Wefhellt in Goldshire (43.28, 66.22)| |C|Mage|
-A A Warrior's Training |QID|1638| |N|Lyria Du Lac in Goldshire (41.1, 65.8)| |C|Warrior|
-A Seek out SI: 7 |QID|2205| |N|Keryn Sylvius in Goldshire (43.8, 65.9)| |C|Rogue|
-A Gakin's Summons |QID|1685| |N|Remen Marcot in Goldshire (44.5, 66.1)| |C|Warlock| |OID|1688|
+A Speak with Jennea |QID|1860| |N|Zaldimar Wefhellt in Goldshire (43.28, 66.22)| |C|Mage| |LV|10|
+A A Warrior's Training |QID|1638| |N|Lyria Du Lac in Goldshire (41.1, 65.8)| |C|Warrior| |LV|10|
+A Seek out SI: 7 |QID|2205| |N|Keryn Sylvius in Goldshire (43.8, 65.9)| |C|Rogue| |LV|10|
+A Gakin's Summons |QID|1685| |N|Remen Marcot in Goldshire (44.5, 66.1)| |C|Warlock| |LV|10| |OID|1688|
 
 R Westbrook Garrison |TID|239| |N|Travel to Westbrook Garrison (24.26, 74.54)|
 T Westbrook Garrison Needs Help! |QID|239| |N|Deputy Rainer in Westbrook Garrison (24.26, 74.54)|

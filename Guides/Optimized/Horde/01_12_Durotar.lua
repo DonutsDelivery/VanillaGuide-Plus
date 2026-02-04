@@ -22,16 +22,16 @@ C Cutting Teeth |QID|788| |N|Kill 10 Mottled Boar in the Valley of Trials (44.5,
 T Sarkoth (Part 2) |QID|804| |N|Gornek in The Den (42.08, 68.35)|
 T Cutting Teeth |QID|788| |N|Gornek in The Den (42.08, 68.35)|
 
-A Etched Parchment |QID|3087| |N|Gornek in The Den (42.08, 68.35)| |C|Hunter| |R|Orc|
+A Etched Parchment |QID|3087| |N|Gornek in The Den (42.08, 68.35)| |C|Hunter| |R|Orc, Troll|
 A Etched Tablet |QID|3082| |N|Gornek in The Den (42.08, 68.35)| |C|Hunter| |R|Troll|
 A Rune-Inscribed Tablet |QID|3084| |N|Gornek in The Den (42.08, 68.35)| |C|Shaman| |R|Troll|
-A Rune-Inscribed Parchment |QID|3089| |N|Gornek in The Den (42.08, 68.35)| |C|Shaman| |R|Orc|
+A Rune-Inscribed Parchment |QID|3089| |N|Gornek in The Den (42.08, 68.35)| |C|Shaman| |R|Orc, Troll|
 A Glyphic Tablet |QID|3086| |N|Gornek in The Den (42.08, 68.35)| |C|Mage|
-A Encrypted Parchment |QID|3088| |N|Gornek in The Den (42.08, 68.35)| |C|Rogue| |R|Orc|
+A Encrypted Parchment |QID|3088| |N|Gornek in The Den (42.08, 68.35)| |C|Rogue| |R|Orc, Troll|
 A Encrypted Tablet |QID|3083| |N|Gornek in The Den (42.08, 68.35)| |C|Rogue| |R|Troll|
 A Hallowed Tablet |QID|3085| |N|Gornek in The Den (42.08, 68.35)| |C|Priest|
 A Simple Tablet |QID|3065| |N|Gornek in The Den (42.08, 68.35)| |C|Warrior| |R|Troll|
-A Simple Parchment |QID|2383| |N|Gornek in The Den (42.08, 68.35)| |C|Warrior| |R|Orc|
+A Simple Parchment |QID|2383| |N|Gornek in The Den (42.08, 68.35)| |C|Warrior| |R|Orc, Troll|
 A Tainted Parchment |QID|3090| |N|Gornek in The Den (42.08, 68.35)| |C|Warlock|
 
 A Sting of the Scorpid |QID|789| |N|Gornek in The Den (42.08, 68.35)|
@@ -184,18 +184,18 @@ N Level 10 Required |N|Grind to level 10 for class quests|
 R Razor Hill |QID|837| |N|Travel to Razor Hill (51.92, 43.45)|
 T Encroachment |QID|837| |N|Gar'Thok in Razor Hill (51.90, 43.48)|
 
-A Taming the Beast (Part 1) |QID|6062| |N|Thotar in Razor Hill (51.92, 43.45)| |C|Hunter|
+A Taming the Beast (Part 1) |QID|6062| |N|Thotar in Razor Hill (51.92, 43.45)| |C|Hunter| |LV|10|
 C Taming the Beast (Part 1) |QID|6062| |N|Use the Taming Rod to tame a Dire Mottled Boar (51.86, 45.96)| |C|Hunter| |U|15917|
 T Taming the Beast (Part 1) |QID|6062| |N|Thotar in Razor Hill (51.86, 43.49)| |C|Hunter|
-A Taming the Beast (Part 2) |QID|6083| |N|Thotar in Razor Hill (51.86, 43.49)| |C|Hunter|
+A Taming the Beast (Part 2) |QID|6083| |N|Thotar in Razor Hill (51.86, 43.49)| |C|Hunter| |LV|10|
 C Taming the Beast (Part 2) |QID|6083| |N|Use the Taming Rod to tame a Surf Crawler in Echo Isles (62.01, 79.27)| |C|Hunter|
 T Taming the Beast (Part 2) |QID|6083| |N|Thotar in Razor Hill (51.86, 43.49)| |C|Hunter|
-A Taming the Beast (Part 3) |QID|6082| |N|Thotar in Razor Hill (51.86, 43.49)| |C|Hunter|
+A Taming the Beast (Part 3) |QID|6082| |N|Thotar in Razor Hill (51.86, 43.49)| |C|Hunter| |LV|10|
 C Taming the Beast (Part 3) |QID|6082| |N|Use the Taming Rod to tame an Armored Scorpid (54.80, 36.94)| |C|Hunter|
 T Taming the Beast (Part 3) |QID|6082| |N|Thotar in Razor Hill (51.87, 43.49)| |C|Hunter|
-A Training the Beast |QID|6081| |N|Thotar in Razor Hill (52.01, 43.48)| |C|Hunter|
+A Training the Beast |QID|6081| |N|Thotar in Razor Hill (52.01, 43.48)| |C|Hunter| |LV|10|
 
-A Gan'rul's Summons |QID|1506| |N|Ophek in Razor Hill (54.21, 41.04)| |C|Warlock|
+A Gan'rul's Summons |QID|1506| |N|Ophek in Razor Hill (54.21, 41.04)| |C|Warlock| |LV|10|
 A Call of Fire |QID|2983| |N|Swart in Razor Hill Barracks (54.41, 42.58)| |C|Shaman|
 
 R Orgrimmar |QID|831| |N|Travel to Orgrimmar (33, 37)| |Z|Orgrimmar|
@@ -209,7 +209,7 @@ A Finding the Antidote |QID|813| |N|Kor'ghan in Cleft of Shadow (47.00, 53.56)| 
 A Speak with Un'thuwa |QID|1883| |N|Uthel'nay in Valley of Spirits (38.86, 86.28)| |C|Mage| |Z|Orgrimmar|
 
 T Gan'rul's Summons |QID|1506| |N|Gan'rul Bloodeye in Cleft of Shadow (48.26, 45.41)| |C|Warlock| |Z|Orgrimmar|
-A Creature of the Void |QID|1501| |N|Gan'rul Bloodeye in Cleft of Shadow (48.26, 45.41)| |C|Warlock| |Z|Orgrimmar|
+A Creature of the Void |QID|1501| |N|Gan'rul Bloodeye in Cleft of Shadow (48.26, 45.41)| |C|Warlock| |LV|10| |Z|Orgrimmar|
 
 R Drygulch Ravine |QID|835| |N|Travel to Drygulch Ravine (53.71, 27.79)|
 C Securing the Lines |QID|835| |N|Kill 12 Dustwind Savage and 8 Dustwind Storm Witch (53.91, 23.25) (51.93, 20.52)|
@@ -254,7 +254,7 @@ A Ak'Zeloth |QID|809| |N|Neeru Fireblade in Cleft of Shadow (49.56, 50.46)| |Z|O
 T Burning Shadows |QID|832| |N|Neeru Fireblade in Cleft of Shadow (49.56, 50.46)| |Z|Orgrimmar| |O|
 
 T Creature of the Void |QID|1501| |N|Gan'rul Bloodeye in Cleft of Shadow (48.26, 45.41)| |C|Warlock| |Z|Orgrimmar|
-A The Binding |QID|1504| |N|Gan'rul Bloodeye in Cleft of Shadow (48.26, 45.41)| |C|Warlock| |Z|Orgrimmar|
+A The Binding |QID|1504| |N|Gan'rul Bloodeye in Cleft of Shadow (48.26, 45.41)| |C|Warlock| |LV|10| |Z|Orgrimmar|
 C The Binding |QID|1504| |N|Use Glyphs of Summoning on the purple circle and subdue a Summoned Voidwalker (45.60, 0.07)| |U|7464| |C|Warlock| |Z|Orgrimmar|
 T The Binding |QID|1504| |N|Gan'rul Bloodeye in Cleft of Shadow (48.26, 45.41)| |C|Warlock| |Z|Orgrimmar|
 
