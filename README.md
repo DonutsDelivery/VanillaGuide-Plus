@@ -239,8 +239,8 @@ Each objective has an **action type** shown by its icon:
 - **< / >** buttons: Move backward/forward one step
 - **>>** button: Mark current step complete and advance
 - **Checkboxes**: Click to manually mark any step complete/incomplete
-- `/tg next` / `/tg prev`: Keyboard shortcuts for navigation
-- `/tg goto 50`: Jump directly to step 50
+- `/vg next` / `/vg prev`: Keyboard shortcuts for navigation
+- `/vg goto 50`: Jump directly to step 50
 
 **Smart skip on guide load:**
 - When loading a guide, TurtleGuide scans your quest log and automatically skips to where you left off
@@ -292,11 +292,11 @@ With **pfQuest** installed:
 
 | Command | Description |
 |---------|-------------|
-| `/tg` | Open options panel |
-| `/tg next` | Skip to next objective |
-| `/tg prev` | Go back to previous objective |
-| `/tg goto <n>` | Jump to step number |
-| `/tg reset` | Reset current guide progress |
+| `/vg` | Open options panel |
+| `/vg next` | Skip to next objective |
+| `/vg prev` | Go back to previous objective |
+| `/vg goto <n>` | Jump to step number |
+| `/vg reset` | Reset current guide progress |
 
 ## Credits
 

@@ -360,7 +360,7 @@ TurtleGuide.independentProfile = true
 function TurtleGuide:OnInitialize()
 	self:RegisterDB("TurtleGuideDB")
 	self:RegisterDefaults("char", defaults)
-	self:RegisterChatCommand({"/tg", "/turtleguide"}, options)
+	self:RegisterChatCommand({"/vg", "/turtleguide"}, options)
 	self.OnMenuRequest = options
 	self:SetupErrorCapture()
 	if not FuBar then
@@ -591,13 +591,16 @@ function TurtleGuide:GetObjectiveStatus(i)
 	local turnedin = self.turnedin[self.quests[i]]
 	local logi, complete = self:GetQuestDetails(self.quests[i])
 
-	-- Server-side completion check - ONLY for TURNIN actions
-	-- Don't auto-mark ACCEPT/COMPLETE as done based on server data
-	if not turnedin and self.actions[i] == "TURNIN" then
+	-- Server-side completion check for TURNIN and RUN actions with QID
+	if not turnedin then
+		local action = self.actions[i]
 		local qid = self:GetObjectiveTag("QID", i)
 		if qid and self:IsQuestCompletedOnServer(qid) then
-			turnedin = true
-			-- Don't persist - let the user manually confirm or let normal flow handle it
+			-- TURNIN: auto-complete if quest is done on server
+			-- RUN: auto-complete travel steps if linked quest is done (no longer needed)
+			if action == "TURNIN" or action == "RUN" then
+				turnedin = true
+			end
 		end
 	end
 
