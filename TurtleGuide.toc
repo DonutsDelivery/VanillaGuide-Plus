@@ -1,8 +1,8 @@
 ## Interface: 11200
 
-## Title: TurtleGuide
+## Title: VanillaGuide+
 ## Notes: Hybrid leveling guide with race-based routing and TomTom navigation
-## Author: TurtleGuide Contributors
+## Author: VanillaGuide+ Contributors
 ## Version: 1.0
 ## X-Category: Quest
 

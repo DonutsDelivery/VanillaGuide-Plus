@@ -126,11 +126,14 @@ frame:SetScript("OnShow", function()
 	this:SetScript("OnUpdate", ww.FadeIn)
 end)
 
+-- Filtered guide list (excludes route pack guides like Optimized/ and RXP/)
+local filteredGuides = {}
+
 frame:EnableMouseWheel()
 frame:SetScript("OnMouseWheel", function()
 	local f, val = this, arg1
 	offset = offset - val * NUMROWS
-	if (offset + NUMROWS * 2) > table.getn(TurtleGuide.guidelist) then offset = offset - NUMROWS end
+	if (offset + NUMROWS * 2) > table.getn(filteredGuides) then offset = offset - NUMROWS end
 	if offset < 0 then offset = 0 end
 	TurtleGuide:UpdateGuideListPanel()
 end)
@@ -149,10 +152,18 @@ function TurtleGuide:UpdateGuideListPanel()
 		frame.title:SetText("Guide List")
 	end
 
+	-- Build filtered list (exclude route pack guides)
+	for k in pairs(filteredGuides) do filteredGuides[k] = nil end
+	for _, name in ipairs(self.guidelist) do
+		if not self:IsRoutePackGuide(name) then
+			table.insert(filteredGuides, name)
+		end
+	end
+
 	for i, row in ipairs(rows) do
 		row.i = i + offset + 1
 
-		local name = self.guidelist[i + offset + 1]
+		local name = filteredGuides[i + offset + 1]
 		local complete = self.db.char.currentguide == name and (self.current - 1) / table.getn(self.actions) or self.db.char.completion[name]
 		row.guide = name
 

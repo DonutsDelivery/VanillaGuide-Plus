@@ -197,6 +197,156 @@ TurtleGuide:RegisterRoute("Goblin", MergeRoutes({
 }, HordeSharedPath))
 
 -- ============================================================================
+-- Route Packs
+-- ============================================================================
+
+-- VanillaGuide Route Pack (default) - uses the existing Optimized routes
+TurtleGuide:RegisterRoutePack("VanillaGuide", {
+	displayName = "VanillaGuide",
+	description = "Quest-optimized 1-60 leveling",
+	routes = {
+		Human = MergeRoutes({
+			{zone = "Elwynn Forest", levels = "1-10", guide = "Optimized/Elwynn Forest (1-10)"},
+			{zone = "Westfall", levels = "10-12", guide = "Optimized/Westfall (10-12)"},
+		}, AllianceSharedPath),
+		Dwarf = MergeRoutes({
+			{zone = "Dun Morogh", levels = "1-12", guide = "Optimized/Dun Morogh (1-12)"},
+		}, AllianceSharedPath),
+		Gnome = MergeRoutes({
+			{zone = "Dun Morogh", levels = "1-12", guide = "Optimized/Dun Morogh (1-12)"},
+		}, AllianceSharedPath),
+		NightElf = MergeRoutes({
+			{zone = "Teldrassil", levels = "1-12", guide = "Optimized/Teldrassil (1-12)"},
+		}, AllianceSharedPath),
+		HighElf = MergeRoutes({
+			{zone = "Thalassian Highlands", levels = "1-10", guide = "Thalassian Highlands (1-10)"},
+		}, AllianceSharedPath),
+		Orc = MergeRoutes({
+			{zone = "Durotar", levels = "1-12", guide = "Optimized/Durotar (1-12)"},
+		}, HordeSharedPath),
+		Troll = MergeRoutes({
+			{zone = "Durotar", levels = "1-12", guide = "Optimized/Durotar (1-12)"},
+		}, HordeSharedPath),
+		Tauren = MergeRoutes({
+			{zone = "Mulgore", levels = "1-12", guide = "Optimized/Mulgore (1-12)"},
+		}, HordeSharedPath),
+		Undead = MergeRoutes({
+			{zone = "Tirisfal Glades", levels = "1-12", guide = "Optimized/Tirisfal Glades (1-12)"},
+		}, HordeSharedPath),
+		Goblin = MergeRoutes({
+			{zone = "Blackstone Island", levels = "1-10", guide = "Blackstone Island (1-10)"},
+		}, HordeSharedPath),
+	},
+})
+
+-- RestedXP Route Pack - Survival/hardcore-safe routes (partial coverage)
+-- Alliance: 1-21, Horde: 1-23
+local RXPAllianceSharedPath = {
+	{zone = "Westfall", levels = "13-15", guide = "RXP/13-15 Westfall"},
+	{zone = "Darkshore", levels = "15-18", guide = "RXP/15-18 Darkshore"},
+	{zone = "Loch Modan", levels = "18-19", guide = "RXP/18-19 Loch Modan"},
+	{zone = "Redridge Mountains", levels = "19-20", guide = "RXP/19-20 Redridge"},
+	{zone = "Darkshore/Ashenvale", levels = "20-21", guide = "RXP/20-21 Darkshore/Ashenvale"},
+}
+
+local RXPHordeSharedPath = {
+	{zone = "Silverpine Forest", levels = "13-15", guide = "RXP/13-15 Silverpine Forest"},
+	{zone = "The Barrens", levels = "15-19", guide = "RXP/15-19 The Barrens"},
+	{zone = "Stonetalon/Barrens/Ashenvale", levels = "19-23", guide = "RXP/19-23 Stonetalon/Barrens/Ashenvale"},
+}
+
+TurtleGuide:RegisterRoutePack("RestedXP", {
+	displayName = "RestedXP",
+	description = "Survival/hardcore-safe routes (Alliance 1-21, Horde 1-23)",
+	routes = {
+		Human = MergeRoutes({
+			{zone = "Northshire", levels = "1-6", guide = "RXP/1-6 Northshire"},
+			{zone = "Elwynn Forest", levels = "6-11", guide = "RXP/6-11 Elwynn Forest"},
+			{zone = "Loch Modan", levels = "11-13", guide = "RXP/11-13 Loch Modan"},
+		}, RXPAllianceSharedPath),
+		Dwarf = MergeRoutes({
+			{zone = "Coldridge Valley", levels = "1-6", guide = "RXP/1-6 Coldridge Valley"},
+			{zone = "Dun Morogh", levels = "6-10", guide = "RXP/6-10 Dun Morogh"},
+			{zone = "Elwynn", levels = "10-11", guide = "RXP/10-11 Elwynn (Dwarf/Gnome)"},
+			{zone = "Loch Modan", levels = "11-13", guide = "RXP/11-13 Loch Modan (Dwarf/Gnome)"},
+		}, RXPAllianceSharedPath),
+		Gnome = MergeRoutes({
+			{zone = "Coldridge Valley", levels = "1-6", guide = "RXP/1-6 Coldridge Valley"},
+			{zone = "Dun Morogh", levels = "6-10", guide = "RXP/6-10 Dun Morogh"},
+			{zone = "Elwynn", levels = "10-11", guide = "RXP/10-11 Elwynn (Dwarf/Gnome)"},
+			{zone = "Loch Modan", levels = "11-13", guide = "RXP/11-13 Loch Modan (Dwarf/Gnome)"},
+		}, RXPAllianceSharedPath),
+		NightElf = MergeRoutes({
+			{zone = "Shadowglen", levels = "1-6", guide = "RXP/1-6 Shadowglen"},
+			{zone = "Teldrassil", levels = "6-11", guide = "RXP/6-11 Teldrassil"},
+			{zone = "Darkshore", levels = "11-13", guide = "RXP/11-13 Darkshore (Night Elf)"},
+			{zone = "Loch Modan", levels = "13-13", guide = "RXP/13-13 Loch Modan (Night Elf)"},
+		}, RXPAllianceSharedPath),
+		Orc = MergeRoutes({
+			{zone = "Valley of Trials", levels = "1-6", guide = "RXP/1-6 Orc/Troll"},
+			{zone = "Durotar", levels = "6-13", guide = "RXP/6-13 Orc/Troll"},
+		}, RXPHordeSharedPath),
+		Troll = MergeRoutes({
+			{zone = "Valley of Trials", levels = "1-6", guide = "RXP/1-6 Orc/Troll"},
+			{zone = "Durotar", levels = "6-13", guide = "RXP/6-13 Orc/Troll"},
+		}, RXPHordeSharedPath),
+		Tauren = MergeRoutes({
+			{zone = "Red Cloud Mesa", levels = "1-6", guide = "RXP/1-6 Tauren"},
+			{zone = "Mulgore", levels = "6-13", guide = "RXP/6-13 Tauren"},
+		}, RXPHordeSharedPath),
+		Undead = MergeRoutes({
+			{zone = "Deathknell", levels = "1-6", guide = "RXP/1-6 Undead"},
+			{zone = "Tirisfal Glades", levels = "6-13", guide = "RXP/6-13 Undead"},
+		}, RXPHordeSharedPath),
+	},
+})
+
+-- Kamisayo Speedrun Route Pack - Horde Warrior speedrun 1-60
+local KamisayoRoute = {
+	{zone = "Durotar", levels = "1-13", guide = "RXP/Kamisayo Speedrun 1-13"},
+	{zone = "The Barrens", levels = "13-16", guide = "RXP/Kamisayo Speedrun 13-16"},
+	{zone = "The Barrens", levels = "16-22", guide = "RXP/Kamisayo Speedrun 16-22"},
+	{zone = "Stonetalon/Ashenvale", levels = "22-24", guide = "RXP/Kamisayo Speedrun 22-24"},
+	{zone = "Thousand Needles", levels = "24-28", guide = "RXP/Kamisayo Speedrun 24-28"},
+	{zone = "Hillsbrad/Arathi", levels = "28-30", guide = "RXP/Kamisayo Speedrun 28-30"},
+	{zone = "Stranglethorn Vale", levels = "30-33", guide = "RXP/Kamisayo Speedrun 30-33"},
+	{zone = "Desolace", levels = "33-34", guide = "RXP/Kamisayo Speedrun 33-34"},
+	{zone = "Stranglethorn Vale", levels = "34-37", guide = "RXP/Kamisayo Speedrun 34-37"},
+	{zone = "Arathi/Alterac", levels = "37-38", guide = "RXP/Kamisayo Speedrun 37-38"},
+	{zone = "Dustwallow Marsh", levels = "38-39", guide = "RXP/Kamisayo Speedrun 38-39"},
+	{zone = "Stranglethorn Vale", levels = "39-40", guide = "RXP/Kamisayo Speedrun 39-40"},
+	{zone = "Badlands", levels = "40-41", guide = "RXP/Kamisayo Speedrun 40-41"},
+	{zone = "Swamp of Sorrows", levels = "41-42", guide = "RXP/Kamisayo Speedrun 41-42"},
+	{zone = "Stranglethorn Vale", levels = "42-43", guide = "RXP/Kamisayo Speedrun 42-43"},
+	{zone = "Tanaris", levels = "43-44", guide = "RXP/Kamisayo Speedrun 43-44"},
+	{zone = "Feralas", levels = "44-46", guide = "RXP/Kamisayo Speedrun 44-46"},
+	{zone = "Hinterlands", levels = "46-49", guide = "RXP/Kamisayo Speedrun 46-49"},
+	{zone = "Tanaris", levels = "49-50", guide = "RXP/Kamisayo Speedrun 49-50"},
+	{zone = "Azshara", levels = "50-51", guide = "RXP/Kamisayo Speedrun 50-51"},
+	{zone = "Un'Goro Crater", levels = "51-52", guide = "RXP/Kamisayo Speedrun 51-52"},
+	{zone = "Burning Steppes", levels = "52-54", guide = "RXP/Kamisayo Speedrun 52-54"},
+	{zone = "Winterspring", levels = "54-56", guide = "RXP/Kamisayo Speedrun 54-56"},
+	{zone = "Silithus", levels = "56-58", guide = "RXP/Kamisayo Speedrun 56-58"},
+	{zone = "Plaguelands", levels = "58-59", guide = "RXP/Kamisayo Speedrun 58-59"},
+	{zone = "Winterspring", levels = "59-60", guide = "RXP/Kamisayo Speedrun 59-60"},
+}
+
+TurtleGuide:RegisterRoutePack("Kamisayo Speedrun", {
+	displayName = "Kamisayo Speedrun",
+	description = "Horde Warrior speedrun 1-60",
+	factionRestriction = "Horde",
+	classRestriction = "Warrior",
+	routes = {
+		Orc = KamisayoRoute,
+		Troll = KamisayoRoute,
+		Tauren = KamisayoRoute,
+		Undead = KamisayoRoute,
+		Goblin = KamisayoRoute,
+	},
+})
+
+
+-- ============================================================================
 -- Debug Functions
 -- ============================================================================
 

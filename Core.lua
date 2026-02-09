@@ -16,6 +16,9 @@ TurtleGuide.myfaction = UnitFactionGroup("player")
 -- Race-based route definitions
 TurtleGuide.routes = {}
 
+-- Route pack registry (named collections of per-race routes)
+TurtleGuide.routepacks = {}
+
 -- Turtle WoW custom race support
 -- Maps race strings from UnitRace() to route names and faction info
 TurtleGuide.turtleRaces = {
@@ -118,6 +121,7 @@ local defaults = {
 	branchsavedguide = nil,
 	branchsavedstep = nil,
 	autobranch = false,  -- auto-branch to Turtle WoW zones
+	routepack = nil,  -- Active route pack name (e.g., "VanillaGuide", "RestedXP")
 	-- Starting zone selection (branch-and-rejoin)
 	startingzoneselected = false,  -- has player picked a starting zone?
 	selectedstartingzone = nil,    -- which starting zone was selected (e.g., "Human", "Dwarf")
@@ -342,6 +346,33 @@ local options = {
 			end,
 			order = 20,
 		},
+		RoutePack = {
+			name = "Route Packs",
+			desc = "List available route packs",
+			type = "execute",
+			func = function()
+				local packs = TurtleGuide:GetAvailableRoutePacks()
+				local current = TurtleGuide.db.char.routepack
+				TurtleGuide:Print("--- Available Route Packs ---")
+				for _, pack in ipairs(packs) do
+					local marker = (current == pack.name) and " |cff00ff00(active)|r" or ""
+					TurtleGuide:Print("  " .. pack.displayName .. marker .. " - " .. pack.description)
+				end
+				TurtleGuide:Print("Use |cff00ccff/vg SetRoutePack <name>|r to switch.")
+			end,
+			order = 21,
+		},
+		SetRoutePack = {
+			name = "Set Route Pack",
+			desc = "Switch to a route pack (e.g., /vg SetRoutePack RestedXP)",
+			type = "text",
+			usage = "<pack name>",
+			get = false,
+			set = function(v)
+				TurtleGuide:SelectRoutePack(v)
+			end,
+			order = 22,
+		},
 	},
 }
 
@@ -349,7 +380,7 @@ local options = {
 -- FuBar
 ---------
 TurtleGuide.hasIcon = [[Interface\QuestFrame\UI-QuestLog-BookIcon]]
-TurtleGuide.title = "TurtleGuide"
+TurtleGuide.title = "VanillaGuide+"
 TurtleGuide.defaultMinimapPosition = 215
 TurtleGuide.defaultPosition = "CENTER"
 TurtleGuide.cannotDetachTooltip = true
@@ -390,6 +421,19 @@ function TurtleGuide:OnEnable()
 end
 
 function TurtleGuide:InitializeRoute()
+	-- Migration: set default route pack for existing characters
+	if not self.db.char.routepack and self.db.char.routeselected then
+		self.db.char.routepack = "VanillaGuide"
+	end
+
+	-- Load active route pack's routes into self.routes
+	local activePack = self:GetCurrentRoutePack()
+	if activePack then
+		for race, route in pairs(activePack.routes) do
+			self.routes[race] = route
+		end
+	end
+
 	-- If no route selected yet, use the new starting zone selection system
 	if not self.db.char.routeselected then
 		-- Try the new branch-and-rejoin starting zone system first
@@ -464,7 +508,7 @@ function TurtleGuide:OnTooltipUpdate()
 end
 
 function TurtleGuide:OnTextUpdate()
-	self:SetText("TurtleGuide")
+	self:SetText("VanillaGuide+")
 end
 
 function TurtleGuide:OnClick()
@@ -519,6 +563,88 @@ end
 -- Register a race-based route
 function TurtleGuide:RegisterRoute(race, route)
 	self.routes[race] = route
+end
+
+-- Register a named route pack (collection of per-race routes)
+function TurtleGuide:RegisterRoutePack(packName, packInfo)
+	self.routepacks[packName] = {
+		name = packName,
+		displayName = packInfo.displayName or packName,
+		description = packInfo.description or "",
+		routes = packInfo.routes or {},
+		factionRestriction = packInfo.factionRestriction,
+		classRestriction = packInfo.classRestriction,
+	}
+end
+
+-- Check if a guide belongs to a route pack (should be hidden from guide list)
+function TurtleGuide:IsRoutePackGuide(guideName)
+	return string.find(guideName, "^Optimized/") or string.find(guideName, "^RXP/")
+end
+
+-- Get the currently active route pack (or nil)
+function TurtleGuide:GetCurrentRoutePack()
+	local packName = self.db.char.routepack
+	if packName and self.routepacks[packName] then
+		return self.routepacks[packName]
+	end
+	return nil
+end
+
+-- Get route packs available for the player's faction and class
+function TurtleGuide:GetAvailableRoutePacks()
+	local faction = self.myfaction
+	local _, playerClass = UnitClass("player")
+	local available = {}
+
+	for name, pack in pairs(self.routepacks) do
+		local factionOk = not pack.factionRestriction or pack.factionRestriction == faction
+		local classOk = not pack.classRestriction or pack.classRestriction == playerClass
+		if factionOk and classOk then
+			table.insert(available, pack)
+		end
+	end
+
+	-- Sort by name for consistent display
+	table.sort(available, function(a, b) return a.name < b.name end)
+	return available
+end
+
+-- Switch to a route pack, replacing self.routes with the pack's routes
+function TurtleGuide:SelectRoutePack(packName)
+	local pack = self.routepacks[packName]
+	if not pack then
+		self:Print("|cffff0000Unknown route pack: " .. tostring(packName) .. "|r")
+		return false
+	end
+
+	-- Check faction/class restrictions
+	local faction = self.myfaction
+	local _, playerClass = UnitClass("player")
+	if pack.factionRestriction and pack.factionRestriction ~= faction then
+		self:Print("|cffff0000Route pack '" .. packName .. "' is for " .. pack.factionRestriction .. " only.|r")
+		return false
+	end
+	if pack.classRestriction and pack.classRestriction ~= playerClass then
+		self:Print("|cffff0000Route pack '" .. packName .. "' requires " .. pack.classRestriction .. " class.|r")
+		return false
+	end
+
+	-- Save selection
+	self.db.char.routepack = packName
+
+	-- Copy pack routes into self.routes (replacing existing)
+	for race, route in pairs(pack.routes) do
+		self.routes[race] = route
+	end
+
+	-- Apply route for current race
+	local _, race = UnitRace("player")
+	local routeName = self:GetRouteForRace(race)
+	self:ApplyRouteSelection(routeName)
+
+	self:Print("|cff00ff00Route pack switched to: " .. pack.displayName .. "|r")
+	return true
 end
 
 
@@ -970,6 +1096,9 @@ function TurtleGuide:GetGuideCategory(guideName)
 	if string.find(guideName, "^Optimized/") then
 		return "optimized"
 	end
+	if string.find(guideName, "^RXP/") then
+		return "rxp"
+	end
 	-- Check if any turtle zone name appears in guide name
 	for zone in pairs(TURTLE_ZONES) do
 		if string.find(guideName, zone) then
@@ -1119,44 +1248,40 @@ function TurtleGuide:UpdateBranchSelectorPanel()
 	local margin = 5  -- Show guides +/- 5 levels
 
 	-- Collect and categorize level-appropriate guides
+	-- Skip route pack guides (Optimized/ and RXP/) from branch selector
 	local categories = {
-		optimized = {},
 		turtle = {},
 		zone = {},
 	}
 
 	-- Use guidelist array for consistent iteration (same as GuideListFrame)
 	for _, name in ipairs(self.guidelist) do
-		if name ~= self.db.char.currentguide then
+		if name ~= self.db.char.currentguide and not self:IsRoutePackGuide(name) then
 			-- Parse level range from guide name
 			local minLevel, maxLevel = self:ParseGuideLevelRange(name)
 			if minLevel and maxLevel then
 				if playerLevel >= (minLevel - margin) and playerLevel <= (maxLevel + margin) then
 					local cat = self:GetGuideCategory(name)
-					table.insert(categories[cat], name)
+					if categories[cat] then
+						table.insert(categories[cat], name)
+					end
 				end
 			else
 				-- Guides without level range - include them in zone category
 				local cat = self:GetGuideCategory(name)
-				table.insert(categories[cat], name)
+				if categories[cat] then
+					table.insert(categories[cat], name)
+				end
 			end
 		end
 	end
 
 	-- Sort each category
-	table.sort(categories.optimized)
 	table.sort(categories.turtle)
 	table.sort(categories.zone)
 
 	-- Build display list with headers
 	local displayList = {}
-
-	if table.getn(categories.optimized) > 0 then
-		table.insert(displayList, {header = true, text = "--- Optimized Path ---"})
-		for _, name in ipairs(categories.optimized) do
-			table.insert(displayList, {header = false, text = name, guide = name})
-		end
-	end
 
 	if table.getn(categories.turtle) > 0 then
 		table.insert(displayList, {header = true, text = "--- TurtleWoW Zones ---"})
@@ -1221,7 +1346,7 @@ end
 function TurtleGuide:CreateRouteSelectorFrame()
 	local f = CreateFrame("Frame", "TurtleGuideRouteSelectorFrame", UIParent)
 	f:SetWidth(300)
-	f:SetHeight(450)
+	f:SetHeight(550)
 	f:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
 	f:SetBackdrop({
 		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
@@ -1241,9 +1366,63 @@ function TurtleGuide:CreateRouteSelectorFrame()
 	title:SetPoint("TOP", f, "TOP", 0, -20)
 	title:SetText(L["Select Your Race"])
 
+	-- Route Pack section
+	local packHeader = f:CreateFontString(nil, "ARTWORK")
+	packHeader:SetFontObject(GameFontNormal)
+	packHeader:SetPoint("TOP", title, "BOTTOM", 0, -12)
+	packHeader:SetText("|cffffd100Route Pack:|r")
+
+	-- Current pack display
+	local packStatus = f:CreateFontString(nil, "ARTWORK")
+	packStatus:SetFontObject(GameFontHighlightSmall)
+	packStatus:SetPoint("TOP", packHeader, "BOTTOM", 0, -4)
+	packStatus:SetWidth(260)
+	f.packStatus = packStatus
+
+	-- Pack buttons container
+	f.packButtons = {}
+	local lastPackBtn
+	local availablePacks = self:GetAvailableRoutePacks()
+	for i, pack in ipairs(availablePacks) do
+		local btn = CreateFrame("Button", nil, f, "UIPanelButtonTemplate")
+		btn:SetWidth(200)
+		btn:SetHeight(24)
+		if lastPackBtn then
+			btn:SetPoint("TOP", lastPackBtn, "BOTTOM", 0, -4)
+		else
+			btn:SetPoint("TOP", packStatus, "BOTTOM", 0, -6)
+		end
+		btn.packName = pack.name
+		btn.packDescription = pack.description
+		btn:SetText(pack.displayName)
+		btn:SetScript("OnClick", function()
+			TurtleGuide:SelectRoutePack(this.packName)
+			TurtleGuide:UpdateRouteSelectorPackHighlight()
+		end)
+		btn:SetScript("OnEnter", function()
+			GameTooltip:SetOwner(this, "ANCHOR_RIGHT")
+			GameTooltip:SetText(this.packDescription, nil, nil, nil, nil, true)
+		end)
+		btn:SetScript("OnLeave", function()
+			GameTooltip:Hide()
+		end)
+		f.packButtons[i] = btn
+		lastPackBtn = btn
+	end
+
+	-- Separator
+	local sep = f:CreateFontString(nil, "ARTWORK")
+	sep:SetFontObject(GameFontNormal)
+	if lastPackBtn then
+		sep:SetPoint("TOP", lastPackBtn, "BOTTOM", 0, -10)
+	else
+		sep:SetPoint("TOP", packStatus, "BOTTOM", 0, -10)
+	end
+	sep:SetText("|cffffd100Race Override:|r")
+
 	local desc = f:CreateFontString(nil, "ARTWORK")
 	desc:SetFontObject(GameFontHighlight)
-	desc:SetPoint("TOP", title, "BOTTOM", 0, -10)
+	desc:SetPoint("TOP", sep, "BOTTOM", 0, -4)
 	desc:SetWidth(260)
 	desc:SetText(L["Choose a leveling route based on your race:"])
 
@@ -1290,7 +1469,7 @@ function TurtleGuide:CreateRouteSelectorFrame()
 		if lastButton then
 			btn:SetPoint("TOP", lastButton, "BOTTOM", 0, -10)
 		else
-			btn:SetPoint("TOP", desc, "BOTTOM", 0, -20)
+			btn:SetPoint("TOP", desc, "BOTTOM", 0, -10)
 		end
 		btn:SetText(displayName)
 		btn:SetScript("OnClick", function()
@@ -1305,7 +1484,29 @@ function TurtleGuide:CreateRouteSelectorFrame()
 	closeBtn:SetPoint("TOPRIGHT", f, "TOPRIGHT", -5, -5)
 
 	self.routeSelectorFrame = f
+
+	-- Update pack highlight on show
+	f:SetScript("OnShow", function()
+		TurtleGuide:UpdateRouteSelectorPackHighlight()
+	end)
+
 	f:Hide()
+end
+
+function TurtleGuide:UpdateRouteSelectorPackHighlight()
+	local f = self.routeSelectorFrame
+	if not f then return end
+
+	local current = self.db.char.routepack or "VanillaGuide"
+	f.packStatus:SetText("Active: |cff00ff00" .. current .. "|r")
+
+	for _, btn in ipairs(f.packButtons) do
+		if btn.packName == current then
+			btn:SetText("|cff00ff00" .. btn.packName .. "|r")
+		else
+			btn:SetText(btn.packName)
+		end
+	end
 end
 
 function TurtleGuide:SelectRoute(race)
@@ -1736,6 +1937,29 @@ function TurtleGuide:SelectStartingZone(zoneInfo)
 	self.db.char.currentroute = zoneInfo.race
 	self.db.char.routeselected = true
 
+	-- Set route pack based on zone type
+	if zoneInfo.isSpeedrun then
+		self.db.char.routepack = "Kamisayo Speedrun"
+		local pack = self.routepacks["Kamisayo Speedrun"]
+		if pack then
+			for race, route in pairs(pack.routes) do
+				self.routes[race] = route
+			end
+		end
+	elseif zoneInfo.isSurvival then
+		self.db.char.routepack = "RestedXP"
+		local pack = self.routepacks["RestedXP"]
+		if pack then
+			for race, route in pairs(pack.routes) do
+				self.routes[race] = route
+			end
+		end
+	else
+		if not self.db.char.routepack then
+			self.db.char.routepack = "VanillaGuide"
+		end
+	end
+
 	-- Load the starting zone guide
 	if self.guides[zoneInfo.guide] then
 		self.db.char.currentguide = zoneInfo.guide
@@ -1835,7 +2059,7 @@ function TurtleGuide:CreateErrorLogFrame()
 	local title = f:CreateFontString(nil, "ARTWORK")
 	title:SetFontObject(GameFontNormalLarge)
 	title:SetPoint("TOP", f, "TOP", 0, -16)
-	title:SetText("TurtleGuide Error Log")
+	title:SetText("VanillaGuide+ Error Log")
 
 	local desc = f:CreateFontString(nil, "ARTWORK")
 	desc:SetFontObject(GameFontHighlight)
