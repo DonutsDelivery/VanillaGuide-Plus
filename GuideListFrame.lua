@@ -6,9 +6,12 @@ local title
 
 local NUMROWS, COLWIDTH = 16, 210
 local ROWHEIGHT = 305 / NUMROWS
+local TOTALROWS = NUMROWS * 3
 
 local offset = 0
 local rows = {}
+local displayList = {}
+local levelFilterOn = false
 
 local function HideTooltip()
 	if GameTooltip:IsOwned(this) then
@@ -44,14 +47,12 @@ local function OnClick()
 		TurtleGuide:UpdateGuideListPanel()
 		GameTooltip:Hide()
 	elseif btn == "RightButton" then
-		-- Right-click: Branch to this guide (saves current progress)
 		local text = f.guide
 		if text then
 			TurtleGuide:BranchToGuide(text)
 			TurtleGuide:UpdateGuideListPanel()
 		end
 	else
-		-- Left-click: Load guide normally
 		local text = f.guide
 		if not text then f:SetChecked(false)
 		else
@@ -83,8 +84,30 @@ title:SetFont(fontname, 18, fontflags)
 title:SetText("Guide List")
 frame.title = title
 
--- Fill in the frame with "guides' CheckButtons"
-for i = 1, NUMROWS * 3 do
+-- Level filter checkbox
+local filterCheck = ww.SummonCheckBox(18, frame, "TOPLEFT", 15, -6)
+local filterLabel = ww.SummonFontString(filterCheck, "OVERLAY", "GameFontNormalSmall", "Level filter (+/-5)", "LEFT", filterCheck, "RIGHT", 2, 0)
+filterCheck:SetScript("OnClick", function()
+	levelFilterOn = not levelFilterOn
+	filterCheck:SetChecked(levelFilterOn)
+	offset = 0
+	TurtleGuide:UpdateGuideListPanel()
+end)
+
+-- Return to Main button
+local returnBtn = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
+returnBtn:SetWidth(120)
+returnBtn:SetHeight(20)
+returnBtn:SetPoint("LEFT", filterCheck, "RIGHT", 120, 0)
+returnBtn:SetText("Return to Main")
+returnBtn:SetScript("OnClick", function()
+	TurtleGuide:ReturnFromBranch()
+	TurtleGuide:UpdateGuideListPanel()
+end)
+frame.returnBtn = returnBtn
+
+-- Fill in the frame with guide CheckButtons (3-column layout)
+for i = 1, TOTALROWS do
 	local anchor, point = rows[i - 1], "BOTTOMLEFT"
 	if i == 1 then anchor, point = frame, "TOPLEFT"
 	elseif i == (NUMROWS + 1) then anchor, point = rows[1], "TOPRIGHT"
@@ -99,12 +122,13 @@ for i = 1, NUMROWS * 3 do
 	local highlight = ww.SummonTexture(row, nil, nil, nil, "Interface\\HelpFrame\\HelpFrameButton-Highlight")
 	highlight:SetTexCoord(0, 1, 0, 0.578125)
 	highlight:SetAllPoints()
+	highlight:SetAlpha(0.5)
 	row:SetHighlightTexture(highlight)
 	row:SetCheckedTexture(highlight)
 
 	local text = ww.SummonFontString(row, nil, "GameFontWhite", nil, "LEFT", 6, 0)
-	local fontname, fontheight, fontflags = title:GetFont()
-	text:SetFont(fontname, 11, fontflags)
+	local fn, fh, ff = title:GetFont()
+	text:SetFont(fn, 11, ff)
 	text:SetTextColor(.79, .79, .79, 1)
 
 	row:RegisterForClicks("LeftButtonUp", "RightButtonUp")
@@ -117,6 +141,7 @@ for i = 1, NUMROWS * 3 do
 end
 
 frame:SetScript("OnShow", function()
+	offset = 0
 	local quad, vhalf, hhalf = TurtleGuide.GetQuadrant(TurtleGuide.statusframe)
 	local anchpoint = (vhalf == "TOP" and "BOTTOM" or "TOP") .. hhalf
 	this:ClearAllPoints()
@@ -126,14 +151,12 @@ frame:SetScript("OnShow", function()
 	this:SetScript("OnUpdate", ww.FadeIn)
 end)
 
--- Filtered guide list (excludes route pack guides like Optimized/ and RXP/)
-local filteredGuides = {}
-
 frame:EnableMouseWheel()
 frame:SetScript("OnMouseWheel", function()
-	local f, val = this, arg1
+	local val = arg1
 	offset = offset - val * NUMROWS
-	if (offset + NUMROWS * 2) > table.getn(filteredGuides) then offset = offset - NUMROWS end
+	local maxOffset = math.max(0, table.getn(displayList) - TOTALROWS)
+	if offset > maxOffset then offset = maxOffset end
 	if offset < 0 then offset = 0 end
 	TurtleGuide:UpdateGuideListPanel()
 end)
@@ -141,6 +164,14 @@ end)
 ww.SetFadeTime(frame, 0.7)
 
 table.insert(UISpecialFrames, "TurtleGuideGuideList")
+
+-- Public API: open guide list with optional level filter preset
+function TurtleGuide:ShowGuideList(withLevelFilter)
+	if withLevelFilter then
+		levelFilterOn = true
+	end
+	self.guidelistframe:Show()
+end
 
 function TurtleGuide:UpdateGuideListPanel()
 	if not frame or not frame:IsVisible() then return end
@@ -152,30 +183,125 @@ function TurtleGuide:UpdateGuideListPanel()
 		frame.title:SetText("Guide List")
 	end
 
-	-- Build filtered list (exclude route pack guides)
-	for k in pairs(filteredGuides) do filteredGuides[k] = nil end
+	-- Show/hide Return to Main button
+	if self.db.char.isbranching then
+		frame.returnBtn:Show()
+		frame.returnBtn:Enable()
+	else
+		frame.returnBtn:Hide()
+	end
+
+	-- Update level filter checkbox state
+	filterCheck:SetChecked(levelFilterOn)
+
+	-- Build categorized display list (fresh table each time)
+	displayList = {}
+
+	local playerLevel = UnitLevel("player") or 0
+	local margin = 5
+
+	local turtleGuides = {}
+	local zoneGuides = {}
+
 	for _, name in ipairs(self.guidelist) do
 		if not self:IsRoutePackGuide(name) then
-			table.insert(filteredGuides, name)
+			local include = true
+			if levelFilterOn then
+				local minLevel, maxLevel = self:ParseGuideLevelRange(name)
+				if minLevel and maxLevel then
+					if playerLevel < (minLevel - margin) or playerLevel > (maxLevel + margin) then
+						include = false
+					end
+				end
+			end
+			if include then
+				local cat = self:GetGuideCategory(name)
+				if cat == "turtle" then
+					table.insert(turtleGuides, name)
+				else
+					table.insert(zoneGuides, name)
+				end
+			end
 		end
 	end
 
-	for i, row in ipairs(rows) do
-		row.i = i + offset + 1
+	table.sort(turtleGuides)
+	table.sort(zoneGuides)
 
-		local name = filteredGuides[i + offset + 1]
-		local complete = self.db.char.currentguide == name and (self.current - 1) / table.getn(self.actions) or self.db.char.completion[name]
-		row.guide = name
-
-		local r, g, b = self.ColorGradient(complete or 0)
-		local text = complete and complete ~= 0 and string.format("|cff%02x%02x%02x%s", r * 255, g * 255, b * 255, name) or name
-
-		-- Mark saved main route when branching
-		if self.db.char.isbranching and self.db.char.branchsavedguide == name then
-			text = "|cff00ff00[Main]|r " .. text
+	if table.getn(turtleGuides) > 0 then
+		table.insert(displayList, {header = true, text = "--- TurtleWoW Zones ---"})
+		for _, name in ipairs(turtleGuides) do
+			table.insert(displayList, {guide = name})
 		end
+	end
 
-		row.text:SetText(text)
-		row:SetChecked(self.db.char.currentguide == name)
+	if table.getn(zoneGuides) > 0 then
+		table.insert(displayList, {header = true, text = "--- Zone Guides ---"})
+		for _, name in ipairs(zoneGuides) do
+			table.insert(displayList, {guide = name})
+		end
+	end
+
+	-- Clamp offset
+	local maxOffset = math.max(0, table.getn(displayList) - TOTALROWS)
+	if offset > maxOffset then offset = maxOffset end
+	if offset < 0 then offset = 0 end
+
+	-- Update rows (never hide — just clear text for unused slots, matching original pattern)
+	for i, row in ipairs(rows) do
+		local entry = displayList[i + offset]
+		if entry and entry.header then
+			row.text:SetText("|cffffd100" .. entry.text .. "|r")
+			row.guide = nil
+			row:SetChecked(false)
+			row:Enable()
+		elseif entry and entry.guide then
+			row:Enable()
+			local name = entry.guide
+			row.guide = name
+
+			-- Color by level range: green = in range, yellow = +-5, red = out of range
+			local minLevel, maxLevel = self:ParseGuideLevelRange(name)
+			local colorCode
+			if minLevel and maxLevel then
+				if playerLevel >= minLevel and playerLevel <= maxLevel then
+					colorCode = "|cff00ff00"  -- green: in range
+				elseif playerLevel >= (minLevel - 5) and playerLevel <= (maxLevel + 5) then
+					colorCode = "|cffffff00"  -- yellow: within 5 levels
+				else
+					colorCode = "|cffff4444"  -- red: out of range
+				end
+			else
+				colorCode = "|cffcccccc"  -- gray: no level info
+			end
+
+			-- Completion percentage
+			local complete
+			if self.db.char.currentguide == name and self.current and self.actions then
+				complete = (self.current - 1) / table.getn(self.actions)
+			else
+				complete = self.db.char.completion[name]
+			end
+
+			local text
+			if complete and complete ~= 0 then
+				local pct = math.floor(complete * 100)
+				text = string.format("%s%s (%d%%)|r", colorCode, name, pct)
+			else
+				text = colorCode .. name .. "|r"
+			end
+
+			if self.db.char.isbranching and self.db.char.branchsavedguide == name then
+				text = "|cff00ff00[Main]|r " .. text
+			end
+
+			row.text:SetText(text)
+			row:SetChecked(self.db.char.currentguide == name)
+		else
+			row.guide = nil
+			row.text:SetText("")
+			row:SetChecked(false)
+			row:Enable()
+		end
 	end
 end

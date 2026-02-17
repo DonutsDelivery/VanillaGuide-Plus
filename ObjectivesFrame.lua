@@ -104,19 +104,8 @@ function TurtleGuide:UpdateObjectivePanel()
 	routebutton:SetText("Route")
 	routebutton:SetScript("OnClick", function() frame:Hide(); TurtleGuide:ShowRouteSelector() end)
 
-	-- Branch button
-	local branchbutton = CreateButton(frame, "RIGHT", routebutton, "LEFT")
-	branchbutton:SetText("Branch")
-	branchbutton:SetScript("OnClick", function() frame:Hide(); TurtleGuide:ShowBranchSelector() end)
-	branchbutton:SetScript("OnEnter", function()
-		GameTooltip:SetOwner(this, "ANCHOR_TOP")
-		GameTooltip:SetText("Branch to a different zone guide")
-	end)
-	branchbutton:SetScript("OnLeave", function() GameTooltip:Hide() end)
-	frame.branchbutton = branchbutton
-
 	-- Return to Main button (only visible when branching)
-	local returnbutton = CreateButton(frame, "RIGHT", branchbutton, "LEFT")
+	local returnbutton = CreateButton(frame, "RIGHT", routebutton, "LEFT")
 	returnbutton:SetWidth(100)
 	returnbutton:SetText("Return Main")
 	returnbutton:SetScript("OnClick", function() TurtleGuide:ReturnFromBranch() end)

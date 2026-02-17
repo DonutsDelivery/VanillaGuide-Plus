@@ -61,7 +61,7 @@ function TurtleGuide:CreateConfigPanel()
 	branchBtn:SetText("Branch to Zone")
 	branchBtn:SetScript("OnClick", function()
 		frame:Hide()
-		TurtleGuide:ShowBranchSelector()
+		TurtleGuide:ShowGuideList(true)
 	end)
 	frame.branchBtn = branchBtn
 
